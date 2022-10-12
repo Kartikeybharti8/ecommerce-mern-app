@@ -80,34 +80,42 @@ const Error = styled.span`
 `;
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const { isFetching, error } = useSelector((state) => state.user);
 
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch, { username, password });
+    login(dispatch, { email, password });
   };
+
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
-        <Form>
+        <Form onSubmit={handleClick}>
           <Input
-            placeholder="username"
+            placeholder="Email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            title='Match The Requested Format (name@example.com) '
+            type="email"
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
           <Input
-            placeholder="password"
+            placeholder="Password"
             type="password"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Must Contain At Least One Number And One Uppercase And Lowercase Letter, And At Least 8 Or More Characters" 
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
-          <Button onClick={handleClick} disabled={isFetching}>
+          <Button  disabled={isFetching}>
             LOGIN
           </Button>
           {error && <Error>Something went wrong...</Error>}
-          <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
+          <Link>FORGOT PASSWORD?</Link>
           <Link>CREATE A NEW ACCOUNT</Link>
         </Form>
       </Wrapper>

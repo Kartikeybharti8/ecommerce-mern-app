@@ -1,7 +1,14 @@
+import React, { useState } from 'react';
 import styled from "styled-components";
+import { useHistory } from 'react-router-dom';
+import swal from 'sweetalert';
+// import PasswordAndConfirmPasswordValidation from "./PasswordAndConfirmPasswordValidation";
+
+
 import "./reg.css";
 
 import { mobile } from "../responsive";
+import { CircularProgress } from '@material-ui/core';
 
 const Container = styled.div`
 font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
@@ -67,32 +74,111 @@ const Button = styled.button`
 
 
 const Register = () => {
+  const history = useHistory();
+
+  const [user, setUser] = useState({
+    name: "", email: "",phone:"", password: ""
+  })
+  // console.log(user)
+
+  let name, value;
+  const handelChange = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    setUser({ ...user, [name]: value });
+  }
+
+  const postData = async (e) => {
+    
+    // await setTimeout(function () {
+    //   console.log('I will run after 2 seconds');
+    // }, 2000);
+    
+    e.preventDefault();
+    const { name, email, phone, password} = user;
+    
+    // if(password === cpassword){
+    //   swal("Please Check Your Password");
+    // }
+
+    const res = await fetch("http://localhost:5000/api/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name, email, phone, password
+      })
+    });
+    const data = await res.json();
+    if (res.status === 201) {
+      console.log(data)
+      swal("Successfull login")
+      history.push("/login");
+    } else {
+      swal("There is some error");
+    }
+  }
+
+
   return (
     <div className="">
-    <Container>
-<h1>A
-  r
-  t
-  i
-  </h1>
-      <Wrapper>
-        <Title>CREATE AN ACCOUNT</Title>
-        <Form>
-          <Input placeholder="name" />
-          <Input placeholder="last name" />
-          <Input placeholder="username" />
-          <Input placeholder="email" />
-          <Input placeholder="password" />
-          <Input placeholder="confirm password" />
-          <Agreement>
-            By creating an account, I consent to the processing of my personal
-            data in accordance with the <b>PRIVACY POLICY</b>
-          </Agreement>
-          <Button>CREATE</Button>
-        </Form>
-      </Wrapper>
-      <h1>T e c h</h1>
-    </Container>
+      <Container>
+        <Wrapper>
+          <Title>CREATE AN ACCOUNT</Title>
+          <Form method='POST' onSubmit={postData} >
+            <Input  
+
+            type="text" 
+            required
+            pattern="[a-zA-Z]{4,10}"
+            title="Must contain Alphabets only"  
+            
+            onChange={handelChange}
+            value={user.name}
+            name="name" 
+            placeholder="Name" />
+
+            
+            <Input onChange={handelChange} value={user.phone} 
+            type="tel"
+            
+            pattern="^[0-9]{10}$"
+            title="Enter a Valid 10 Digit Number"
+            required
+            name="phone" 
+            placeholder="Phone" />
+            
+            <Input onChange={handelChange} value={user.email} 
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                title='Match The Requested Format (name@example.com) '
+                type="mail"
+                required
+                name="email" 
+                placeholder="Email" />
+
+
+            <Input onChange={handelChange} 
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Must Contain At Least One Number And One Uppercase And Lowercase Letter, And At Least 8 Or More Characters" 
+            value={user.password} 
+            name="password" 
+            type="password"
+            placeholder="Password" 
+            required/>
+            
+            
+           
+            
+            
+            <Agreement>
+              By creating an account, I consent to the processing of my personal
+              data in accordance with the <b>PRIVACY POLICY</b>
+            </Agreement>
+            <Button type='submit' >CREATE</Button>
+          </Form>
+        </Wrapper>
+      </Container>
     </div>
   );
 };

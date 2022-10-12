@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 const Announcement = () => {
-  return <Container>Made by artisian, made for artisian</Container>;
+  return <Container>Made by artisan, made for artisan</Container>;
 };
 
 export default Announcement;

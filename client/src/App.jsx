@@ -4,6 +4,8 @@ import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
+import swal from 'sweetalert';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,6 +16,11 @@ import Success from "./pages/Success";
 import { useSelector } from "react-redux";
 
 const App = () => {
+  
+  if(localStorage.getItem("isLoggedIn")){
+    swal("Login Successful");
+  }
+
   const user = useSelector((state) => state.user.currentUser);
   return (
     <Router>

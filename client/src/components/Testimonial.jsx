@@ -11,7 +11,7 @@ const Testimonial = () => {
           style={{ width: 90 }}
         />
         <p>
-          <span>Gandu Gameti.</span> <br /> 
+          <span>Ram</span> <br /> 
           <p> Authentic Buyer</p>
         </p>
         <p><i>Loved the material and the over all quality of the product.
