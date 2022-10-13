@@ -6,17 +6,28 @@ import { mobile } from "../responsive";
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 81vh;
   display: flex;
   position: relative;
   overflow: hidden;
   ${mobile({ display: "none" })}
 `;
 
+if(`@media (width: 1024px)`){
+  const Container = styled.div`
+    width: 80%;
+    height: 71vh;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    ${mobile({ display: "none" })}
+  `;
+}
+
 const Arrow = styled.div`
   width: 50px;
   height: 50px;
-  background-color: #afaaaa;
+  background-color: #fff7f7;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -44,7 +55,7 @@ const Slide = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-  background-image: url(${(props) => props.bg});
+  background-color: #${(props) => props.bg};
 `;
 
 const ImgContainer = styled.div`
