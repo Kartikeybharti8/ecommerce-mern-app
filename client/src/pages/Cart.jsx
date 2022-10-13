@@ -191,7 +191,7 @@ const Cart = () => {
         <Top>
           <TopButton>CONTINUE SHOPPING</TopButton>
           <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
+            <TopText>Shopping Bag(0)</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
           <TopButton type="filled">CHECKOUT NOW</TopButton>
@@ -207,7 +207,7 @@ const Cart = () => {
                       <b>Product:</b> {product.title}
                     </ProductName>
                     <ProductId>
-                      <b>ID:</b> {product._id}
+                      <b>ID:</b> {product.id}
                     </ProductId>
                     <ProductColor color={product.color} />
                     <ProductSize>
@@ -237,7 +237,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>₹ 5.90</SummaryItemPrice>
+              <SummaryItemPrice>₹ {(5*cart.total)/100}</SummaryItemPrice>
             </SummaryItem>
          
             <SummaryItem type="total">
