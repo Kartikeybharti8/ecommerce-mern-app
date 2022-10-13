@@ -1,3 +1,4 @@
+// nidhi
 export const sliderItems = [
   {
     id: 1,
