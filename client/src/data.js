@@ -1,6 +1,6 @@
 export const sliderItems = [
   {
-    id: 1,
+    id: 1, //Hasnain
     img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/115001163A-3.jpg?v=1658395412",
     title: "SUMMER SALE",
     desc: "Some of the best selling products are on sale",
