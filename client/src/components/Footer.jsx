@@ -8,6 +8,7 @@ import {
   Twitter,
 } from "@material-ui/icons";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
 import "./footer.css";
 
@@ -150,14 +151,13 @@ const Footer = () => {
         <Title>Useful Links</Title>
         <List>
         
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
+          <ListItem><Link to="/home">Home</Link></ListItem>
+          <ListItem><Link to="/cart">Cart</Link></ListItem>
           <ListItem>Hand-bags</ListItem>
           <ListItem>Statues</ListItem>
           <ListItem>Crafting </ListItem>
-          <ListItem>My Account</ListItem>
+          <ListItem><Link to="/register">My Account</Link></ListItem>
           <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
           <ListItem>Wishlist</ListItem>
           <ListItem>Terms</ListItem>
         </List>
