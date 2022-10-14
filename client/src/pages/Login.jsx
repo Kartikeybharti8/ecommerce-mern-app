@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { login } from "../redux/apiCalls";
 import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -68,7 +69,7 @@ const Button = styled.button`
   }
 `;
 
-const Link = styled.a`
+const Linked = styled.a`
   margin: 5px 0px;
   font-size: 12px;
   text-decoration: underline;
@@ -115,8 +116,8 @@ const Login = () => {
             LOGIN
           </Button>
           {error && <Error>Something went wrong...</Error>}
-          <Link>FORGOT PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
+          <Linked><Link>FORGOT PASSWORD?</Link></Linked>
+          <Linked><Link to="/register">CREATE A NEW ACCOUNT</Link></Linked>
         </Form>
       </Wrapper>
     </Container>

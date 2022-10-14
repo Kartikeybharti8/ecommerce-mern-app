@@ -5,6 +5,7 @@ import {
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { popularProducts } from "../data";
 
 const Info = styled.div`
   opacity: 0;
@@ -22,7 +23,7 @@ const Info = styled.div`
   cursor: pointer;
 `;
 
-const Container = styled.div`
+const Container1 = styled.div`
   flex: 1;
   margin: 5px;
   min-width: 280px;
@@ -37,6 +38,19 @@ const Container = styled.div`
     opacity: 1;
   }
 `;
+
+const Container2 = styled.div`
+  flex: 1;
+  margin: 10px;
+  width: 200px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  position: relative;
+  align-items: left;
+  justify-content: center;
+  flex-direction: column;
+`
 
 const Circle = styled.div`
   width: 200px;
@@ -67,25 +81,49 @@ const Icon = styled.div`
   }
 `;
 
+const Title = styled.div`
+  height: 75%;
+  max-width: 200px;
+`;
+
+const Span = styled.div`
+  color: black;
+  padding: 10px;
+  content: "\a";
+`;
+
+const Stock = styled.div`
+  color: black;
+  padding: 10px;
+  content: "\a";
+`;
+
 const Product = ({ item }) => {
   return (
-    <Container>
-      <Circle />
-      <Image src={item.img} />
-      <Info>
-        <Icon>
-          <ShoppingCartOutlined />
-        </Icon>
-        <Icon>
-          <Link to={`/product/${item.id}`}>
-          <SearchOutlined />
-          </Link>
-        </Icon>
-        <Icon>
-          <FavoriteBorderOutlined />
-        </Icon>
-      </Info>
-    </Container>
+    <div>
+      <Container1>
+        <Circle />
+        <Image src={item.img} />
+        <Info>
+          <Icon>
+            <ShoppingCartOutlined />
+          </Icon>
+          <Icon>
+            <Link to={`/product/${item.id}`}>
+            <SearchOutlined />
+            </Link>
+          </Icon>
+          <Icon>
+            <FavoriteBorderOutlined />
+          </Icon>
+        </Info>
+      </Container1>
+      <Container2>
+        <Title>{item.title}</Title>
+        <Span>₹{item.price}</Span>
+        <Stock>{item.inStock}</Stock>
+      </Container2>
+    </div>
   );
 };
 
