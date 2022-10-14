@@ -4,6 +4,7 @@ import {
   ShoppingCartOutlined,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import styled from "styled-components";
 import { popularProducts } from "../data";
 
@@ -42,12 +43,11 @@ const Container1 = styled.div`
 const Container2 = styled.div`
   flex: 1;
   margin: 10px;
-  width: 200px;
+  width: 300px;
   height: 50px;
   border-radius: 50%;
   display: flex;
   position: relative;
-  align-items: left;
   justify-content: center;
   flex-direction: column;
 `
@@ -83,22 +83,35 @@ const Icon = styled.div`
 
 const Title = styled.div`
   height: 75%;
-  max-width: 200px;
+  font-weight: bold;
+  align-items: left;
+  width: 280px;
 `;
 
 const Span = styled.div`
   color: black;
-  padding: 10px;
-  content: "\a";
+  align-items: left;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 5px;
 `;
 
 const Stock = styled.div`
   color: black;
-  padding: 10px;
-  content: "\a";
+  align-items: right;
 `;
 
 const Product = ({ item }) => {
+  let ans1 = "In Stock";
+  let ans2 = "Out of Stock";
+  let fans;
+  if(item.inStock){
+    fans = ans1;
+  }
+  else{
+    fans = ans2;
+  }
+
   return (
     <div>
       <Container1>
@@ -120,8 +133,7 @@ const Product = ({ item }) => {
       </Container1>
       <Container2>
         <Title>{item.title}</Title>
-        <Span>₹{item.price}</Span>
-        <Stock>{item.inStock}</Stock>
+        <Span>₹{item.price} {fans}</Span>
       </Container2>
     </div>
   );
