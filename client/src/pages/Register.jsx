@@ -27,7 +27,7 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
 `;
 
 const Wrapper = styled.div`
-  width: 40%;
+  width: 25%;
   padding: 20px;
   background: rgba( 255, 255, 255, 0.25 );
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
@@ -41,30 +41,39 @@ const Wrapper = styled.div`
 const Title = styled.h1`
   font-size: 24px;
   font-weight: 300;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+
 `;
 
 const Form = styled.form`
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  // flex-wrap: wrap;
 `;
 
 const Input = styled.input`
   flex: 1;
-  min-width: 40%;
+  min-width: 80%;
   margin: 20px 10px 0px 0px;
   padding: 10px;
   outline: none;
   background-color: #f0f0f0;
-    border:none;
+  border:none;
 `;
 
 const Agreement = styled.span`
   font-size: 12px;
   margin: 20px 0px;
+  width: 90%;
 `;
 
 const Button = styled.button`
-  width: 40%;
+  width: 50%;
   border: none;
   padding: 15px 20px;
   background-color: cream;
@@ -113,7 +122,7 @@ const Register = () => {
     const data = await res.json();
     if (res.status === 201) {
       console.log(data)
-      swal("Successfull login")
+      swal("Account Created Successfull")
       history.push("/login");
     } else {
       swal("There is some error");
@@ -131,8 +140,8 @@ const Register = () => {
 
             type="text" 
             required
-            pattern="[a-zA-Z]{4,10}"
-            title="Must contain Alphabets only"  
+            pattern="[a-zA-Z\s]{3,20}"
+            title="Can Contain 3 to 16 characters only."  
             
             onChange={handelChange}
             value={user.name}

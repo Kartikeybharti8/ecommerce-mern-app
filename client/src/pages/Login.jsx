@@ -36,17 +36,22 @@ const Wrapper = styled.div`
 const Title = styled.h1`
   font-size: 24px;
   font-weight: 300;
+  display: flex;
+  align-items:center;
+  justify-content: center;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  align-items:center;
+  justify-content: center;
 `;
 
 const Input = styled.input`
   flex: 1;
-  min-width: 40%;
-  margin: 10px 0;
+  min-width: 80%;
+  margin: 10px 0 10px 0;
   padding: 10px;
   flex: 1;
   outline: none;
@@ -57,7 +62,7 @@ const Input = styled.input`
 const Button = styled.button`
   width: 40%;
   border: none;
-  padding: 15px 20px;
+  padding: 10px 20px;
   background-color: #333;
   color: white;
   cursor: pointer;
