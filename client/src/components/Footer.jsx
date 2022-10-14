@@ -121,7 +121,7 @@ const Footer = () => {
       <Left>
         <Logo>Artisans</Logo>
         <Desc>
-          We are provind the finest traditional and modern art pieces for your
+          We provide the finest traditional and modern art pieces for your
           home and make them more beautiful.
         </Desc>
         <SocialContainer>
