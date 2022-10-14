@@ -6,6 +6,12 @@ import {
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
+
 const Info = styled.div`
   opacity: 0;
   width: 100%;
@@ -33,7 +39,7 @@ const Container = styled.div`
   background-color: #f5fbfd;
   position: relative;
 
-  &:hover ${Info}{
+  &:hover ${Info} {
     opacity: 1;
   }
 `;
@@ -68,17 +74,18 @@ const Icon = styled.div`
 `;
 
 const Product = ({ item }) => {
+
   return (
     <Container>
       <Circle />
       <Image src={item.img} />
       <Info>
-        <Icon>
-          <ShoppingCartOutlined />
-        </Icon>
+        {/* <Icon>
+          <ShoppingCartOutlined onClick={handleClick} />
+        </Icon> */}
         <Icon>
           <Link to={`/product/${item.id}`}>
-          <SearchOutlined />
+            <SearchOutlined />
           </Link>
         </Icon>
         <Icon>

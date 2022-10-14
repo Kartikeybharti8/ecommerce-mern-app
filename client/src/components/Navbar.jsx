@@ -124,37 +124,36 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>Artisans</Logo>
+            <Logo>Artisans</Logo>
+          
         </Center>
         <Right>
-     
-            {!user && (
-              <>
-                <Link to="/register" style={{ textDecoration: "none" }}>
-                  <MenuItem className="nav-items">REGISTER</MenuItem>
-                </Link>
-                <Link to="/login" style={{ textDecoration: "none" }}>
-                  <MenuItem className="nav-items">Login</MenuItem>
-                </Link>
-              </>
-            )}
+          {!user && (
+            <>
+              <Link to="/register" style={{ textDecoration: "none" }}>
+                <MenuItem className="nav-items">REGISTER</MenuItem>
+              </Link>
+              <Link to="/login" style={{ textDecoration: "none" }}>
+                <MenuItem className="nav-items">Login</MenuItem>
+              </Link>
+            </>
+          )}
 
-            <Link to="/" style={{ textDecoration: "none" }}>
-              {user && (
-                <MenuItem className="nav-items" onClick={handleLogout}>
-                  LOGOUT
-                </MenuItem>
-              )}
-            </Link>
-
-            <Link to="/cart">
-              <MenuItem>
-                <Badge className="nav-items" badgeContent={quantity}>
-                  <ShoppingCartOutlined />
-                </Badge>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            {user && (
+              <MenuItem className="nav-items" onClick={handleLogout}>
+                LOGOUT
               </MenuItem>
-            </Link>
-          
+            )}
+          </Link>
+
+          <Link to="/cart">
+            <MenuItem>
+              <Badge className="nav-items" badgeContent={quantity}>
+                <ShoppingCartOutlined />
+              </Badge>
+            </MenuItem>
+          </Link>
         </Right>
       </Wrapper>
     </Container>
