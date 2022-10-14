@@ -12,6 +12,7 @@ import { useHistory } from "react-router";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
+
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -167,7 +168,7 @@ const Cart = () => {
   const onToken = (token) => {
     setStripeToken(token);
   };
-
+//  console.log(stripeToken)
   useEffect(() => {
     const makeRequest = async () => {
       try {
