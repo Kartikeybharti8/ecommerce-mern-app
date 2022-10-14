@@ -131,7 +131,7 @@ const Register = () => {
 
             type="text" 
             required
-            pattern="[a-zA-Z]{4,10}"
+            pattern="^[A-Za-z]+((\s)?([A-Za-z])+)*${3,10}"
             title="Must contain Alphabets only"  
             
             onChange={handelChange}
@@ -166,9 +166,6 @@ const Register = () => {
             type="password"
             placeholder="Password" 
             required/>
-            
-            
-           
             
             
             <Agreement>

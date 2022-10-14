@@ -35,7 +35,7 @@ const Language = styled.span`
 const SearchContainer = styled.div`
   border: 0.5px solid lightgray;
   border-radius: 5px;
-  display: flex;
+  display: none;
   align-items: center;
   margin-left: 25px;
   padding: 5px;

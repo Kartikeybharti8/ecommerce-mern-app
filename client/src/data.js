@@ -81,8 +81,8 @@ export const popularProducts = [
   },
   {
     id: "634798fddf4c8b863b4bd6fb",
-    img: "https://4.imimg.com/data4/DS/BV/ANDROID-16420486/product-500x500.jpeg",
-    title: "CHUUDAS",
+    img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/115001145E.jpg?v=1658403616",
+    title: "HAND BAGS",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],
@@ -92,8 +92,8 @@ export const popularProducts = [
   },
   {
     id: "63479a99df4c8b863b4bd6fd",
-    img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/115001145E.jpg?v=1658403616",
-    title: "HAND BAGS",
+    img: "https://m.media-amazon.com/images/I/412JCAkm8sL.._SX._UX._SY._UY_.jpg",
+    title: "CHUUDAS",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],
