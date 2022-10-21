@@ -114,7 +114,7 @@ export const popularProducts = [
   {
     id: "6347a598df4c8b863b4bd708",
     img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/115001220A-4.jpg?v=1658136142",
-    title: "Gota Patti Beaded String Baby Pink Potli Pouch",
+    title: "Baby Pink Potli Pouch",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],

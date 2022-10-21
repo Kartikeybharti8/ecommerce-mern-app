@@ -1,0 +1,11 @@
+.stock
+{
+    font-weight: 300;
+    font-size: small;
+    color: rgb(97, 96, 96);
+}
+.price
+{
+    color: black !important;
+    font-weight: 700;
+}

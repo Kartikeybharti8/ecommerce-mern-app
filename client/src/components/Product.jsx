@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import styled from "styled-components";
 import { popularProducts } from "../data";
-
+import "./product.css";
 const Info = styled.div`
   opacity: 0;
   width: 100%;
@@ -23,7 +23,6 @@ const Info = styled.div`
   transition: all 0.5s ease;
   cursor: pointer;
 `;
-
 const Container1 = styled.div`
   flex: 1;
   margin: 5px;
@@ -31,21 +30,22 @@ const Container1 = styled.div`
   height: 350px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  // background-color: blue;
   background-color: #f5fbfd;
+  justify-content: center;
+  
   position: relative;
-
+  
   &:hover ${Info}{
     opacity: 1;
   }
-`;
+  `;
 
 const Container2 = styled.div`
   flex: 1;
   margin: 10px;
   width: 300px;
   height: 50px;
-  border-radius: 50%;
   display: flex;
   position: relative;
   justify-content: center;
@@ -62,6 +62,7 @@ const Circle = styled.div`
 
 const Image = styled.img`
   height: 75%;
+  border-radius: 15px;
   z-index: 2;
 `;
 
@@ -84,6 +85,7 @@ const Icon = styled.div`
 const Title = styled.div`
   height: 75%;
   font-weight: bold;
+  color:black;
   align-items: left;
   width: 280px;
 `;
@@ -105,10 +107,10 @@ const Product = ({ item }) => {
   let ans1 = "In Stock";
   let ans2 = "Out of Stock";
   let fans;
-  if(item.inStock){
+  if (item.inStock) {
     fans = ans1;
   }
-  else{
+  else {
     fans = ans2;
   }
 
@@ -118,22 +120,25 @@ const Product = ({ item }) => {
         <Circle />
         <Image src={item.img} />
         <Info>
-          <Icon>
+          {/* <Icon>
             <ShoppingCartOutlined />
-          </Icon>
+          </Icon> */}
           <Icon>
             <Link to={`/product/${item.id}`}>
-            <SearchOutlined />
+              <SearchOutlined />
             </Link>
           </Icon>
           <Icon>
-            <FavoriteBorderOutlined />
+            <Link to={`/product/${item.id}`}>
+              <FavoriteBorderOutlined />
+            </Link>
           </Icon>
         </Info>
       </Container1>
       <Container2>
         <Title>{item.title}</Title>
-        <Span>₹{item.price} {fans}</Span>
+        <Span className="price">₹{item.price}</Span>
+        <Span className="stock">{fans}</Span>
       </Container2>
     </div>
   );
