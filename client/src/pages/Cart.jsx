@@ -12,6 +12,7 @@ import { useHistory } from "react-router";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
+
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -167,7 +168,7 @@ const Cart = () => {
   const onToken = (token) => {
     setStripeToken(token);
   };
-
+//  console.log(stripeToken)
   useEffect(() => {
     const makeRequest = async () => {
       try {
@@ -207,7 +208,7 @@ const Cart = () => {
                       <b>Product:</b> {product.title}
                     </ProductName>
                     <ProductId>
-                      <b>ID:</b> {product.id}
+                      <b>ID:</b> {product._id}
                     </ProductId>
                     <ProductColor color={product.color} />
                     <ProductSize>
@@ -245,11 +246,11 @@ const Cart = () => {
               <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
             </SummaryItem>
             <StripeCheckout
-              name="Lama Shop"
-              image="https://avatars.githubusercontent.com/u/1486366?v=4"
+              name="Artisan Shop"
+              image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSemqiIPiJGwCjVqLTbkUODcDHt8As8aALN0eo48P434qjeKqSXS8eRfKSc1kPnyRv0jSI&usqp=CAU"
               billingAddress
               shippingAddress
-              description={`Your total is $${cart.total}`}
+              description={`Your total is Rs ${cart.total}`}
               amount={cart.total * 100}
               token={onToken}
               stripeKey={KEY}
