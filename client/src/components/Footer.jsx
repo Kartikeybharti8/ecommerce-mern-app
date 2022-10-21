@@ -11,6 +11,9 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import "./footer.css";
 
+import React from 'react'
+import ReactDOM from 'react-dom'
+
 
 const Container = styled.div`
   display: flex;
@@ -171,12 +174,12 @@ const Footer = () => {
               Block, Jayanagar, Bangalore-560011
             </ContactItem>
           </a>
-          <a href="tel:+4733378901" target="_blank">
+          <a href="tel:+4733378901" >
             <ContactItem>
               <Phone style={{ marginRight: "10px" }} /> +91 9876543210
             </ContactItem>
           </a>
-          <a href="mailto:webmaster@example.com" target="_blank">
+          <a href="mailto:nitesh@gmail.com">
             <ContactItem>
               <MailOutline style={{ marginRight: "10px" }} /> contact@Art.dev
             </ContactItem>

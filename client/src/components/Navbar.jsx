@@ -96,7 +96,7 @@ const MenuItem = styled.div`
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 const Navbar = () => {
-  //gautam2
+  
   const [user, setUser] = useState(false);
   useEffect(() => {
     if (localStorage.getItem("isLoggedIn")) {
