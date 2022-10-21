@@ -134,7 +134,7 @@ const Navbar = () => {
                 <MenuItem className="nav-items">REGISTER</MenuItem>
               </Link>
               <Link to="/login" style={{ textDecoration: "none" }}>
-                <MenuItem className="nav-items">Login</MenuItem>
+                <MenuItem className="nav-items">LOGIN</MenuItem>
               </Link>
             </>
           )}
