@@ -51,7 +51,7 @@ const ProductList = () => {
       [e.target.name]: value,
     });
   };
-
+  console.log(filters);
   return (
     <Container>
       <Navbar />
@@ -70,7 +70,7 @@ const ProductList = () => {
             <Option>green</Option>
           </Select>
           <Select name="size" onChange={handleFilters}>
-            <Option disabled>Size</Option>
+            <Option>Size</Option>
             <Option>XS</Option>
             <Option>S</Option>
             <Option>M</Option>

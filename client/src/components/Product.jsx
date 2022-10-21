@@ -8,6 +8,13 @@ import { useState } from "react";
 import styled from "styled-components";
 import { popularProducts } from "../data";
 import "./product.css";
+
+
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
+
 const Info = styled.div`
   opacity: 0;
   width: 100%;
@@ -35,8 +42,13 @@ const Container1 = styled.div`
   justify-content: center;
   
   position: relative;
+<<<<<<< HEAD
   
   &:hover ${Info}{
+=======
+
+  &:hover ${Info} {
+>>>>>>> 42459228ac30399f5fbcc577a28f7c545de5b345
     opacity: 1;
   }
   `;

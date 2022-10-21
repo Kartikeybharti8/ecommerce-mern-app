@@ -120,7 +120,8 @@ const Button = styled.button`
   }
 `;
 
-const Product = () => {
+const Product = () => 
+{
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
@@ -139,7 +140,7 @@ const Product = () => {
     getProduct();
   }, [id]);
 
-  const handleQuantity = (type) => {
+   const handleQuantity = (type) => {
     if (type === "dec") {
       quantity > 1 && setQuantity(quantity - 1);
     } else {
@@ -163,6 +164,7 @@ const Product = () => {
         <InfoContainer>
           <Title>{product.title}</Title>
           <Desc>{product.desc}</Desc>
+          
           <Price>₹ {product.price}</Price>
           <FilterContainer>
             <Filter>

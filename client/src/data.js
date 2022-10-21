@@ -1,8 +1,10 @@
+//its not nidhi
 export const sliderItems = [
   {
     id: 1, //Hasnain
     img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/115001163A-3.jpg?v=1658395412",
     title: "SUMMER SALE",
+    //sales
     desc: "Some of the best selling products are on sale",
     bg: "FCF1ED",
 
@@ -91,8 +93,8 @@ export const popularProducts = [
   },
   {
     id: "63479a99df4c8b863b4bd6fd",
-    img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/115001145E.jpg?v=1658403616",
-    title: "Golden Hand Bag",
+    img: "https://m.media-amazon.com/images/I/412JCAkm8sL.._SX._UX._SY._UY_.jpg",
+    title: "CHUUDAS",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],

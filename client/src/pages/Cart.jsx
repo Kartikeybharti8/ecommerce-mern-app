@@ -14,7 +14,6 @@ import { Link } from "react-router-dom";
 const KEY = process.env.REACT_APP_STRIPE;
 
 const Container = styled.div``;
-
 const Wrapper = styled.div`
   padding: 20px;
   ${mobile({ padding: "10px" })}
@@ -168,7 +167,7 @@ const Cart = () => {
   const onToken = (token) => {
     setStripeToken(token);
   };
-
+//  console.log(stripeToken)
   useEffect(() => {
     const makeRequest = async () => {
       try {
@@ -178,11 +177,13 @@ const Cart = () => {
         });
         history.push("/success", {
           stripeData: res.data,
-          products: cart, });
+          products: cart,
+        });
       } catch {}
     };
     stripeToken && makeRequest();
   }, [stripeToken, cart.total, history]);
+  
   return (
     <Container>
       <Navbar />
@@ -208,7 +209,7 @@ const Cart = () => {
                       <b>Product:</b> {product.title}
                     </ProductName>
                     <ProductId>
-                      <b>ID:</b> {product.id}
+                      <b>ID:</b> {product._id}
                     </ProductId>
                     <ProductColor color={product.color} />
                     <ProductSize>
@@ -223,7 +224,7 @@ const Cart = () => {
                     <Remove />
                   </ProductAmountContainer>
                   <ProductPrice>
-                  ₹ {product.price * product.quantity}
+                    ₹ {product.price * product.quantity}
                   </ProductPrice>
                 </PriceDetail>
               </Product>
@@ -238,19 +239,20 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>₹ {(5*cart.total)/100}</SummaryItemPrice>
+              <SummaryItemPrice>₹ {(5 * cart.total) / 100}</SummaryItemPrice>
             </SummaryItem>
-         
+
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
             </SummaryItem>
             <StripeCheckout
-              name="Lama Shop"
+
+              name="Art Store"
               image="https://avatars.githubusercontent.com/u/1486366?v=4"
               billingAddress
               shippingAddress
-              description={`Your total is $${cart.total}`}
+              description={`Your total is Rs ${cart.total}`}
               amount={cart.total * 100}
               token={onToken}
               stripeKey={KEY}

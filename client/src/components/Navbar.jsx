@@ -1,6 +1,6 @@
 import { Badge } from "@material-ui/core";
 import { Search, ShoppingCartOutlined } from "@material-ui/icons";
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
 import { useSelector } from "react-redux";
@@ -64,7 +64,31 @@ const Right = styled.div`
   justify-content: flex-end;
   ${mobile({ flex: 2, justifyContent: "center" })}
 `;
+const Nonlink = styled.div`
+  a:link {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
 
+  a:visited {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:active {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+`;
 const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
@@ -72,21 +96,21 @@ const MenuItem = styled.div`
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 const Navbar = () => {
-  //gautam2
-  const [user,setUser]=useState(false);
-  useEffect(()=>{
-   if(localStorage.getItem("isLoggedIn")){
-    setUser(true);
-   }else{
-    setUser(false);
-   }
-  //  eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
-//
-const handleLogout= ()=>{
-  localStorage.removeItem("isLoggedIn");
-  window.location.reload();
-}
+  
+  const [user, setUser] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem("isLoggedIn")) {
+      setUser(true);
+    } else {
+      setUser(false);
+    }
+    //  eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  //
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    window.location.reload();
+  };
 
   // window.localStorage.clear();
   const quantity = useSelector((state) => state.cart.quantity);
@@ -103,27 +127,25 @@ const handleLogout= ()=>{
           <Link to="/" style={{textDecoration: "none"}}><Logo>Artisans</Logo></Link>
         </Center>
         <Right>
-        
-        
-        {!user &&
-          (
-            <> 
-            <Link to="/register" style={{textDecoration: "none"}}>
-            <MenuItem className="nav-items">REGISTER</MenuItem>
-            </Link>
-            <Link to="/login" style={{textDecoration: "none"}}>
-            <MenuItem className="nav-items">SIGN IN</MenuItem>
-            </Link>
-             </>
-          )
-        } 
+          {!user && (
+            <>
+              <Link to="/register" style={{ textDecoration: "none" }}>
+                <MenuItem className="nav-items">REGISTER</MenuItem>
+              </Link>
+              <Link to="/login" style={{ textDecoration: "none" }}>
+                <MenuItem className="nav-items">Login</MenuItem>
+              </Link>
+            </>
+          )}
 
-          <Link to="/" style={{textDecoration: "none"}}>
-          {user &&
-            <MenuItem className="nav-items" onClick={handleLogout}>LOGOUT</MenuItem>
-          } 
+          <Link to="/" style={{ textDecoration: "none" }}>
+            {user && (
+              <MenuItem className="nav-items" onClick={handleLogout}>
+                LOGOUT
+              </MenuItem>
+            )}
           </Link>
-          
+
           <Link to="/cart">
             <MenuItem>
               <Badge className="nav-items" badgeContent={quantity}>
