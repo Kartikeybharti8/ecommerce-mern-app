@@ -12,16 +12,14 @@ import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
 import "./footer.css";
 
-import React from 'react'
-import ReactDOM from 'react-dom'
-
+import React from "react";
+import ReactDOM from "react-dom";
 
 const Container = styled.div`
-border-top: 1px solid #e6e6e6;
-background-color: white;
+  border-top: 1px solid #e6e6e6;
+  background-color: white;
   display: flex;
   ${mobile({ flexDirection: "column" })}
-
 `;
 const Nonlink = styled.div`
   a:link {
@@ -116,9 +114,7 @@ const ContactItem = styled.div`
 const Payment = styled.img`
   width: 50%;
 `;
-const responsive = styled.div`
-  
-`;
+const responsive = styled.div``;
 
 const Footer = () => {
   return (
@@ -126,8 +122,8 @@ const Footer = () => {
       <Left>
         <Logo>Artisans</Logo>
         <Desc>
-          We provide the finest traditional and modern art pieces for your
-          home and make them more beautiful.
+          We provide the finest traditional and modern art pieces for your home
+          and make them more beautiful.
         </Desc>
         <SocialContainer>
           <a href="http://www.facebook.com" target="_blank" rel="noreferrer">
@@ -154,13 +150,21 @@ const Footer = () => {
       </Left>
       <Center>
         <Title>Useful Links</Title>
-        <List>
-          <ListItem><Link to="/home">Home</Link></ListItem>
-          <ListItem><Link to="/cart">Cart</Link></ListItem>
-          <ListItem><Link to="/register">My Account</Link></ListItem>
-          <ListItem>Track Order</ListItem>
-          <ListItem>Terms</ListItem>
-        </List>
+        <Nonlink>
+          <List>
+            <ListItem>
+              <Link to="/home">Home</Link>
+            </ListItem>
+            <ListItem>
+              <Link to="/cart">Cart</Link>
+            </ListItem>
+            <ListItem>
+              <Link to="/register">My Account</Link>
+            </ListItem>
+            <ListItem>Track Order</ListItem>
+            <ListItem>Terms</ListItem>
+          </List>
+        </Nonlink>
       </Center>
       <Right>
         <Nonlink>
@@ -171,7 +175,7 @@ const Footer = () => {
               Block, Jayanagar, Bangalore-560011
             </ContactItem>
           </a>
-          <a href="tel:+4733378901" >
+          <a href="tel:+4733378901">
             <ContactItem>
               <Phone style={{ marginRight: "10px" }} /> +91 9876543210
             </ContactItem>
@@ -184,7 +188,6 @@ const Footer = () => {
         </Nonlink>
         <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
       </Right>
-      
     </Container>
   );
 };

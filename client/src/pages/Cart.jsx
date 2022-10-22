@@ -9,13 +9,10 @@ import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
-<<<<<<< HEAD
 import "./cart.css";
 // import {Add as Add } from "./Product"
-=======
 import { Link } from "react-router-dom";
 
->>>>>>> origin/master
 const KEY = process.env.REACT_APP_STRIPE;
 
 const Container = styled.div``;
