@@ -1,7 +1,15 @@
 //its not nidhi
 //najksbdjabdjadjadjasdjandjandlasndasnsd
 export const sliderItems = [
+  {
+    id: 1, //Hasnain
+    img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/115001163A-3.jpg?v=1658395412",
+    title: "SUMMER SALE",
+    //sales
+    desc: "Some of the best selling products are on sale",
+    bg: "FCF1ED",
 
+  },
   {
     id: 2,
     img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/115001145D.jpg?v=1658403378",
