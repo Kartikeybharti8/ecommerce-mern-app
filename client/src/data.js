@@ -1,4 +1,5 @@
 //its not nidhi
+//najksbdjabdjadjadjasdjandjandlasndasnsd
 export const sliderItems = [
   {
     id: 1, //Hasnain
