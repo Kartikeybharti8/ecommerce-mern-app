@@ -27,8 +27,7 @@ app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", stripeRoute);
-//hello
-//kuch bhi
+
 app.get("/",(eq,res)=>{
   res.end("home")
 })

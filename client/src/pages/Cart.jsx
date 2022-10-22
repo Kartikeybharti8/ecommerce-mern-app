@@ -9,9 +9,15 @@ import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
+<<<<<<< HEAD
 import "./cart.css";
 // import {Add as Add } from "./Product"
+=======
+import { Link } from "react-router-dom";
+
+>>>>>>> origin/master
 const KEY = process.env.REACT_APP_STRIPE;
+
 const Container = styled.div``;
 const Wrapper = styled.div`
   padding: 20px;
@@ -167,7 +173,7 @@ const Cart = () => {
   const onToken = (token) => {
     setStripeToken(token);
   };
-
+//  console.log(stripeToken)
   useEffect(() => {
     const makeRequest = async () => {
       try {
@@ -191,7 +197,7 @@ const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <Link to={`/`}><TopButton>CONTINUE SHOPPING</TopButton></Link>
           <TopTexts>
             <TopText>Shopping Bag(0)</TopText>
             <TopText>Your Wishlist (0)</TopText>
@@ -209,7 +215,7 @@ const Cart = () => {
                       <b>Product:</b> {product.title}
                     </ProductName>
                     <ProductId>
-                      <b>ID:</b> {product.id}
+                      <b>ID:</b> {product._id}
                     </ProductId>
                     <ProductColor color={product.color} />
                     <ProductSize>
@@ -246,12 +252,12 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <StripeCheckout
-              name="Art Store"
-              image="https://avatars.githubusercontent.com/u/1486366?v=4"
+              <StripeCheckout
+              name="Artisan Shop"
+              image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSemqiIPiJGwCjVqLTbkUODcDHt8As8aALN0eo48P434qjeKqSXS8eRfKSc1kPnyRv0jSI&usqp=CAU"
               billingAddress
               shippingAddress
-              description={`Your total is $${cart.total}`}
+              description={`Your total is Rs ${cart.total}`}
               amount={cart.total * 100}
               token={onToken}
               stripeKey={KEY}

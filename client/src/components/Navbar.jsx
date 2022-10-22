@@ -124,8 +124,7 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-            <Logo>Artisans</Logo>
-          
+          <Link to="/" style={{textDecoration: "none"}}><Logo>Artisans</Logo></Link>
         </Center>
         <Right>
           {!user && (

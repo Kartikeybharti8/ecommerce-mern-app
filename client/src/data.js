@@ -1,6 +1,7 @@
+//its not nidhi
 export const sliderItems = [
   {
-    id: 1,
+    id: 1, //Hasnain
     img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/115001163A-3.jpg?v=1658395412",
     title: "SUMMER SALE",
     //sales
@@ -59,7 +60,7 @@ export const categories = [
 export const popularProducts = [
   {
     id: "63478d315422804b9a1ef29c",
-    title: "POTTERY",
+    title: "Blue Pottery",
     desc: "POTTERY",
     img: "https://cdn.shopify.com/s/files/1/0155/8131/products/0Q8A6927_480x.jpg?v=1664965442",
     categories: ["POTTERY"],
@@ -71,78 +72,78 @@ export const popularProducts = [
   {
     id: "634798a0df4c8b863b4bd6f9",
     img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/73000981-2_52e4c764-09a2-45be-a18e-3eb1df5aafe8.jpg?v=1658379767",
-    title: "COPPER FLASK",
+    title: "Prestige Tattva Copper Water Bottle",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],
     color: ["blue", "black"],
-    price: 600,
+    price: 800,
     inStock: true
   },
   {
     id: "634798fddf4c8b863b4bd6fb",
     img: "https://4.imimg.com/data4/DS/BV/ANDROID-16420486/product-500x500.jpeg",
+    title: "Kundan Work Silk Thread Bangle",
+    desc: "POTTERY",
+    categories: ["POTTERY"],
+    size: [],
+    color: ["blue", "black"],
+    price: 800,
+    inStock: true 
+  },
+  {
+    id: "63479a99df4c8b863b4bd6fd",
+    img: "https://m.media-amazon.com/images/I/412JCAkm8sL.._SX._UX._SY._UY_.jpg",
     title: "CHUUDAS",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],
     color: ["blue", "black"],
-    price: 600,
-    inStock: true 
-  },
-  {
-    id: "63479a99df4c8b863b4bd6fd",
-    img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/115001145E.jpg?v=1658403616",
-    title: "HAND BAGS",
-    desc: "POTTERY",
-    categories: ["POTTERY"],
-    size: [],
-    color: ["blue", "black"],
-    price: 600,
-    inStock: true
+    price: 800,
+    inStock: false
   },
   {
     id: "63479eafdf4c8b863b4bd701",
     img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/30000654-1.jpg?v=1659168974",
-    title: "WOODEN BOAT",
+    title: "Wooden Boat",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],
     color: ["blue", "black"],
-    price: 600,
+    price: 500,
     inStock: true
   },
   {
     id: "6347a598df4c8b863b4bd708",
     img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/115001220A-4.jpg?v=1658136142",
-    title: "POUCHES",
+    title: "Baby Pink Potli Pouch",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],
     color: ["blue", "black"],
-    price: 600,
+    price: 800,
     inStock: true
   },
   {
     id: "6347a5c6df4c8b863b4bd70a",
     img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/VWP7117.jpg?v=1658750659",
-    title: "PEN STAND",
+    title: "Wooden Pen Stand",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],
     color: ["blue", "black"],
-    price: 600,
-    inStock: true
+    price: 400,
+    inStock: false
   },
   {
     id: "6347a626df4c8b863b4bd70c",
     img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/123000930-1.jpg?v=1661238745",
-    title: "LAMP",
+    title: "Marble Antique Table Lamp",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],
     color: ["blue", "black"],
-    price: 600,
+    price: 760,
     inStock: true
   },
 ]

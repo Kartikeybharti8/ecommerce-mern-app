@@ -8,6 +8,7 @@ import {
   Twitter,
 } from "@material-ui/icons";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
 import "./footer.css";
 
@@ -123,9 +124,9 @@ const Footer = () => {
   return (
     <Container>
       <Left>
-        <Logo>Arti-Tech</Logo>
+        <Logo>Artisans</Logo>
         <Desc>
-          We are provind the finest traditional and modern art pieces for your
+          We provide the finest traditional and modern art pieces for your
           home and make them more beautiful.
         </Desc>
         <SocialContainer>
@@ -154,16 +155,10 @@ const Footer = () => {
       <Center>
         <Title>Useful Links</Title>
         <List>
-        
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>Hand-bags</ListItem>
-          <ListItem>Statues</ListItem>
-          <ListItem>Crafting </ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Wishlist</ListItem>
+          <ListItem><Link to="/home">Home</Link></ListItem>
+          <ListItem><Link to="/cart">Cart</Link></ListItem>
+          <ListItem><Link to="/register">My Account</Link></ListItem>
+          <ListItem>Track Order</ListItem>
           <ListItem>Terms</ListItem>
         </List>
       </Center>

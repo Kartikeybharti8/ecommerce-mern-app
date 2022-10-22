@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { login } from "../redux/apiCalls";
 import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -36,17 +37,22 @@ const Wrapper = styled.div`
 const Title = styled.h1`
   font-size: 24px;
   font-weight: 300;
+  display: flex;
+  align-items:center;
+  justify-content: center;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  align-items:center;
+  justify-content: center;
 `;
 
 const Input = styled.input`
   flex: 1;
-  min-width: 40%;
-  margin: 10px 0;
+  min-width: 80%;
+  margin: 10px 0 10px 0;
   padding: 10px;
   flex: 1;
   outline: none;
@@ -57,7 +63,7 @@ const Input = styled.input`
 const Button = styled.button`
   width: 40%;
   border: none;
-  padding: 15px 20px;
+  padding: 10px 20px;
   background-color: #333;
   color: white;
   cursor: pointer;
@@ -68,7 +74,7 @@ const Button = styled.button`
   }
 `;
 
-const Link = styled.a`
+const Linked = styled.a`
   margin: 5px 0px;
   font-size: 12px;
   text-decoration: underline;
@@ -115,8 +121,8 @@ const Login = () => {
             LOGIN
           </Button>
           {error && <Error>Something went wrong...</Error>}
-          <Link>FORGOT PASSWORD?</Link>
-          <Link>CREATE A NEW ACCOUNT</Link>
+          <Linked><Link>FORGOT PASSWORD?</Link></Linked>
+          <Linked><Link to="/register">CREATE A NEW ACCOUNT</Link></Linked>
         </Form>
       </Wrapper>
     </Container>
