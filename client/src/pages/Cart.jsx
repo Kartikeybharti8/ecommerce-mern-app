@@ -9,6 +9,7 @@ import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
+import "./cart.css";
 // import {Add as Add } from "./Product"
 const KEY = process.env.REACT_APP_STRIPE;
 const Container = styled.div``;
@@ -127,7 +128,7 @@ const Hr = styled.hr`
 
 const Summary = styled.div`
   flex: 1;
-  border: 0.5px solid lightgray;
+  border: 0.5px solid IndianRed;
   border-radius: 10px;
   padding: 20px;
   height: 50vh;
@@ -152,8 +153,9 @@ const SummaryItemPrice = styled.span``;
 const Button = styled.button`
   width: 100%;
   padding: 10px;
-  background-color: black;
-  color: white;
+  background-color: #FFF4EF;
+  border: 0.5px solid IndianRed;
+  color: black;
   font-weight: 600;
 `;
 
@@ -199,9 +201,9 @@ const Cart = () => {
         <Bottom>
           <Info>
             {cart.products.map((product) => (
-              <Product>
-                <ProductDetail>
-                  <Image src={product.img} />
+              <Product className="Demo">
+                <ProductDetail >
+                  <Image  className="prodImg" src={product.img} />
                   <Details>
                     <ProductName>
                       <b>Product:</b> {product.title}

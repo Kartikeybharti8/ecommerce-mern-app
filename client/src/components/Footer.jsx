@@ -16,6 +16,8 @@ import ReactDOM from 'react-dom'
 
 
 const Container = styled.div`
+border-top: 1px solid #e6e6e6;
+background-color: white;
   display: flex;
   ${mobile({ flexDirection: "column" })}
 
