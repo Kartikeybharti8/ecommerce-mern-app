@@ -29,7 +29,7 @@ export const sliderItems = [
     id: 4,
     img: "https://images.pexels.com/photos/6447952/pexels-photo-6447952.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     title: "AUTHENTIC WEAR",
-    desc: "GET FLAT 30% OFF FOR NEW ARRIVALS",
+    desc: "WEAR YOUR OWN CHOICE",
     bg: "fbf0f4",
 
 
@@ -52,7 +52,7 @@ export const categories = [
   {
     id: 3,
     img: "https://cdn.shopify.com/s/files/1/0155/8131/collections/sample-nitin-collection-thumb_ea22ef0a-c54c-4ad4-b1a9-00d1e677d7b8.jpg?v=1639131115&width=200",
-    title: "JEWELERY ACCESSORIES",
+    title: "JEWELERY",
     cat: "jeans"
   },
 ];
@@ -94,7 +94,7 @@ export const popularProducts = [
   {
     id: "63479a99df4c8b863b4bd6fd",
     img: "https://m.media-amazon.com/images/I/412JCAkm8sL.._SX._UX._SY._UY_.jpg",
-    title: "CHUUDAS",
+    title: "Chudaas",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],

@@ -51,6 +51,7 @@ const Input = styled.input`
 const Center = styled.div`
   flex: 1;
   text-align: center;
+  text-decoration: none
 `;
 
 const Logo = styled.h1`
@@ -133,7 +134,7 @@ const Navbar = () => {
                 <MenuItem className="nav-items">REGISTER</MenuItem>
               </Link>
               <Link to="/login" style={{ textDecoration: "none" }}>
-                <MenuItem className="nav-items">Login</MenuItem>
+                <MenuItem className="nav-items">LOGIN</MenuItem>
               </Link>
             </>
           )}
