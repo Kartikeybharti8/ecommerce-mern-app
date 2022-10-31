@@ -1,7 +1,10 @@
 import { Send } from "@material-ui/icons";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-
+import CountUp, { useCountUp } from "react-countup";
+import ScrollTrigger from "react-scroll-trigger";
+import { useState } from "react";
+import "./news.css";
 const Container = styled.div`
   height: 60vh;
   background-color: #fcf5f5;
@@ -9,6 +12,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  ${mobile({ textAlign: "center" })}
 `;
 const Title = styled.h1`
   font-size: 70px;
@@ -20,43 +24,33 @@ const Desc = styled.div`
   font-weight: 300;
   margin-bottom: 20px;
   ${mobile({ textAlign: "center" })}
-
-`;
-
-const InputContainer = styled.div`
-  width: 50%;
-  height: 40px;
-  background-color: white;
-  display: flex;
-  justify-content: space-between;
-  border: 1px solid lightgray;
-  ${mobile({ width: "80%" })}
-`;
-
-const Input = styled.input`
-  border: none;
-  flex: 8;
-  padding-left: 20px;
-`;
-
-const Button = styled.button`
-  flex: 1;
-  border: none;
-  background-color: teal;
-  color: white;
 `;
 
 const Newsletter = () => {
+  const [counterOn, setCounterOn] = useState(0);
+ 
   return (
     <Container>
-      <Title>Newsletter</Title>
-      <Desc>Get timely updates from your favorite products.</Desc>
-      <InputContainer>
-        <Input placeholder="Your email" />
-        <Button>
-          <Send />
-        </Button>
-      </InputContainer>
+      <ScrollTrigger
+        onEnter={() => setCounterOn(true)}
+        onExit={() => setCounterOn(false)}
+      >
+        <center>
+          <Title>Love from all over India</Title>
+          <Desc>Delivered Happiness and art </Desc>
+          <h2>
+            {counterOn && (
+              <CountUp
+                className="Count"
+                start={0}
+                end={621}
+                duration={10}
+                delay={0}
+              />
+            )}
+          </h2>
+        </center>
+      </ScrollTrigger>
     </Container>
   );
 };

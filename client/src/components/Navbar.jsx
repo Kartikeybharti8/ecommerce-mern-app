@@ -19,40 +19,35 @@ const Wrapper = styled.div`
   justify-content: space-between;
   ${mobile({ padding: "10px 0px" })}
 `;
-
 const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
 `;
-
 const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
   ${mobile({ display: "none" })}
 `;
-
 const SearchContainer = styled.div`
   border: 0.5px solid lightgray;
   border-radius: 5px;
   display: flex;
+  display:none;
   align-items: center;
   margin-left: 25px;
   padding: 5px;
 `;
-
 const Input = styled.input`
   outline: none;
   background-color: transparent;
   border: none;
   ${mobile({ width: "50px" })}
 `;
-
 const Center = styled.div`
   flex: 1;
   text-align: center;
 `;
-
 const Logo = styled.h1`
   font-weight: bold;
   ${mobile({ fontSize: "24px" })}
