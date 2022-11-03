@@ -12,7 +12,9 @@ const Container = styled.div`
     justify-content: space-between;
 `;
 
+
 const Products = (cat,filters,sort) => {
+
 //   console.log(cat,filters,sort);
 //   const[products,setProducts]=useState([]);
 //   const [filteredProducts,setFilteredProducts]= useState([]);
@@ -27,6 +29,7 @@ const Products = (cat,filters,sort) => {
 //      }
 //    };
 //    getProducts();
+
 //  },[cat]);
   return (
     <Container>

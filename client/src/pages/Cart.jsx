@@ -196,8 +196,7 @@ const Cart = () => {
         <Top>
           <Link to={`/`}><TopButton>CONTINUE SHOPPING</TopButton></Link>
           <TopTexts>
-            <TopText>Shopping Bag(0)</TopText>
-            <TopText>Your Wishlist (0)</TopText>
+            <TopText>Shopping Bag</TopText>
           </TopTexts>
           <TopButton type="filled">CHECKOUT NOW</TopButton>
         </Top>

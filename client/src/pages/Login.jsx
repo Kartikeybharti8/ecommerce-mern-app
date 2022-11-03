@@ -36,16 +36,16 @@ const Wrapper = styled.div`
 
 const Title = styled.h1`
   font-size: 24px;
-  font-weight: 300;
+  font-weight: 700;
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
   justify-content: center;
 `;
 
@@ -77,8 +77,30 @@ const Button = styled.button`
 const Linked = styled.a`
   margin: 5px 0px;
   font-size: 12px;
-  text-decoration: underline;
-  cursor: pointer;
+font-weight:400;  cursor: pointer;
+  a:link {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:active {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
 `;
 
 const Error = styled.span`
@@ -104,7 +126,7 @@ const Login = () => {
           <Input
             placeholder="Email"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-            title='Match The Requested Format (name@example.com) '
+            title="Match The Requested Format (name@example.com) "
             type="email"
             onChange={(e) => setUsername(e.target.value)}
             required
@@ -113,16 +135,16 @@ const Login = () => {
             placeholder="Password"
             type="password"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-            title="Must Contain At Least One Number And One Uppercase And Lowercase Letter, And At Least 8 Or More Characters" 
+            title="Must Contain At Least One Number And One Uppercase And Lowercase Letter, And At Least 8 Or More Characters"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <Button  disabled={isFetching}>
-            LOGIN
-          </Button>
+          <Button disabled={isFetching}>LOGIN</Button>
           {error && <Error>Something went wrong...</Error>}
-          <Linked><Link>FORGOT PASSWORD?</Link></Linked>
-          <Linked><Link to="/register">CREATE A NEW ACCOUNT</Link></Linked>
+          {/* <Linked><Link>FORGOT PASSWORD?</Link></Linked> */}
+          <Linked>
+            <Link to="/register">CREATE A NEW ACCOUNT</Link>
+          </Linked>
         </Form>
       </Wrapper>
     </Container>

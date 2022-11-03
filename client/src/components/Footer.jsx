@@ -153,7 +153,7 @@ const Footer = () => {
         <Nonlink>
           <List>
             <ListItem>
-              <Link to="/home">Home</Link>
+              <Link to="/">Home</Link>
             </ListItem>
             <ListItem>
               <Link to="/cart">Cart</Link>
