@@ -28,7 +28,7 @@ app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/checkout", stripeRoute);
 
-app.get("/",(eq,res)=>{
+app.get("/",(req,res)=>{
   res.end("home")
 })
 

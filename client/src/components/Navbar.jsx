@@ -1,10 +1,16 @@
 import { Badge } from "@material-ui/core";
-import { Search, ShoppingCartOutlined } from "@material-ui/icons";
-import React, { useEffect, useState } from "react";
+import { Search, ShoppingCartOutlined} from "@material-ui/icons";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+// import LogoutIcon from '@mui/icons-material/Logout';
+import { logout } from '../redux/userRedux';
+
+
+
 import "./Navbar.css";
 const Container = styled.div`
   background-color: #fff4ef;
@@ -92,23 +98,28 @@ const MenuItem = styled.div`
 `;
 const Navbar = () => {
   
-  const [user, setUser] = useState(false);
-  useEffect(() => {
-    if (localStorage.getItem("isLoggedIn")) {
-      setUser(true);
-    } else {
-      setUser(false);
-    }
-    //  eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  //
-  const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    window.location.reload();
-  };
-
+  // const [user, setUser] = useState(false);
+  // useEffect(() => {
+  //   if (localStorage.getItem("isLoggedIn")) {
+  //     setUser(true);
+  //   } else {
+  //     setUser(false);
+  //   }
+  //   //  eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+  // //
+  // const handleLogout = () => {
+  //   localStorage.removeItem("isLoggedIn");
+  //   window.location.reload();
+  // };
+  const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
+  const [showPopup, setShowPopup] = useState(false);
   // window.localStorage.clear();
   const quantity = useSelector((state) => state.cart.quantity);
+
+  const handleLogout = useCallback(() => dispatch(logout()), [dispatch]);
+  
   return (
     <Container>
       <Wrapper>
@@ -133,13 +144,25 @@ const Navbar = () => {
             </>
           )}
 
-          <Link to="/" style={{ textDecoration: "none" }}>
-            {user && (
-              <MenuItem className="nav-items" onClick={handleLogout}>
-                LOGOUT
-              </MenuItem>
-            )}
-          </Link>
+          {user && (
+            <>
+              <div
+                onClick={() => setShowPopup((prev) => !prev)}
+                className="relative cursor-pointer ml-[10px] border  space-x-3 rounded p-2 flex justify-between items-center "
+              >
+                <div className="text-[12px] sm:text-[14px] tracking-wide ">
+                 Hii {user?.name.toUpperCase()}
+                </div>
+                <div
+                  onClick={handleLogout}
+                  className="dropdown">
+                  <button className="logout">
+                    LOGOUT
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
 
           <Link to="/cart">
             <MenuItem>
