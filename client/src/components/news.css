@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100&display=swap');
+
+.Count 
+{
+  border: dashed 4px indianred;
+  border-radius: 13px;
+  font-size: larger;
+  padding: 6px;
+  font-weight: 600;
+  font-family: 'Barlow', sans-serif;
+}

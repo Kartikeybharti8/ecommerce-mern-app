@@ -170,7 +170,7 @@ const Product = () => {
 
           <Price>₹ {product.price}</Price>
           <FilterContainer>
-            <Filter>
+            {/* <Filter>
               <FilterTitle>Color</FilterTitle>
               {product.color?.map((c) => (
                 <FilterColor color={c} key={c} onClick={() => setColor(c)} />
@@ -183,7 +183,7 @@ const Product = () => {
                   <FilterSizeOption key={s}>{s}</FilterSizeOption>
                 ))}
               </FilterSize>
-            </Filter>
+            </Filter> */}
           </FilterContainer>
           <AddContainer>
             <AmountContainer>

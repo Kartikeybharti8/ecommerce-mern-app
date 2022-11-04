@@ -1,1 +1,188 @@
 form{padding: 12px 0px;}
+/* 
+const Container = styled.div`
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("https://i.ibb.co/CBPT2sp/Mahatma-Gandhi-Independence-Quote-Desktop-Wallpaper.png")
+      center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Wrapper = styled.div`
+  width: 25%;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  ${mobile({ width: "75%" })}
+`;
+
+const Title = styled.h1`
+  font-size: 24px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Input = styled.input`
+  flex: 1;
+  min-width: 80%;
+  margin: 10px 0 10px 0;
+  padding: 10px;
+  flex: 1;
+  outline: none;
+  background-color: #f0f0f0;
+  border: none;
+`;
+
+const Button = styled.button`
+  width: 40%;
+  border: none;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
+  &:disabled {
+    color: green;
+    cursor: not-allowed;
+  }
+`;
+
+const Linked = styled.a`
+  margin: 5px 0px;
+  font-size: 12px;
+font-weight:400;  cursor: pointer;
+  a:link {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:active {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+`;
+
+const Error = styled.span`
+  color: red;
+`; 
+
+
+const Container = styled.div`
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("https://i.ibb.co/CBPT2sp/Mahatma-Gandhi-Independence-Quote-Desktop-Wallpaper.png")
+      center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Wrapper = styled.div`
+  width: 25%;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  ${mobile({ width: "75%" })}
+`;
+
+const Title = styled.h1`
+  font-size: 24px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  justify-content: center;
+
+  // flex-wrap: wrap;
+`;
+
+const Input = styled.input`
+  flex: 1;
+  min-width: 80%;
+  margin: 5px 10px 5px 10px;
+  padding: 10px;
+  outline: none;
+  background-color: #f0f0f0;
+  border: none;
+`;
+
+const Agreement = styled.span`
+  align-items: center;
+  font-size: 1vw;
+  margin: 20px 0px;
+  width: 90%;
+`;
+
+const Button = styled.button`
+  width: 100%;
+  font-weight: 600;
+  border: none;
+  padding: 15px 20px;
+  background-color: cream;
+  color: black;
+  cursor: pointer;
+`;
+
+const Label = styled.label`
+
+color: black;
+font-weight: 500;
+margin-top: 21px;
+padding: 1px 15px;
+font-size: 1vw;
+`;
+
+*/

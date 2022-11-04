@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import Link from 'next/link';
+import React, { useState,useCallback } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { register } from '../redux/apiCalls';
 import styled from "styled-components";
-import { useHistory } from 'react-router-dom';
-import swal from 'sweetalert';
+import { useHistory } from "react-router-dom";
+// import { useRouter } from 'next/router';
+import swal from "sweetalert";
 // import PasswordAndConfirmPasswordValidation from "./PasswordAndConfirmPasswordValidation";
-
 
 import "./reg.css";
 
 import { mobile } from "../responsive";
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress } from "@material-ui/core";
 
 const Container = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -41,7 +44,7 @@ const Wrapper = styled.div`
 
 const Title = styled.h1`
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,7 +78,6 @@ const Agreement = styled.span`
 
 const Button = styled.button`
   width: 100%;
-  font-weight: 600;
   border: none;
   padding: 15px 20px;
   background-color: cream;
@@ -84,123 +86,145 @@ const Button = styled.button`
 `;
 
 const Label = styled.label`
-
-color: black;
-font-weight: 500;
-margin-top: 21px;
-padding: 1px 15px;
-font-size: 1vw;
+  margin-top: 10px;
+  padding: 0px 15px;
+  font-size: 1vw;
 `;
-
 
 const Register = () => {
   const history = useHistory();
 
-  const [user, setUser] = useState({
-    name: "", email: "",phone:"", password: ""
-  })
-  // console.log(user)
+  // const [user, setUser] = useState({
+  //   name: "",
+  //   name: "",
+  //   phone: "",
+  //   password: "",
+  // });
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
 
-  let name, value;
-  const handelChange = (e) => {
-    name = e.target.name;
-    value = e.target.value;
-    setUser({ ...user, [name]: value });
-  }
+  // const postData = async (e) => {
+  //   // await setTimeout(function () {
+  //   //   console.log('I will run after 2 seconds');
+  //   // }, 2000);
 
-  const postData = async (e) => {
-    
-    // await setTimeout(function () {
-    //   console.log('I will run after 2 seconds');
-    // }, 2000);
-    
-    e.preventDefault();
-    const { name, email, phone, password} = user;
-    
-    // if(password === cpassword){
-    //   swal("Please Check Your Password");
-    // }
+  //   e.preventDefault();
+  //   const { name, name, phone, password } = user;
 
-    const res = await fetch("http://localhost:5000/api/auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name, email, phone, password
-      })
-    });
-    const data = await res.json();
-    if (res.status === 201) {
-      console.log(data)
-      swal("Account Created Successfull")
-      history.push("/login");
-    } else {
-      swal("There is some error");
-    }
-  }
+  //   // if(password === cpassword){
+  //   //   swal("Please Check Your Password");
+  //   // }
+
+  //   const res = await fetch("http://localhost:5000/api/auth/register", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       name,
+  //       name,
+  //       phone,
+  //       password,
+  //     }),
+  //   });
+  //   const data = await res.json();
+  //   if (res.status === 201) {
+  //     console.log(data);
+  //     swal("Account Created Successfull");
+  //     history.push("/login");
+  //   } else {
+  //     swal("There is some error");
+  //   }
+  // };
+
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
+  // const router = useRouter();
+
+  const postData = useCallback(
+    (e) => {
+      e.preventDefault();
+      // const { name, email, phone, password } = user;
+      register(dispatch, {name, email, phone, password });
+      swal("Account Created Successfull");
+      // router.push('/login');
+       history.push("/login");
+    },
+    [name, email, phone, password]
+  );
+
   return (
     <div className="">
-    <Container>
-      <Wrapper>
-        <Title>CREATE AN ACCOUNT</Title>
-        <Form method="POST" onSubmit={postData}>
-          <Label class="a-form-label">Name</Label>
-          <Input
-            type="text"
-            required
-            pattern="[a-zA-Z\s]{3,20}"
-            title="Can Contain 3 to 16 characters only."
-            onChange={handelChange}
-            value={user.name}
-            name="name"
-            placeholder="Name"
-          />
+      <Container>
+        <Wrapper>
+          <Title>CREATE AN ACCOUNT</Title>
+          <Form>
+            <Label class="a-form-label">Name</Label>
+            <Input
+              type="text"
+              required
+              pattern="[a-zA-Z\s]{3,20}"
+              title="Can Contain 3 to 16 characters only."
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              name="name"
+              placeholder="Name"
+            />
 
-          <Label class="a-form-label">Phone Number</Label>
-          <Input
-            onChange={handelChange}
-            value={user.phone}
-            type="tel"
-            pattern="^[0-9]{10}$"
-            title="Enter a Valid 10 Digit Number"
-            required
-            name="phone"
-            placeholder="Phone"
-          />
-          <Label class="a-form-label">Email</Label>
-          <Input
-            onChange={handelChange}
-            value={user.email}
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-            title="Match The Requested Format (name@example.com) "
-            type="mail"
-            required
-            name="email"
-            placeholder="Email"
-          />
+            <Label class="a-form-label">Mobile Number</Label>
+            <Input
+              onChange={(e) => setPhone(e.target.value)}
+              value={phone}
+              type="tel"
+              pattern="^[0-9]{10}$"
+              title="Enter a Valid 10 Digit Number"
+              required
+              name="phone"
+              placeholder="Phone"
+            />
 
-          <Label class="a-form-label">Password</Label>
-          <Input
-            onChange={handelChange}
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-            title="Must Contain At Least One Number And One Uppercase And Lowercase Letter, And At Least 8 Or More Characters"
-            value={user.password}
-            name="password"
-            type="password"
-            placeholder="Password"
-            required
-          />
+            <Label class="a-form-label">Email</Label>
+            <Input
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+              title="Match The Requested Format (name@example.com) "
+              type="mail"
+              required
+              name="email"
+              placeholder="Email"
+            />
 
-          <Agreement>
-            By creating an account, I consent to the processing of my personal
-            data in accordance with the <b>PRIVACY POLICY</b>
-          </Agreement>
-          <Button type="submit">CREATE</Button>
-        </Form>
-      </Wrapper>
-    </Container>
-  </div>
+            <Label class="a-form-label">Password</Label>
+            <Input
+              onChange={(e) => setPassword(e.target.value)}
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              title="Must Contain At Least One Number And One Uppercase And Lowercase Letter, And At Least 8 Or More Characters"
+              value={password}
+              name="password"
+              type="password"
+              placeholder="Password"
+              required
+            />
+
+            <Agreement>
+              By creating an account, I consent to the processing of my personal
+              data in accordance with the <b>PRIVACY POLICY</b>
+            </Agreement>
+            <Button type="submit" onClick={postData}
+            disabled={isFetching}>
+            CREATE
+            </Button>
+          </Form>
+          
+        {error && (
+          <span className="text-red-500 block ">Something Went Wrong...</span>
+        )}
+        </Wrapper>
+      </Container>
+    </div>
   );
 };
 

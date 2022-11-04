@@ -10,7 +10,6 @@ import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import "./cart.css";
-// import {Add as Add } from "./Product"
 import { Link } from "react-router-dom";
 
 const KEY = process.env.REACT_APP_STRIPE;
@@ -36,20 +35,21 @@ const Top = styled.div`
 const TopButton = styled.button`
   padding: 10px;
   font-weight: 600;
+  background-color: #fff4ef;
+  border: 0;
+  color: black;
   cursor: pointer;
-  border: ${(props) => props.type === "filled" && "none"};
-  background-color: ${(props) =>
-    props.type === "filled" ? "black" : "transparent"};
-  color: ${(props) => props.type === "filled" && "white"};
 `;
 
 const TopTexts = styled.div`
   ${mobile({ display: "none" })}
 `;
 const TopText = styled.span`
-  text-decoration: underline;
+  background: #fff4ef;
   cursor: pointer;
   margin: 0px 10px;
+  padding: 5px;
+  border-radius: 30px;
 `;
 
 const Bottom = styled.div`
@@ -156,8 +156,8 @@ const SummaryItemPrice = styled.span``;
 const Button = styled.button`
   width: 100%;
   padding: 10px;
-  background-color: #FFF4EF;
-  border: 0.5px solid IndianRed;
+  background-color: #fff4ef;
+  border: 0;
   color: black;
   font-weight: 600;
 `;
@@ -170,7 +170,7 @@ const Cart = () => {
   const onToken = (token) => {
     setStripeToken(token);
   };
-//  console.log(stripeToken)
+  //  console.log(stripeToken)
   useEffect(() => {
     const makeRequest = async () => {
       try {
@@ -186,7 +186,7 @@ const Cart = () => {
     };
     stripeToken && makeRequest();
   }, [stripeToken, cart.total, history]);
-  
+
   return (
     <Container>
       <Navbar />
@@ -194,9 +194,14 @@ const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <Link to={`/`}><TopButton>CONTINUE SHOPPING</TopButton></Link>
+          <Link to={`/`}>
+            <TopButton>CONTINUE SHOPPING</TopButton>
+          </Link>
           <TopTexts>
             <TopText>Shopping Bag</TopText>
+            <Link to={`/wishlist`}>
+              <TopText className="transparent">Your Wishlist ()</TopText>
+            </Link>
           </TopTexts>
           <TopButton type="filled">CHECKOUT NOW</TopButton>
         </Top>
@@ -204,8 +209,8 @@ const Cart = () => {
           <Info>
             {cart.products.map((product) => (
               <Product className="Demo">
-                <ProductDetail >
-                  <Image  className="prodImg" src={product.img} />
+                <ProductDetail>
+                  <Image className="prodImg" src={product.img} />
                   <Details>
                     <ProductName>
                       <b>Product:</b> {product.title}
@@ -248,7 +253,7 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-              <StripeCheckout
+            <StripeCheckout
               name="Artisan Shop"
               image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSemqiIPiJGwCjVqLTbkUODcDHt8As8aALN0eo48P434qjeKqSXS8eRfKSc1kPnyRv0jSI&usqp=CAU"
               billingAddress

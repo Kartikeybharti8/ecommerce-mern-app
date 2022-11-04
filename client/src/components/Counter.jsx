@@ -1,8 +1,8 @@
 import { Send } from "@material-ui/icons";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import CountUp, { useCountUp } from "react-countup";
-import ScrollTrigger from "react-scroll-trigger";
+// import CountUp, { useCountUp } from "react-countup";
+// import ScrollTrigger from "react-scroll-trigger";
 import { useState } from "react";
 import "./news.css";
 const Container = styled.div`
@@ -31,15 +31,15 @@ const Counter = () => {
  
   return (
     <Container>
-      <ScrollTrigger
+      {/* <ScrollTrigger
         onEnter={() => setCounterOn(true)}
         onExit={() => setCounterOn(false)}
-      >
+      > */}
         <center>
           <Title>Love from all over India</Title>
-          <Desc>Delivered Happiness and art </Desc>
+          <Desc>Ready to deliver Happiness and art </Desc>
           <h1>
-            {counterOn && (
+            {/* {counterOn && (
               <CountUp
                 className="Count"
                 start={60}
@@ -47,10 +47,10 @@ const Counter = () => {
                 duration={1}
                 delay={0}
               />
-            )}
+            )} */}
           </h1>
         </center>
-      </ScrollTrigger>
+      {/* </ScrollTrigger> */}
     </Container>
   );
 };

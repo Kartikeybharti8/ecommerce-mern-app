@@ -130,11 +130,11 @@ const Product = ({ item }) => {
               <SearchOutlined />
             </Link>
           </Icon>
-          <Icon>
+          {/* <Icon>
             <Link to={`/product/${item.id}`}>
               <FavoriteBorderOutlined />
             </Link>
-          </Icon>
+          </Icon> */}
         </Info>
       </Container1>
       <Container2>
