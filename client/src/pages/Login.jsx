@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRouter } from 'next/router';
+import { useState ,useCallback} from "react";
 import styled from "styled-components";
 import { login } from "../redux/apiCalls";
 import { mobile } from "../responsive";
@@ -89,18 +90,26 @@ const Login = () => {
   const [email, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { isFetching, error } = useSelector((state) => state.user);
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    login(dispatch, { email, password });
-  };
-
+  const { isFetching, isError, currentUser } = useSelector((state) => state.user);
+  const router = useRouter();
+  const handleLogin =  useCallback(
+    (e) => {
+      e.preventDefault();
+      login(dispatch, { email, password });
+    },
+    [email, password]
+  );
+  
+  if (currentUser) {
+    router.replace('/');
+    return null;
+  }
+  
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
-        <Form onSubmit={handleClick}>
+        <Form onSubmit={handleLogin }>
           <Input
             placeholder="Email"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
@@ -117,11 +126,17 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <Button  disabled={isFetching}>
+          <Button  
+          onClick={handleLogin}
+          disabled={isFetching}
+          >
             LOGIN
           </Button>
-          {error && <Error>Something went wrong...</Error>}
+          {isError && <Error>Something went wrong...</Error>}
+          {/*
           <Linked><Link>FORGOT PASSWORD?</Link></Linked>
+          */
+         }
           <Linked><Link to="/register">CREATE A NEW ACCOUNT</Link></Linked>
         </Form>
       </Wrapper>
