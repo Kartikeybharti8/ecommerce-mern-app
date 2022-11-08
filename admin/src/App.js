@@ -18,16 +18,14 @@ import Login from "./pages/login/Login";
 import { useSelector } from "react-redux";
 
 function App() {
-  const admin = useSelector((state) => state.user.currentUser) ? true : false;
-  // const admin =false;
+  const admin = useSelector((state) => state.user.currentUser? state.user.currentUser.isAdmin: false);
+  // const admin =true;
   
   return (
     <Router>
       <Switch>
         <Route path="/login">
-          <Login />
-        </Route>
-        {admin && (
+        {admin ? (
           <>
             <Topbar />
             <div className="container">
@@ -55,7 +53,9 @@ function App() {
               </Route>
             </div>
           </>
-        )}
+        ): <Redirect to="/login" />}
+        </Route>
+          
       </Switch>
     </Router>
   );
