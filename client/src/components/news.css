@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100&display=swap');
 
 .Count 
@@ -8,4 +9,12 @@
   padding: 6px;
   font-weight: 600;
   font-family: 'Barlow', sans-serif;
+=======
+.Count {
+  color: black;
+  font-weight: 600;
+  border: red 1px solid;
+  padding: 5px;
+  border-radius: 12px;
+>>>>>>> master
 }

@@ -198,9 +198,15 @@ const Cart = () => {
             <TopButton>CONTINUE SHOPPING</TopButton>
           </Link>
           <TopTexts>
+<<<<<<< HEAD
             <TopText>Shopping Bag</TopText>
             <Link to={`/wishlist`}>
               <TopText className="transparent">Your Wishlist ()</TopText>
+=======
+            <TopText>Shopping Bag()</TopText>
+            <Link to={`/wishlist`}>
+              <TopText>Your Wishlist ()</TopText>
+>>>>>>> master
             </Link>
           </TopTexts>
           <TopButton type="filled">CHECKOUT NOW</TopButton>
