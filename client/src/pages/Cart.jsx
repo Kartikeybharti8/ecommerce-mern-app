@@ -201,7 +201,8 @@ const Cart = () => {
     });
   }
  
-  async function showRazorpay() {
+  async function showRazorpay(total) {
+    console.log(total)
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -213,17 +214,26 @@ const Cart = () => {
 
     const data = await fetch("http://localhost:5000/api/checkout/payment", {
       method: "POST",
+      headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              currency:"INR",
+              payment_capture:cart.products.length,
+              amount:cart.total*100
+            }),
     }).then((t) => t.json());
 
     console.log(data);
 
     const options = {
+      //publc key
       key: "rzp_test_Hhk1Sht36toHVl",
       currency: data.currency,
-      amount: data.amount.toString(),
+      amount: data.amount,
       order_id: data.id,
-      name: "Donation",
-      description: "Thank you for nothing. Please give us some money",
+      name: "Artisan Shopping",
+      description: "You can make your payments here",
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSemqiIPiJGwCjVqLTbkUODcDHt8As8aALN0eo48P434qjeKqSXS8eRfKSc1kPnyRv0jSI&usqp=CAU",
       handler: function (response) {
         // alert(response.razorpay_payment_id);
@@ -235,7 +245,7 @@ const Cart = () => {
       prefill: {
         name: "kartikey",
         email: "kartikey@gamil.com",
-        phone_number: "9899999999",
+        phone_number: "9999999999",
       },
       theme:{
         color: "#99cc33"
@@ -254,7 +264,7 @@ const Cart = () => {
         <Top>
           <Link to={`/`}><TopButton>CONTINUE SHOPPING</TopButton></Link>
           <TopTexts>
-            <TopText>Shopping Bag(0)</TopText>
+            <TopText>Shopping Bag({cart.products.length})</TopText>
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
           <TopButton type="filled">CHECKOUT NOW</TopButton>
@@ -300,7 +310,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>₹ {(5 * cart.total) / 100}</SummaryItemPrice>
+              <SummaryItemPrice>₹ {0}</SummaryItemPrice>
             </SummaryItem>
 
             <SummaryItem type="total">
@@ -320,7 +330,7 @@ const Cart = () => {
              </StripeCheckout>*/}
             
               <Button
-              onClick={showRazorpay}
+              onClick={()=>{showRazorpay(cart.total)}}
               target="_blank"
               rel="noopener noreferrer">CHECKOUT NOW</Button>
           </Summary>
