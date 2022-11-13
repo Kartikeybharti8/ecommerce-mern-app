@@ -1,15 +1,25 @@
 .Demo {
-  background: FFF4EF;
-  padding: 0px;
-  margin: 8px;
-  border-radius: 15px;
-  border: 0.5px solid IndianRed;
-}
-.prodImg {
-  margin: 8px;
-  border-radius: 15px;
-}
-.transparent
+    background: #fff;
+    padding: 0px;
+    margin: 8px;
+    border-radius: 15px;
+    border: 0.5px solid IndianRed;
+  }
+  .prodImg {
+    margin: 8px;
+    border-radius: 15px;
+  }
+  .transparent
+  {
+    display: none;
+  }
+  
+.backIcon
 {
-  display: none;
+  position: relative;
+  left: 27px;
+  top: 25px;
+  color: indianred;
+  background-color: #FFF4EF;
+  border-radius: 14px;
 }

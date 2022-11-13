@@ -1,14 +1,14 @@
 const express = require("express");
-const app = express();
+const app = express(); 
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv"); 
 dotenv.config();
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
 const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
-const stripeRoute = require("./routes/stripe");
+const razorpayRoute = require("./routes/razorpay");
 const cors = require("cors");
 mongoose
   .connect(process.env.MONGO_URL)
@@ -23,8 +23,9 @@ app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders", orderRoute);
-app.use("/api/checkout", stripeRoute);
-app.get("/",(eq,res)=>{
+app.use("/api/checkout", razorpayRoute);
+
+app.get("/",(req,res)=>{
   res.end("home")
 })
 app.listen(process.env.PORT || 5000, () => {

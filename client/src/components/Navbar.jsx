@@ -1,5 +1,5 @@
 import { Badge } from "@material-ui/core";
-import { Search, ShoppingCartOutlined} from "@material-ui/icons";
+import { Search,OutdoorGrill, ShoppingCartOutlined} from "@material-ui/icons";
 import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
@@ -146,19 +146,23 @@ const Navbar = () => {
 
           {user && (
             <>
-              <div
+            <div
                 onClick={() => setShowPopup((prev) => !prev)}
-                className="relative cursor-pointer ml-[10px] border  space-x-3 rounded p-2 flex justify-between items-center "
+                className="parent "
               >
-                <div className="text-[12px] sm:text-[14px] tracking-wide ">
-                 Hii {user?.name.toUpperCase()}
+                <div className="hi">
+                  <Link to="/myAccount">
+                 <button className="nav-items">
+                  {user?.name.charAt(0).toUpperCase()}
+                 </button>
+                 </Link> 
                 </div>
                 <div
                   onClick={handleLogout}
-                  className="dropdown">
-                  <button className="logout">
-                   {user?.name.toUpperCase(charAt(0))}
-                    </button>
+                  className="logoutParent  ">
+                  <button className="logout  ">
+                  <i className="fa fa-sign-out" ></i>
+                  </button>
                 </div>
               </div>
             </>

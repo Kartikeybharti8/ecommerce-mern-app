@@ -10,8 +10,10 @@ import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
 import { addProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import swal from "sweetalert";
-
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import "./cart.css"
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -121,6 +123,7 @@ const Button = styled.button`
   }
 `;
 
+
 const Product = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
@@ -135,13 +138,11 @@ const Product = () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
         setProduct(res.data);
-        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
       } catch {}
     };
     getProduct();
-    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
-
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, [id]);
 
   const handleQuantity = (type) => {
@@ -153,13 +154,21 @@ const Product = () => {
   };
 
   const handleClick = () => {
-    swal("Added to cart");
+    swal("Added to Cart", {
+      buttons: false,
+      timer: 1500,
+      closeOnEsc: true,
+      closeOnClickOutside: true,
+    });
     dispatch(addProduct({ ...product, quantity, color, size }));
   };
   return (
     <Container>
       <Navbar />
       <Announcement />
+      <Link to="/">
+        <ArrowBackIcon className="backIcon"/>
+      </Link>
       <Wrapper>
         <ImgContainer>
           <Image src={product.img} />

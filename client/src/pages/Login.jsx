@@ -109,7 +109,7 @@ const Login = () => {
   return (
     <Container>
       <Wrapper>
-        <Title>Login</Title>
+        <Title>SIGN IN</Title>
         <Form onSubmit={handleLogin }>
           <Input
             placeholder="Email"

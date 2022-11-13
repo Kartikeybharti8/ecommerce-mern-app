@@ -6,6 +6,8 @@ import Navbar from "../components/Navbar";
 import Counter from "../components/Counter";
 import Products from "../components/Products";
 import Slider from "../components/Slider";
+
+
 const Home = () => {
   return (
     <div>
