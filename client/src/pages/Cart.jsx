@@ -9,7 +9,7 @@ import { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./cart.css";
-import swal from "sweetalert";
+// import swal from "sweetalert";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import {
@@ -317,44 +317,7 @@ const Cart = () => {
             )}
             <Hr />
           </Info> 
-          <Info>
-            {cart.products.length === 0 ? (
-              <p>
-                Your Cart is empty.<br></br> <Link to="/">Go for Shopping</Link>
-              </p>
-            ) : (
-              cart.products.map((product) => (
-                <Product className="Demo">
-                  <ProductDetail>
-                    <Image className="prodImg" src={product.img} />
-                    <Details>
-                      <ProductName>
-                        <b>Product:</b> {product.title}
-                      </ProductName>
-                      <ProductId>
-                        <b>ID:</b> {product._id}
-                      </ProductId>
-                      <ProductColor color={product.color} />
-                      <ProductSize>
-                        <b>Size:</b> {product.size}
-                      </ProductSize>
-                    </Details>
-                  </ProductDetail>
-                  <PriceDetail>
-                    <ProductAmountContainer>
-                      <Add />
-                      <ProductAmount>{product.quantity}</ProductAmount>
-                      <Remove />
-                    </ProductAmountContainer>
-                    <ProductPrice>
-                      ₹ {product.price * product.quantity}
-                    </ProductPrice>
-                  </PriceDetail>
-                </Product>
-              ))
-            )}
-            <Hr />
-          </Info>
+          
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
