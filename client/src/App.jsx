@@ -5,6 +5,8 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import swal from 'sweetalert';
+import About from "./pages/About";
+import Wishlist from "./pages/Wishlist";
 
 import {
   BrowserRouter as Router,
@@ -39,6 +41,12 @@ const App = () => {
         </Route>
         <Route path="/success">
           <Success />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/wishlist">
+          <Wishlist />
         </Route>
         <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
         <Route path="/register">

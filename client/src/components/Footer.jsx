@@ -153,11 +153,11 @@ const Footer = () => {
       <Center>
         <Title>Useful Links</Title>
         <List>
-          <ListItem><Link to="/home">Home</Link></ListItem>
-          <ListItem><Link to="/cart">Cart</Link></ListItem>
-          <ListItem><Link to="/register">My Account</Link></ListItem>
+          <ListItem><Link style={{textDecoration: "none"}} to="/">Home</Link></ListItem>
+          <ListItem><Link style={{textDecoration: "none"}} to="/cart">Cart</Link></ListItem>
+          <ListItem><Link style={{textDecoration: "none"}} to="/register">My Account</Link></ListItem>
           <ListItem>Track Order</ListItem>
-          <ListItem>Terms</ListItem>
+          <ListItem><Link style={{textDecoration: "none"}} to="/about">About Us</Link></ListItem>
         </List>
       </Center>
       <Right>

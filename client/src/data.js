@@ -60,7 +60,7 @@ export const categories = [
 export const popularProducts = [
   {
     id: "63478d315422804b9a1ef29c",
-    title: "Blue Pottery",
+    title: "BLUE POTTERY",
     desc: "POTTERY",
     img: "https://cdn.shopify.com/s/files/1/0155/8131/products/0Q8A6927_480x.jpg?v=1664965442",
     categories: ["POTTERY"],
@@ -71,8 +71,8 @@ export const popularProducts = [
   },
   {
     id: "634798a0df4c8b863b4bd6f9",
-    img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/73000981-2_52e4c764-09a2-45be-a18e-3eb1df5aafe8.jpg?v=1658379767",
-    title: "Prestige Tattva Copper Water Bottle",
+    img: "https://www.auffbeat.com/wp-content/uploads/2021/03/Handmade-Meena-Art-Copper-Bottle-in-Funky-Design-1.jpg.webp",
+    title: "PRESTIGE TATTVA COPPER WATER BOTTLE",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],
@@ -83,7 +83,7 @@ export const popularProducts = [
   {
     id: "634798fddf4c8b863b4bd6fb",
     img: "https://4.imimg.com/data4/DS/BV/ANDROID-16420486/product-500x500.jpeg",
-    title: "Kundan Work Silk Thread Bangle",
+    title: "KUNDAN WORK SILK THREAD BANGLE",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],
@@ -94,7 +94,7 @@ export const popularProducts = [
   {
     id: "63479a99df4c8b863b4bd6fd",
     img: "https://m.media-amazon.com/images/I/412JCAkm8sL.._SX._UX._SY._UY_.jpg",
-    title: "Chudaas",
+    title: "CHUDAAS",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],
@@ -105,7 +105,7 @@ export const popularProducts = [
   {
     id: "63479eafdf4c8b863b4bd701",
     img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/30000654-1.jpg?v=1659168974",
-    title: "Wooden Boat",
+    title: "WOODEN BOAT",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],
@@ -116,7 +116,7 @@ export const popularProducts = [
   {
     id: "6347a598df4c8b863b4bd708",
     img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/115001220A-4.jpg?v=1658136142",
-    title: "Baby Pink Potli Pouch",
+    title: "BABY PINK POTLI POUCH",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],
@@ -127,7 +127,7 @@ export const popularProducts = [
   {
     id: "6347a5c6df4c8b863b4bd70a",
     img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/VWP7117.jpg?v=1658750659",
-    title: "Wooden Pen Stand",
+    title: "WOODEN PEN STAND",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],
@@ -138,7 +138,7 @@ export const popularProducts = [
   {
     id: "6347a626df4c8b863b4bd70c",
     img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/123000930-1.jpg?v=1661238745",
-    title: "Marble Antique Table Lamp",
+    title: "MARBLE ANTIQUE TABLE LAMP",
     desc: "POTTERY",
     categories: ["POTTERY"],
     size: [],

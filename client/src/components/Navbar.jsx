@@ -1,5 +1,5 @@
 import { Badge } from "@material-ui/core";
-import { Search, ShoppingCartOutlined } from "@material-ui/icons";
+import { Search, ShoppingCartOutlined, FavoriteBorderOutlined } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
@@ -90,12 +90,21 @@ const Nonlink = styled.div`
     text-decoration: none;
   }
 `;
+
 const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
+
+const WishlistIcon = styled.div`
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 25px;
+  ${mobile({ fontSize: "12px", marginLeft: "10px" })}
+`;
+
 const Navbar = () => {
   
   const [user, setUser] = useState(false);
@@ -145,6 +154,14 @@ const Navbar = () => {
                 LOGOUT
               </MenuItem>
             )}
+          </Link>
+
+          <Link to="/wishlist">
+            <MenuItem>
+              <Badge className="nav-items">
+                <FavoriteBorderOutlined />
+              </Badge>
+            </MenuItem>
           </Link>
 
           <Link to="/cart">

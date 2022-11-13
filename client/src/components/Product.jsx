@@ -1,18 +1,16 @@
 import {
+  FavoriteBorderRounded,
   FavoriteBorderOutlined,
   SearchOutlined,
-  ShoppingCartOutlined,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { popularProducts } from "../data";
 import "./product.css";
-
-
+import { publicRequest } from "../requestMethods";
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
-import { addProduct } from "../redux/cartRedux";
+import { wishProduct } from "../redux/wishlistRedux";
 import { useDispatch } from "react-redux";
 
 const Info = styled.div`
@@ -30,6 +28,7 @@ const Info = styled.div`
   transition: all 0.5s ease;
   cursor: pointer;
 `;
+
 const Container1 = styled.div`
   flex: 1;
   margin: 5px;
@@ -37,7 +36,7 @@ const Container1 = styled.div`
   height: 350px;
   display: flex;
   align-items: center;
-  // background-color: blue;
+  background-color: blue;
   background-color: #f5fbfd;
   justify-content: center;
   
@@ -46,7 +45,7 @@ const Container1 = styled.div`
   &:hover ${Info}{
     opacity: 1;
   }
-  `;
+`;
 
 const Container2 = styled.div`
   flex: 1;
@@ -89,6 +88,8 @@ const Icon = styled.div`
   }
 `;
 
+const SubIcon = styled.div``;
+
 const Title = styled.div`
   height: 75%;
   font-weight: bold;
@@ -110,17 +111,47 @@ const Stock = styled.div`
   align-items: right;
 `;
 
-const Product = ({ item }) => {
-  let ans1 = "In Stock";
-  let ans2 = "Out of Stock";
-  let fans;
-  if (item.inStock) {
-    fans = ans1;
-  }
-  else {
-    fans = ans2;
+const Product = ({ item }) =>
+{
+  const location = useLocation();
+  // const id = location.pathname.split("/")[2];
+  const [quantity, setQuantity] = useState(1);
+  // const [color, setColor] = useState("");
+  // const [size, setSize] = useState("");
+  const [product, setProduct] = useState({});
+  const dispatch = useDispatch();
+  const [clicked, setClicked] = useState(false);
+
+  const handleIconClick = () => {
+    setClicked(true);
   }
 
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get("/products/find/" + item.id);
+        setProduct(res.data);
+      } catch {}
+    };
+    getProduct();
+  }, [item.id]);
+
+  let inStock = "In Stock";
+  let outofStock = "Out of Stock";
+  let stockDetail;
+  if (item.inStock) {
+    stockDetail = inStock;
+  }
+  else {
+    stockDetail = outofStock;
+  }
+
+  const handleClick = () => {
+    //console.log(product, item.id)
+    dispatch(
+      wishProduct({ ...product, quantity })
+    );
+  };
   return (
     <div>
       <Container1>
@@ -132,20 +163,18 @@ const Product = ({ item }) => {
           </Icon> */}
           <Icon>
             <Link to={`/product/${item.id}`}>
-              <SearchOutlined />
+              <SearchOutlined />  
             </Link>
           </Icon>
-          <Icon>
-            <Link to={`/product/${item.id}`}>
-              <FavoriteBorderOutlined />
-            </Link>
+          <Icon onClick={handleClick}>
+            <FavoriteBorderOutlined />
           </Icon>
         </Info>
       </Container1>
       <Container2>
         <Title>{item.title}</Title>
         <Span className="price">₹{item.price}</Span>
-        <Span className="stock">{fans}</Span>
+        <Span className="stock">{stockDetail}</Span>
       </Container2>
     </div>
   );

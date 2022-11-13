@@ -10,8 +10,25 @@ import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import {FavoriteBorderOutlined } from "@material-ui/icons";
 
 const KEY = process.env.REACT_APP_STRIPE;
+
+const Major = styled.div`
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.5s ease;
+  cursor: pointer;
+`;
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -58,68 +75,90 @@ const Bottom = styled.div`
 
 const Info = styled.div`
   flex: 3;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 const Product = styled.div`
   display: flex;
   justify-content: space-between;
   ${mobile({ flexDirection: "column" })}
+  margin: 50px 30px 50px 30px;
+  align-items: center;
+  position: relative;
+
+  &:hover ${Info}{
+    opacity: 1;
+  }
 `;
 
 const ProductDetail = styled.div`
   flex: 2;
-  display: flex;
+  display: column;
+  padding: 10px 10px 10px 10px
 `;
 
 const Image = styled.img`
   width: 200px;
+  border-radius: 15px;
+  z-index: 2;
 `;
 
+const Icon = styled.div``;
+
 const Details = styled.div`
-  padding: 20px;
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 `;
 
-const ProductName = styled.span``;
-
-const ProductId = styled.span``;
-
-const ProductColor = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
+const ProductName = styled.span`
+  text-align: center;
+  width: 200px;
+  font-weight: bold;
+  color:black;
 `;
 
-const ProductSize = styled.span``;
-
-const PriceDetail = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+const ProductStock = styled.div`
+  color: black;
+  padding-top: 5px;
 `;
 
-const ProductAmountContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-`;
+// const ProductColor = styled.div`
+//   width: 20px;
+//   height: 20px;
+//   border-radius: 50%;
+//   background-color: ${(props) => props.color};
+// `;
 
-const ProductAmount = styled.div`
-  font-size: 24px;
-  margin: 5px;
-  ${mobile({ margin: "5px 15px" })}
-`;
+// const ProductSize = styled.span``;
 
-const ProductPrice = styled.div`
-  font-size: 30px;
-  font-weight: 200;
-  ${mobile({ marginBottom: "20px" })}
-`;
+// const PriceDetail = styled.div`
+//   flex: 1;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+// `;
+
+// const ProductAmountContainer = styled.div`
+//   display: flex;
+//   align-items: center;
+//   margin-bottom: 20px;
+// `;
+
+// const ProductAmount = styled.div`
+//   font-size: 24px;
+//   margin: 5px;
+//   ${mobile({ margin: "5px 15px" })}
+// `;
+
+// const ProductPrice = styled.div`
+//   font-size: 30px;
+//   font-weight: 200;
+//   ${mobile({ marginBottom: "20px" })}
+// `;
 
 const Hr = styled.hr`
   background-color: #eee;
@@ -127,97 +166,98 @@ const Hr = styled.hr`
   height: 1px;
 `;
 
-const Summary = styled.div`
-  flex: 1;
-  border: 0.5px solid lightgray;
-  border-radius: 10px;
-  padding: 20px;
-  height: 50vh;
-`;
+// const Summary = styled.div`
+//   flex: 1;
+//   border: 0.5px solid lightgray;
+//   border-radius: 10px;
+//   padding: 20px;
+//   height: 50vh;
+// `;
 
-const SummaryTitle = styled.h1`
-  font-weight: 200;
-`;
+// const SummaryTitle = styled.h1`
+//   font-weight: 200;
+// `;
 
-const SummaryItem = styled.div`
-  margin: 30px 0px;
-  display: flex;
-  justify-content: space-between;
-  font-weight: ${(props) => props.type === "total" && "500"};
-  font-size: ${(props) => props.type === "total" && "24px"};
-`;
+// const SummaryItem = styled.div`
+//   margin: 30px 0px;
+//   display: flex;
+//   justify-content: space-between;
+//   font-weight: ${(props) => props.type === "total" && "500"};
+//   font-size: ${(props) => props.type === "total" && "24px"};
+// `;
 
-const SummaryItemText = styled.span``;
+// const SummaryItemText = styled.span``;
 
-const SummaryItemPrice = styled.span``;
+// const SummaryItemPrice = styled.span``;
 
-const Button = styled.button`
-  width: 100%;
-  padding: 10px;
-  background-color: black;
-  color: white;
-  font-weight: 600;
-`;
+// const Button = styled.button`
+//   width: 100%;
+//   padding: 10px;
+//   background-color: black;
+//   color: white;
+//   font-weight: 600;
+// `;
 
-const Cart = () => {
-  const cart = useSelector((state) => state.cart);
+const Wishlist = ({item}) => {
+  const wishlist = useSelector((state) => state.wishlist);
   const [stripeToken, setStripeToken] = useState(null);
   const history = useHistory();
-  const quantity = useSelector((state) => state.cart.quantity);
-  const onToken = (token) => {
-    setStripeToken(token);
-  };
-//  console.log(stripeToken)
-  useEffect(() => {
-    const makeRequest = async () => {
-      try {
-        const res = await userRequest.post("/checkout/payment", {
-          tokenId: stripeToken.id,
-          amount: 500,
-        });
-        history.push("./success", {
-          stripeData: res.data,
-          products: cart,
-        });
-      } catch {}
-    };
-    stripeToken && makeRequest();
-  }, [stripeToken, cart.total, history]);
+  
+//   const onToken = (token) => {
+//     setStripeToken(token);
+//   };
+// //  console.log(stripeToken)
+//   useEffect(() => {
+//     const makeRequest = async () => {
+//       try {
+//         const res = await userRequest.post("/checkout/payment", {
+//           tokenId: stripeToken.id,
+//           amount: 500,
+//         });
+//         history.push("./success", {
+//           stripeData: res.data,
+//           products: wishlist,
+//         });
+//       } catch {}
+//     };
+//     stripeToken && makeRequest();
+//   }, [stripeToken, wishlist.total, history]);
   
   return (
     <Container>
-      <Navbar />
       <Announcement />
+      <Navbar />
       <Wrapper>
-        <Title>YOUR BAG</Title>
+        <Title>YOUR WISHLIST</Title>
         <Top>
           <Link to={`/`}><TopButton>CONTINUE SHOPPING</TopButton></Link>
-          <TopTexts>
-            <TopText>Shopping Bag({quantity})</TopText>
-            <Link to="/wishlist" style={{ color: "black" }}><TopText>Your Wishlist({quantity})</TopText></Link>
-          </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+          {/* <TopButton type="outlined">ADD TO CART</TopButton> */}
         </Top>
         <Bottom>
           <Info>
-            {cart.products.map((product) => (
+            {wishlist.products.map((product) => (
               <Product>
                 <ProductDetail>
-                  <Image src={product.img} />
+                  <Link to ={`/product/${product._id}`}>
+                    <Image src={product.img} />
+                  </Link>
+                  {/* <Icon>
+                    <FavoriteBorderOutlined />
+                  </Icon> */}
                   <Details>
                     <ProductName>
-                      <b>Product:</b> {product.title}
+                      {product.title}
                     </ProductName>
-                    <ProductId>
-                      <b>ID:</b> {product._id}
-                    </ProductId>
-                    <ProductColor color={product.color} />
+                    <ProductStock>
+                      {product.stockDetail}
+                    </ProductStock>
+                    {/*<ProductColor color={item.color} />
                     <ProductSize>
-                      <b>Size:</b> {product.size}
-                    </ProductSize>
+                      <b>Size:</b> {item.size}
+                    </ProductSize>*/}
                   </Details>
                 </ProductDetail>
-                <PriceDetail>
+                {/*<PriceDetail>
                   <ProductAmountContainer>
                     <Add />
                     <ProductAmount>{product.quantity}</ProductAmount>
@@ -226,12 +266,12 @@ const Cart = () => {
                   <ProductPrice>
                     ₹ {product.price * product.quantity}
                   </ProductPrice>
-                </PriceDetail>
+                </PriceDetail>*/}
               </Product>
             ))}
             <Hr />
           </Info>
-          <Summary>
+          {/*<Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
@@ -257,7 +297,7 @@ const Cart = () => {
             >
               <Button>CHECKOUT NOW</Button>
             </StripeCheckout>
-          </Summary>
+            </Summary>*/}
         </Bottom>
       </Wrapper>
       <Footer />
@@ -265,5 +305,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
-
+export default Wishlist;
