@@ -1,4 +1,4 @@
-import { Add, Remove } from "@material-ui/icons";
+import { Add, Remove, DeleteOutlineOutlined } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
@@ -10,7 +10,8 @@ import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import {FavoriteBorderOutlined } from "@material-ui/icons";
+import { useDispatch } from "react-redux";
+import { removeFromWishlist } from "../redux/wishlistRedux";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -102,6 +103,10 @@ const Image = styled.img`
   width: 200px;
   border-radius: 15px;
   z-index: 2;
+`;
+
+const DeleteButton = styled.button`
+  
 `;
 
 const Icon = styled.div``;
@@ -202,6 +207,13 @@ const Wishlist = ({item}) => {
   const wishlist = useSelector((state) => state.wishlist);
   const [stripeToken, setStripeToken] = useState(null);
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const handleDeleteWislist = (product) => {
+    // console.log(product)
+  
+      dispatch(removeFromWishlist(product));
+    };
   
 //   const onToken = (token) => {
 //     setStripeToken(token);
@@ -241,6 +253,9 @@ const Wishlist = ({item}) => {
                   <Link to ={`/product/${product._id}`}>
                     <Image src={product.img} />
                   </Link>
+                  <DeleteButton onClick={() => handleDeleteWislist(product)}>
+                    <DeleteOutlineOutlined />
+                  </DeleteButton>
                   {/* <Icon>
                     <FavoriteBorderOutlined />
                   </Icon> */}
