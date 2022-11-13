@@ -11,6 +11,7 @@ import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import "./cart.css";
 import swal from "sweetalert";
+import { Link } from "react-router-dom";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
