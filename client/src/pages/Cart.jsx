@@ -175,7 +175,7 @@ const Cart = () => {
           tokenId: stripeToken.id,
           amount: 500,
         });
-        history.push("/success", {
+        history.push("./success", {
           stripeData: res.data,
           products: cart,
         });
@@ -241,13 +241,11 @@ const Cart = () => {
               <SummaryItemText>Estimated Shipping</SummaryItemText>
               <SummaryItemPrice>₹ {(5 * cart.total) / 100}</SummaryItemPrice>
             </SummaryItem>
-
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
             </SummaryItem>
             <StripeCheckout
-
               name="Art Store"
               image="https://avatars.githubusercontent.com/u/1486366?v=4"
               billingAddress
@@ -268,3 +266,4 @@ const Cart = () => {
 };
 
 export default Cart;
+
