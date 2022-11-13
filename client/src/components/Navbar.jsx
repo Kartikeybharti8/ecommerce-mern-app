@@ -5,13 +5,9 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import { useSelector,useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-// import LogoutIcon from '@mui/icons-material/Logout';
 import { logout } from '../redux/userRedux';
-
-
-
 import "./Navbar.css";
+
 const Container = styled.div`
   background-color: #fff4ef;
   height: 60px;
@@ -98,20 +94,6 @@ const MenuItem = styled.div`
 `;
 const Navbar = () => {
   
-  // const [user, setUser] = useState(false);
-  // useEffect(() => {
-  //   if (localStorage.getItem("isLoggedIn")) {
-  //     setUser(true);
-  //   } else {
-  //     setUser(false);
-  //   }
-  //   //  eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-  // //
-  // const handleLogout = () => {
-  //   localStorage.removeItem("isLoggedIn");
-  //   window.location.reload();
-  // };
   const user = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState(false);
@@ -119,7 +101,7 @@ const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity);
 
   const handleLogout = useCallback(() => dispatch(logout()), [dispatch]);
-  
+  // console.log(quantity)
   return (
     <Container>
       <Wrapper>
@@ -148,20 +130,16 @@ const Navbar = () => {
             <>
             <div
                 onClick={() => setShowPopup((prev) => !prev)}
-                className="parent "
+                className="relative cursor-pointer ml-[10px] border  space-x-3 rounded p-2 flex justify-between items-center parent "
               >
-                <div className="hi">
-                  <Link to="/myAccount">
-                 <button className="nav-items">
-                  {user?.name.charAt(0).toUpperCase()}
-                 </button>
-                 </Link> 
+                <div className="text-[12px] sm:text-[14px] tracking-wide   ">
+                 Hii {user?.name.toUpperCase()}
                 </div>
                 <div
                   onClick={handleLogout}
-                  className="logoutParent  ">
-                  <button className="logout  ">
-                  <i className="fa fa-sign-out" ></i>
+                  className="logoutParent ">
+                  <button className="logout ">
+                    <OutdoorGrill />
                   </button>
                 </div>
               </div>

@@ -10,7 +10,7 @@ import Track from "./pages/TrackOrder";
 import Terms from "./pages/terms";
 import About from "./pages/About";
 import swal from 'sweetalert';
-
+// check
 import {
   BrowserRouter as Router,
   Switch,

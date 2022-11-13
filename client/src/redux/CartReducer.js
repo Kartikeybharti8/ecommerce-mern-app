@@ -1,45 +1,34 @@
-import { loadData, saveData } from "../../utils/localStorage";
-import {
-  GET_CART_FALIURE,
-  GET_CART_REQUEST,
-  GET_CART_SUCCESS,
-} from "./actionTypes";
 
-const intialState = {
-  isLoading: false,
-  isError: "",
-  AddtoCart: loadData("Cart") || [],
+
+import { 
+  loginFailure,
+  loginStart, 
+  loginSuccess,
+  registerStart,
+  registerFailure,
+  registerSuccess, } from "./userRedux";
+import { publicRequest } from "../requestMethods";
+
+
+export const login = async (dispatch, user) => {
+  // localStorage.setItem("isLoggedIn",true);
+
+  dispatch(loginStart());
+  try {
+    const res = await publicRequest.post("/auth/login", user);
+
+    dispatch(loginSuccess(res.data));
+  } catch (err) {
+    dispatch(loginFailure());
+  }
 };
 
-export const Cartreducer = (state = intialState, action) => {
-  const { type, payload } = action;
-  switch (type) {
-    case GET_CART_REQUEST: {
-      return {
-        ...state,
-        isError: "",
-        isLoading: true,
-      };
-    }
-    case GET_CART_SUCCESS: {
-      saveData("Cart", payload);
-      return {
-        ...state,
-        isError: "",
-        isLoading: false,
-        AddtoCart: payload,
-      };
-    }
-    case GET_CART_FALIURE: {
-      return {
-        ...state,
-        isError: payload,
-        isLoading: false,
-        AddtoCart: null,
-      };
-    }
-    default: {
-      return { ...state };
-    }
+export const register = async (dispatch, user) => {
+  dispatch(registerStart());
+  try {
+    const res = await publicRequest.post('/auth/register', user);
+    dispatch(registerSuccess(res.data));
+  } catch (error) {
+    dispatch(registerFailure());
   }
 };

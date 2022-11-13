@@ -8,12 +8,17 @@ import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
-import { addProduct } from "../redux/cartRedux";
+import { addtoProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import "./cart.css"
+=======
+import swal from "sweetalert";
+
+>>>>>>> nidhi
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -123,7 +128,10 @@ const Button = styled.button`
   }
 `;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> nidhi
 const Product = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
@@ -138,11 +146,21 @@ const Product = () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
         setProduct(res.data);
+<<<<<<< HEAD
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
       } catch {}
     };
     getProduct();
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+=======
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+
+      } catch {}
+    };
+    getProduct();
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+
+>>>>>>> nidhi
   }, [id]);
 
   const handleQuantity = (type) => {
@@ -153,14 +171,22 @@ const Product = () => {
     }
   };
 
+  
   const handleClick = () => {
     swal("Added to Cart", {
       buttons: false,
       timer: 1500,
       closeOnEsc: true,
       closeOnClickOutside: true,
+<<<<<<< HEAD
     });
     dispatch(addProduct({ ...product, quantity, color, size }));
+=======
+
+
+    });   
+    dispatch(addtoProduct({ ...product, quantity, color, size }));
+>>>>>>> nidhi
   };
   return (
     <Container>

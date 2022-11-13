@@ -1,4 +1,4 @@
-import Link from 'next/link';
+// import Link from 'next/link';
 import React, { useState,useCallback } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../redux/apiCalls';
@@ -11,7 +11,7 @@ import swal from "sweetalert";
 import "./reg.css";
 
 import { mobile } from "../responsive";
-import { CircularProgress } from "@material-ui/core";
+// import { CircularProgress } from "@material-ui/core";
 
 const Container = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
