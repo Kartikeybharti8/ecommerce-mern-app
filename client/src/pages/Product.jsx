@@ -3,13 +3,14 @@ import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import Newsletter from "../components/Newsletter";
+import Counter from "../components/Counter";
 import { mobile } from "../responsive";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
-import { addProduct } from "../redux/cartRedux";
+import { addtoProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
+import swal from "sweetalert";
 
 const Container = styled.div``;
 
@@ -120,8 +121,7 @@ const Button = styled.button`
   }
 `;
 
-const Product = () => 
-{
+const Product = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
@@ -135,12 +135,16 @@ const Product = () =>
       try {
         const res = await publicRequest.get("/products/find/" + id);
         setProduct(res.data);
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+
       } catch {}
     };
     getProduct();
+    window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+
   }, [id]);
 
-   const handleQuantity = (type) => {
+  const handleQuantity = (type) => {
     if (type === "dec") {
       quantity > 1 && setQuantity(quantity - 1);
     } else {
@@ -148,10 +152,17 @@ const Product = () =>
     }
   };
 
+  
   const handleClick = () => {
-    dispatch(
-      addProduct({ ...product, quantity, color, size })
-    );
+    swal("Added to Cart", {
+      buttons: false,
+      timer: 1500,
+      closeOnEsc: true,
+      closeOnClickOutside: true,
+
+
+    });   
+    dispatch(addtoProduct({ ...product, quantity, color, size }));
   };
   return (
     <Container>
@@ -164,10 +175,10 @@ const Product = () =>
         <InfoContainer>
           <Title>{product.title}</Title>
           <Desc>{product.desc}</Desc>
-          
+
           <Price>₹ {product.price}</Price>
           <FilterContainer>
-            <Filter>
+            {/* <Filter>
               <FilterTitle>Color</FilterTitle>
               {product.color?.map((c) => (
                 <FilterColor color={c} key={c} onClick={() => setColor(c)} />
@@ -180,7 +191,7 @@ const Product = () =>
                   <FilterSizeOption key={s}>{s}</FilterSizeOption>
                 ))}
               </FilterSize>
-            </Filter>
+            </Filter> */}
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
@@ -192,7 +203,7 @@ const Product = () =>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
-      <Newsletter />
+      <Counter />
       <Footer />
     </Container>
   );

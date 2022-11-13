@@ -13,4 +13,18 @@
   {
     display: none;
   }
+  .fa-trash-o
+  {
+    left: 40px;
+    top: 2px;
+    z-index: 14;
+    position: relative;
+    font-size: x-large !important;
+    color: black;
+  }
+  p{
+    padding: 25px;
+    font-style: revert;
+    font-size: large;
+  }
   
