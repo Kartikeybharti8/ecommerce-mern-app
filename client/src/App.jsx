@@ -5,7 +5,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
 import swal from 'sweetalert';
-
+// check
 import {
   BrowserRouter as Router,
   Switch,
