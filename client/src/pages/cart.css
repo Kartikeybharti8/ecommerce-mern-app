@@ -17,6 +17,7 @@
 .backIcon
 {
   position: relative;
+  font-size: larger;
   left: 27px;
   top: 25px;
   color: indianred;
