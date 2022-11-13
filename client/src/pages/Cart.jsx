@@ -10,8 +10,7 @@ import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import "./cart.css";
-import { Link } from "react-router-dom";
-import "./cart.css"
+import swal from "sweetalert";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -166,28 +165,6 @@ const Button = styled.button`
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  // const [stripeToken, setStripeToken] = useState(null);
-  // const history = useHistory();
-
-  // const onToken = (token) => {
-  //   setStripeToken(token);
-  // };
-//  console.log(stripeToken)
-  // useEffect(() => {
-  //   const makeRequest = async () => {
-  //     try {
-  //       const res = await userRequest.post("/checkout/payment", {
-  //         tokenId: stripeToken.id,
-  //         amount: 500,
-  //       });
-  //       history.push("/success", {
-  //         stripeData: res.data,
-  //         products: cart,
-  //       });
-  //     } catch {}
-  //   };
-  //   stripeToken && makeRequest();
-  // }, [stripeToken, cart.total, history]);
   function loadScript(src) {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -201,7 +178,7 @@ const Cart = () => {
       document.body.appendChild(script);
     });
   }
- 
+
   async function showRazorpay() {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
@@ -225,27 +202,34 @@ const Cart = () => {
       order_id: data.id,
       name: "Donation",
       description: "Thank you for nothing. Please give us some money",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSemqiIPiJGwCjVqLTbkUODcDHt8As8aALN0eo48P434qjeKqSXS8eRfKSc1kPnyRv0jSI&usqp=CAU",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSemqiIPiJGwCjVqLTbkUODcDHt8As8aALN0eo48P434qjeKqSXS8eRfKSc1kPnyRv0jSI&usqp=CAU",
       handler: function (response) {
         // alert(response.razorpay_payment_id);
         // alert(response.razorpay_order_id);
         // alert(response.razorpay_signature);
 
-        alert("Transaction successful");
+        swal("Transaction Successful", {
+          buttons: false,
+          icon: "success",
+          timer: 1500,
+          closeOnEsc: true,
+          closeOnClickOutside: true,
+        });
       },
       prefill: {
         name: "kartikey",
         email: "kartikey@gamil.com",
         phone_number: "9899999999",
       },
-      theme:{
-        color: "#99cc33"
-      }
+      theme: {
+        color: "#99cc33",
+      },
     };
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   }
-  
+  //print product quantity
   return (
     <Container>
       <Navbar />
@@ -265,8 +249,9 @@ const Cart = () => {
           <TopButton type="filled">CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
-          <Info>
+          {/* <Info>
             {cart.products.map((product) => (
+           
               <Product className="Demo">
                 <ProductDetail>
                 <Image className="prodImg" src={product.img} />
@@ -296,6 +281,44 @@ const Cart = () => {
               </Product>
             ))}
             <Hr />
+          </Info> */}
+          <Info>
+            {cart.products.length === 0 ? (
+              <p>
+                Your Cart is empty.<br></br> <Link to="/">Go for Shopping</Link>
+              </p>
+            ) : (
+              cart.products.map((product) => (
+                <Product className="Demo">
+                  <ProductDetail>
+                    <Image className="prodImg" src={product.img} />
+                    <Details>
+                      <ProductName>
+                        <b>Product:</b> {product.title}
+                      </ProductName>
+                      <ProductId>
+                        <b>ID:</b> {product._id}
+                      </ProductId>
+                      <ProductColor color={product.color} />
+                      <ProductSize>
+                        <b>Size:</b> {product.size}
+                      </ProductSize>
+                    </Details>
+                  </ProductDetail>
+                  <PriceDetail>
+                    <ProductAmountContainer>
+                      <Add />
+                      <ProductAmount>{product.quantity}</ProductAmount>
+                      <Remove />
+                    </ProductAmountContainer>
+                    <ProductPrice>
+                      ₹ {product.price * product.quantity}
+                    </ProductPrice>
+                  </PriceDetail>
+                </Product>
+              ))
+            )}
+            <Hr />
           </Info>
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
@@ -310,24 +333,17 @@ const Cart = () => {
 
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
+              <SummaryItemPrice>
+                ₹ {cart.total + (5 * cart.total) / 100}
+              </SummaryItemPrice>
             </SummaryItem>
-             {/* <StripeCheckout
-              name="Artisan Shop"
-              image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSemqiIPiJGwCjVqLTbkUODcDHt8As8aALN0eo48P434qjeKqSXS8eRfKSc1kPnyRv0jSI&usqp=CAU"
-              billingAddress
-              shippingAddress
-              description={`Your total is Rs ${cart.total}`}
-              amount={cart.total * 100}
-              token={onToken}
-              stripeKey={KEY}
-            >
-             </StripeCheckout>*/}
-            
-              <Button
+            <Button
               onClick={showRazorpay}
               target="_blank"
-              rel="noopener noreferrer">CHECKOUT NOW</Button>
+              rel="noopener noreferrer"
+            >
+              CHECKOUT NOW
+            </Button>
           </Summary>
         </Bottom>
       </Wrapper>

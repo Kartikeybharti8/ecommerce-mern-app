@@ -1,5 +1,5 @@
 import { Badge } from "@material-ui/core";
-import { Search, ShoppingCartOutlined} from "@material-ui/icons";
+import { Search,OutdoorGrill, ShoppingCartOutlined} from "@material-ui/icons";
 import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
@@ -38,6 +38,7 @@ const Language = styled.span`
 const SearchContainer = styled.div`
   border: 0.5px solid lightgray;
   border-radius: 5px;
+  display: none !important;
   display: flex;
   display:none;
   align-items: center;
@@ -71,7 +72,6 @@ const Nonlink = styled.div`
     background-color: transparent;
     text-decoration: none;
   }
-
   a:visited {
     color: black;
     background-color: transparent;
@@ -139,25 +139,29 @@ const Navbar = () => {
                 <MenuItem className="nav-items">REGISTER</MenuItem>
               </Link>
               <Link to="/login" style={{ textDecoration: "none" }}>
-                <MenuItem className="nav-items">LOGIN</MenuItem>
+                <MenuItem className="nav-items">Login</MenuItem>
               </Link>
             </>
           )}
 
           {user && (
             <>
-              <div
+            <div
                 onClick={() => setShowPopup((prev) => !prev)}
-                className="relative cursor-pointer ml-[10px] border  space-x-3 rounded p-2 flex justify-between items-center "
+                className="parent "
               >
-                <div className="text-[12px] sm:text-[14px] tracking-wide ">
-                 Hii {user?.name.toUpperCase()}
+                <div className="hi">
+                  <Link to="/myAccount">
+                 <button className="nav-items">
+                  {user?.name.charAt(0).toUpperCase()}
+                 </button>
+                 </Link> 
                 </div>
                 <div
                   onClick={handleLogout}
-                  className="dropdown">
-                  <button className="logout">
-                    LOGOUT
+                  className="logoutParent  ">
+                  <button className="logout  ">
+                  <i className="fa fa-sign-out" ></i>
                   </button>
                 </div>
               </div>

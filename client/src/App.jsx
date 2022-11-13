@@ -4,6 +4,11 @@ import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
+import Contact from "./pages/contact";
+import Account from "./pages/MyAccount";
+import Track from "./pages/TrackOrder";
+import Terms from "./pages/terms";
+import About from "./pages/About";
 import swal from 'sweetalert';
 
 import {
@@ -29,6 +34,9 @@ const App = () => {
         <Route exact path="/">
           <Home />
         </Route>
+        <Route exact path="/About">
+          <About/>
+        </Route>
         <Route  path="/products/:category">
           <ProductList />
         </Route>
@@ -38,8 +46,20 @@ const App = () => {
         <Route path="/cart">
           <Cart />
         </Route>
+        <Route path="/contact">
+          <Contact />
+        </Route>
+        <Route path="/myAccount">
+          <Account />
+        </Route>
+        <Route path="/Track">
+          <Track />
+        </Route>
         <Route path="/success">
           <Success />
+        </Route>
+        <Route path="/terms">
+          <Terms />
         </Route>
         <Route path="/login">{user ? <Redirect to="/" /> : <Login />}</Route>
         <Route path="/register">

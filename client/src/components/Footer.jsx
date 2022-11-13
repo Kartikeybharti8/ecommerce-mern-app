@@ -114,8 +114,9 @@ const ContactItem = styled.div`
 const Payment = styled.img`
   width: 50%;
 `;
-const responsive = styled.div``;
-
+function scrollup() {
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
 const Footer = () => {
   return (
     <Container>
@@ -153,16 +154,20 @@ const Footer = () => {
         <Nonlink>
           <List>
             <ListItem>
-              <Link to="/home">Home</Link>
+              <Link onClick={scrollup}>Home</Link>
             </ListItem>
             <ListItem>
               <Link to="/cart">Cart</Link>
             </ListItem>
             <ListItem>
-              <Link to="/register">My Account</Link>
+              <Link to="/myAccount">My Account</Link>
             </ListItem>
-            <ListItem>Track Order</ListItem>
-            <ListItem>Terms</ListItem>
+            <ListItem>
+              <Link to="/terms">Terms</Link>
+            </ListItem>
+            <ListItem>
+              <Link to="/contact">Contact</Link>
+            </ListItem>
           </List>
         </Nonlink>
       </Center>

@@ -1,5 +1,5 @@
 .Demo {
-    background: FFF4EF;
+    background: #fff;
     padding: 0px;
     margin: 8px;
     border-radius: 15px;
@@ -14,3 +14,13 @@
     display: none;
   }
   
+.backIcon
+{
+  position: relative;
+  font-size: larger;
+  left: 27px;
+  top: 25px;
+  color: indianred;
+  background-color: #FFF4EF;
+  border-radius: 14px;
+}

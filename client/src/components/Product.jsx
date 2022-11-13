@@ -4,16 +4,12 @@ import {
   ShoppingCartOutlined,
   VisibilityIcon,
 } from "@material-ui/icons";
-
+import swal from 'sweetalert';
 import { Link } from "react-router-dom";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { popularProducts } from "../data";
 import "./product.css";
-
-
-
-
 
 const Info = styled.div`
   opacity: 0;
@@ -40,13 +36,13 @@ const Container1 = styled.div`
   // background-color: blue;
   background-color: #f5fbfd;
   justify-content: center;
-  
+
   position: relative;
 
   &:hover ${Info} {
     opacity: 1;
   }
-  `;
+`;
 
 const Container2 = styled.div`
   flex: 1;
@@ -57,7 +53,7 @@ const Container2 = styled.div`
   position: relative;
   justify-content: center;
   flex-direction: column;
-`
+`;
 
 const Circle = styled.div`
   width: 200px;
@@ -92,7 +88,7 @@ const Icon = styled.div`
 const Title = styled.div`
   height: 75%;
   font-weight: bold;
-  color:black;
+  color: black;
   align-items: left;
   width: 280px;
 `;
@@ -116,8 +112,7 @@ const Product = ({ item }) => {
   let fans;
   if (item.inStock) {
     fans = ans1;
-  }
-  else {
+  } else {
     fans = ans2;
   }
 
@@ -135,11 +130,11 @@ const Product = ({ item }) => {
               <SearchOutlined />
             </Link>
           </Icon>
-          <Icon>
+          {/* <Icon>
             <Link to={`/product/${item.id}`}>
               <FavoriteBorderOutlined />
             </Link>
-          </Icon>
+          </Icon> */}
         </Info>
       </Container1>
       <Container2>

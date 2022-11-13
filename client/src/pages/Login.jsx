@@ -37,7 +37,7 @@ const Wrapper = styled.div`
 
 const Title = styled.h1`
   font-size: 24px;
-  font-weight: 300;
+  font-weight: 600;
   display: flex;
   align-items:center;
   justify-content: center;
@@ -80,6 +80,7 @@ const Linked = styled.a`
   font-size: 12px;
   text-decoration: underline;
   cursor: pointer;
+  
 `;
 
 const Error = styled.span`
