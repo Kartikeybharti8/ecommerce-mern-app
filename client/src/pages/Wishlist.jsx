@@ -12,6 +12,8 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeFromWishlist } from "../redux/wishlistRedux";
+import Lottie from 'react-lottie';
+import HeartLottie from "./heart.json";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -80,6 +82,10 @@ const Info = styled.div`
   flex-wrap: wrap;
 `;
 
+const P = styled.div`
+  margin: 100px 520px 110px 520px;
+`;
+
 const Product = styled.div`
   display: flex;
   justify-content: space-between;
@@ -105,8 +111,12 @@ const Image = styled.img`
   z-index: 2;
 `;
 
-const DeleteButton = styled.button`
-  
+const DeleteButton = styled.div`
+  position: relative;
+  top: -195px;
+  left: 169px;
+  cursor: pointer;
+  width: 25px;
 `;
 
 const Icon = styled.div``;
@@ -211,9 +221,17 @@ const Wishlist = ({item}) => {
 
   const handleDeleteWislist = (product) => {
     // console.log(product)
-  
-      dispatch(removeFromWishlist(product));
-    };
+    dispatch(removeFromWishlist(product));
+  };
+
+  let heartObj = {
+    loop: true,
+    autoplay: true,
+    animationData : HeartLottie,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice'
+    }
+}
   
 //   const onToken = (token) => {
 //     setStripeToken(token);
@@ -247,7 +265,18 @@ const Wishlist = ({item}) => {
         </Top>
         <Bottom>
           <Info>
-            {wishlist.products.map((product) => (
+            {wishlist.products.length === 0 ? (
+              <P>
+                <Lottie options={heartObj}
+                  height={150}
+                  width={150}
+                  isStopped={false}
+                  isPaused={false}
+                />
+                <h2>Your wishlist is empty🙃</h2>
+              </P>
+              ) :
+              (wishlist.products.map((product) => (
               <Product>
                 <ProductDetail>
                   <Link to ={`/product/${product._id}`}>
@@ -283,7 +312,7 @@ const Wishlist = ({item}) => {
                   </ProductPrice>
                 </PriceDetail>*/}
               </Product>
-            ))}
+            )))}
             <Hr />
           </Info>
           {/*<Summary>

@@ -1,7 +1,7 @@
 import {
-  FavoriteBorderRounded,
-  FavoriteBorderOutlined,
+  Favorite,
   SearchOutlined,
+  FavoriteBorderOutlined,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -10,8 +10,9 @@ import { popularProducts } from "../data";
 import "./product.css";
 import { publicRequest } from "../requestMethods";
 import { useLocation } from "react-router-dom";
-import { wishProduct } from "../redux/wishlistRedux";
+import { wishProduct, removeFromWishlist } from "../redux/wishlistRedux";
 import { useDispatch } from "react-redux";
+import {RiHeart3Fill} from 'react-icons/ri';
 
 const Info = styled.div`
   opacity: 0;
@@ -120,11 +121,8 @@ const Product = ({ item }) =>
   // const [size, setSize] = useState("");
   const [product, setProduct] = useState({});
   const dispatch = useDispatch();
-  const [clicked, setClicked] = useState(false);
-
-  const handleIconClick = () => {
-    setClicked(true);
-  }
+  const [isFilled, setIsFilled] = useState(false);
+  const toggleFilledIcon = () => setIsFilled(!isFilled)
 
   useEffect(() => {
     const getProduct = async () => {
@@ -148,9 +146,11 @@ const Product = ({ item }) =>
 
   const handleClick = () => {
     //console.log(product, item.id)
-    dispatch(
-      wishProduct({ ...product, quantity })
-    );
+    if(isFilled){
+      dispatch(removeFromWishlist(product));
+    }
+    else{
+      dispatch(wishProduct({ ...product, quantity }));}
   };
   return (
     <div>
@@ -166,8 +166,13 @@ const Product = ({ item }) =>
               <SearchOutlined />  
             </Link>
           </Icon>
-          <Icon onClick={handleClick}>
-            <FavoriteBorderOutlined />
+          <Icon onClick={(event)=>{
+              event.preventDefault();
+              event.stopPropagation();
+              toggleFilledIcon();
+              handleClick();
+            }}>
+            { isFilled ? <Favorite style={{ color: 'crimson' }} /> : <FavoriteBorderOutlined /> }
           </Icon>
         </Info>
       </Container1>

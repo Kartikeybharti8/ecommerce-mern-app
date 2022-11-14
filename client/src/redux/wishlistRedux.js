@@ -14,6 +14,7 @@ const wishlistSlice = createSlice({
 
     removeFromWishlist: (state, action) => {
       //  console.log(action.payload._id,state.products[2]._id)
+        state.quantity -= 1;
         const nextproducts = state.products.filter(
           (item) => item._id !== action.payload._id
         );

@@ -124,6 +124,7 @@ const Navbar = () => {
 
   // window.localStorage.clear();
   const quantity = useSelector((state) => state.cart.quantity);
+  let wishlistQuantity = useSelector((state) => state.wishlist.quantity);
   return (
     <Container>
       <Wrapper>
@@ -158,7 +159,7 @@ const Navbar = () => {
 
           <Link to="/wishlist">
             <MenuItem>
-              <Badge className="nav-items">
+              <Badge className="nav-items" badgeContent={wishlistQuantity}>
                 <FavoriteBorderOutlined />
               </Badge>
             </MenuItem>
