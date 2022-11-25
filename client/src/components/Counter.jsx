@@ -30,14 +30,14 @@ const Counter = () => {
   const [counterOn, setCounterOn] = useState(0);
  
   return (
-    <Container>
+    <Container data-aos="zoom-in">
       {/* <ScrollTrigger
         onEnter={() => setCounterOn(true)}
         onExit={() => setCounterOn(false)}
       > */}
         <center>
           <Title>Love from all over India</Title>
-          <Desc>Ready to deliver Happiness and art </Desc>
+          <Desc data-aos="flip-down">Ready to deliver Happiness and art </Desc>
           <h1>
             {/* {counterOn && (
               <CountUp

@@ -9,8 +9,7 @@ import Account from "./pages/MyAccount";
 import Track from "./pages/TrackOrder";
 import Terms from "./pages/terms";
 import About from "./pages/About";
-import swal from 'sweetalert';
-
+import swal from "sweetalert";
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,25 +18,32 @@ import {
 } from "react-router-dom";
 import Success from "./pages/Success";
 import { useSelector } from "react-redux";
+import "./pages/animation.css";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
+import AOS from "aos";
+import "aos/dist/aos.css"; // You can also use <link> for styles
+// ..
 
 const App = () => {
-  
-  if(localStorage.getItem("isLoggedIn")){
+  AOS.init();
+  if (localStorage.getItem("isLoggedIn")) {
     swal("Login Successful");
   }
 
   const user = useSelector((state) => state.user.currentUser);
   return (
-    
     <Router>
+      <link rel="stylesheet" href="./src/animation/magic.css" />
       <Switch>
         <Route exact path="/">
           <Home />
         </Route>
         <Route exact path="/About">
-          <About/>
+          <About />
         </Route>
-        <Route  path="/products/:category">
+        <Route path="/products/:category">
           <ProductList />
         </Route>
         <Route path="/product/:id">

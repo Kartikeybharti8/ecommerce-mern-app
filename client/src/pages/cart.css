@@ -1,26 +1,29 @@
 .Demo {
-    background: #fff;
-    padding: 0px;
-    margin: 8px;
-    border-radius: 15px;
-    border: 0.5px solid IndianRed;
-  }
-  .prodImg {
-    margin: 8px;
-    border-radius: 15px;
-  }
-  .transparent
-  {
-    display: none;
-  }
-  
-.backIcon
-{
+  background: #fff;
+  padding: 0px;
+  margin: 8px;
+  border-radius: 15px;
+  border: 0.5px solid IndianRed;
+}
+.prodImg {
+  margin: 8px;
+  border-radius: 15px;
+}
+.btm-data > .emptyCart {
+  left: 437px !important;
+  top: 159px !important;
+  width: 300px !important;
+}
+.transparent {
+  display: none;
+}
+
+.backIcon {
   position: relative;
   font-size: larger;
   left: 27px;
   top: 25px;
   color: indianred;
-  background-color: #FFF4EF;
+  background-color: #fff4ef;
   border-radius: 14px;
 }

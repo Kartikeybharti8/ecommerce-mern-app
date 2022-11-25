@@ -7,11 +7,12 @@ import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
+
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import "./cart.css";
 import { Link } from "react-router-dom";
-import "./cart.css";
+
 import swal from "sweetalert";
 
 const KEY = process.env.REACT_APP_STRIPE;
@@ -179,7 +180,19 @@ const Cart = () => {
       document.body.appendChild(script);
     });
   }
+  const user = useSelector((state) => state.user.currentUser);
+  console.log(user);
 
+  function redirect() {
+   
+    swal("Please login to continue", {
+      title: "Please login to continue",
+      text: "Redirecting to login page  ",
+      icon: "warning",
+      buttons: false,
+    });
+   
+  }
   async function showRazorpay() {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
@@ -194,8 +207,7 @@ const Cart = () => {
       method: "POST",
     }).then((t) => t.json());
 
-    console.log(data);
-
+  
     const options = {
       key: "rzp_test_Hhk1Sht36toHVl",
       currency: data.currency,
@@ -231,25 +243,36 @@ const Cart = () => {
     paymentObject.open();
   }
   //print product quantity
+  function scroll() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
+  scroll();
   return (
     <Container>
       <Navbar />
+     
       <Announcement />
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
           <Link to={`/`}>
-            <TopButton>CONTINUE SHOPPING</TopButton>
+            <TopButton className="hvr-grow">CONTINUE SHOPPING</TopButton>
           </Link>
           <TopTexts>
-            <TopText>Shopping Bag()</TopText>
+            <TopText className="hvr-grow">Shopping Bag()</TopText>
             <Link to={`/wishlist`}>
-              <TopText>Your Wishlist ()</TopText>
+              <TopText className="hvr-grow">Your Wishlist ()</TopText>
             </Link>
           </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+          <TopButton className="hvr-grow" type="filled">
+            CHECKOUT NOW
+          </TopButton>
         </Top>
-        <Bottom>
+        <Bottom className="btm-data">
           {/* <Info>
             {cart.products.map((product) => (
            
@@ -285,12 +308,12 @@ const Cart = () => {
           </Info> */}
           <Info>
             {cart.products.length === 0 ? (
-              <p>
+              <p className="">
                 Your Cart is empty.<br></br> <Link to="/">Go for Shopping</Link>
               </p>
             ) : (
               cart.products.map((product) => (
-                <Product className="Demo">
+                <Product className="Demo " data-aos="flip-up">
                   <ProductDetail>
                     <Image className="prodImg" src={product.img} />
                     <Details>
@@ -308,11 +331,16 @@ const Cart = () => {
                   </ProductDetail>
                   <PriceDetail>
                     <ProductAmountContainer>
-                      <Add />
-                      <ProductAmount>{product.quantity}</ProductAmount>
-                      <Remove />
+                      <Add className="hvr-grow" />
+                      <ProductAmount
+                        data-aos="flip-down"
+                        data-aos-duration="1500"
+                      >
+                        {product.quantity}
+                      </ProductAmount>
+                      <Remove className="hvr-grow" />
                     </ProductAmountContainer>
-                    <ProductPrice>
+                    <ProductPrice data-aos="flip-up" data-aos-duration="1500">
                       ₹ {product.price * product.quantity}
                     </ProductPrice>
                   </PriceDetail>
@@ -338,13 +366,26 @@ const Cart = () => {
                 ₹ {cart.total + (5 * cart.total) / 100}
               </SummaryItemPrice>
             </SummaryItem>
-            <Button
-              onClick={showRazorpay}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              CHECKOUT NOW
-            </Button>
+            {!user && (
+              <Button
+                onClick={redirect}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hvr-grow "
+              >
+                CHECKOUT NOW
+              </Button>
+            )}
+            {user && (
+              <Button
+                onClick={showRazorpay}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hvr-grow "
+              >
+                CHECKOUT NOW
+              </Button>
+            )}
           </Summary>
         </Bottom>
       </Wrapper>

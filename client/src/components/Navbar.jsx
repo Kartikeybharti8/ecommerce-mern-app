@@ -1,16 +1,14 @@
 import { Badge } from "@material-ui/core";
-import { Search,OutdoorGrill, ShoppingCartOutlined} from "@material-ui/icons";
+import { Search, OutdoorGrill, ShoppingCartOutlined } from "@material-ui/icons";
 import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 // import LogoutIcon from '@mui/icons-material/Logout';
-import { logout } from '../redux/userRedux';
-
-
-
+import { logout } from "../redux/userRedux";
+import LogoutIcon from "@mui/icons-material/Logout";
 import "./Navbar.css";
 const Container = styled.div`
   background-color: #fff4ef;
@@ -40,7 +38,7 @@ const SearchContainer = styled.div`
   border-radius: 5px;
   display: none !important;
   display: flex;
-  display:none;
+  display: none;
   align-items: center;
   margin-left: 25px;
   padding: 5px;
@@ -56,8 +54,15 @@ const Center = styled.div`
   text-align: center;
 `;
 const Logo = styled.h1`
+  font-family: "rovo", cursive !important;
+  color: indianRed;
   font-weight: bold;
   ${mobile({ fontSize: "24px" })}
+  h1:hover {
+    color: indianred !important;
+    background-color: transparent;
+    text-decoration: none;
+  }
 `;
 const Right = styled.div`
   flex: 1;
@@ -79,7 +84,6 @@ const Nonlink = styled.div`
   }
 
   a:hover {
-    color: black;
     background-color: transparent;
     text-decoration: none;
   }
@@ -97,7 +101,6 @@ const MenuItem = styled.div`
   ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
 const Navbar = () => {
-  
   // const [user, setUser] = useState(false);
   // useEffect(() => {
   //   if (localStorage.getItem("isLoggedIn")) {
@@ -119,7 +122,7 @@ const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity);
 
   const handleLogout = useCallback(() => dispatch(logout()), [dispatch]);
-  
+
   return (
     <Container>
       <Wrapper>
@@ -130,48 +133,53 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Link to="/" style={{textDecoration: "none"}}><Logo>Artisans</Logo></Link>
+          <Link
+            to="/"
+            className="hvr-bounce-in typewriter logo"
+            style={{ textDecoration: "none" }}
+          >
+            <Logo>Artisans</Logo>
+          </Link>
         </Center>
         <Right>
           {!user && (
             <>
               <Link to="/register" style={{ textDecoration: "none" }}>
-                <MenuItem className="nav-items">REGISTER</MenuItem>
+                <MenuItem className="hvr-underline-from-left  ">
+                  REGISTER
+                </MenuItem>
               </Link>
               <Link to="/login" style={{ textDecoration: "none" }}>
-                <MenuItem className="nav-items">Login</MenuItem>
+                <MenuItem className="nav-items hvr-underline-from-left ">
+                  Login
+                </MenuItem>
               </Link>
             </>
           )}
 
           {user && (
             <>
-            <div
+              <div
                 onClick={() => setShowPopup((prev) => !prev)}
-                className="parent "
+                className="parent"
               >
-                <div className="hi">
-                  <Link to="/myAccount">
-                 <button className="nav-items">
-                  {user?.name.charAt(0).toUpperCase()}
-                 </button>
-                 </Link> 
-                </div>
-                <div
-                  onClick={handleLogout}
-                  className="logoutParent  ">
-                  <button className="logout  ">
-                  <i className="fa fa-sign-out" ></i>
+                <Link to="/myAccount">
+                  <button className="hvr-underline-from-left transparent">
+                    {user?.name.toUpperCase()}
                   </button>
+                </Link>
+
+                <div onClick={handleLogout} className="logoutParent  ">
+                  <LogoutIcon className="hvr-underline-from-left hvr-shrink" />
                 </div>
               </div>
             </>
           )}
 
           <Link to="/cart">
-            <MenuItem>
-              <Badge className="nav-items" badgeContent={quantity}>
-                <ShoppingCartOutlined />
+            <MenuItem className="cartCount">
+              <Badge className=" hvr-shrink " badgeContent={quantity}>
+                <ShoppingCartOutlined className="hvr-shrink cartIcon" />
               </Badge>
             </MenuItem>
           </Link>

@@ -11,7 +11,6 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
 import "./footer.css";
-
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -35,8 +34,8 @@ const Nonlink = styled.div`
   }
 
   a:hover {
-    color: black;
-    background-color: transparent;
+    color: indianRed;
+    background-color: fff4efv;
     text-decoration: none;
   }
 
@@ -115,14 +114,16 @@ const Payment = styled.img`
   width: 50%;
 `;
 function scrollup() {
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 const Footer = () => {
   return (
     <Container>
       <Left>
-        <Logo>Artisans</Logo>
-        <Desc>
+        <Logo data-aos="flip-up" data-aos-duration="500">
+          Artisans
+        </Logo>
+        <Desc data-aos="flip-up" data-aos-duration="500">
           We provide the finest traditional and modern art pieces for your home
           and make them more beautiful.
         </Desc>
@@ -150,48 +151,64 @@ const Footer = () => {
         </SocialContainer>
       </Left>
       <Center>
-        <Title>Useful Links</Title>
+        <Title data-aos="flip-up" data-aos-duration="500">
+          Useful Links
+        </Title>
         <Nonlink>
           <List>
-            <ListItem>
+            <ListItem data-aos="flip-up" data-aos-duration="500">
               <Link onClick={scrollup}>Home</Link>
             </ListItem>
-            <ListItem>
+            <ListItem data-aos="flip-up" data-aos-duration="500">
               <Link to="/cart">Cart</Link>
             </ListItem>
-            <ListItem>
+            <ListItem data-aos="flip-up" data-aos-duration="500">
               <Link to="/myAccount">My Account</Link>
             </ListItem>
-            <ListItem>
+            <ListItem data-aos="flip-up" data-aos-duration="500">
               <Link to="/terms">Terms</Link>
             </ListItem>
             <ListItem>
-              <Link to="/contact">Contact</Link>
+              <Link data-aos="flip-up" data-aos-duration="500" to="/contact">
+                Contact
+              </Link>
             </ListItem>
           </List>
         </Nonlink>
       </Center>
       <Right>
         <Nonlink>
-          <Title>Contact</Title>
+          <Title data-aos="flip-up" data-aos-duration="1000">
+            Contact
+          </Title>
           <a href="https://goo.gl/maps/R9EUD6NkHnoAZNPP8" target="_blank">
             <ContactItem>
-              <Room style={{ marginRight: "10px" }} /> 1330, 13th Main, 4th
-              Block, Jayanagar, Bangalore-560011
+              <Room
+                data-aos="flip-up"
+                data-aos-duration="500"
+                style={{ marginRight: "10px" }}
+              />{" "}
+              1330, 13th Main, 4th Block, Jayanagar, Bangalore-560011
             </ContactItem>
           </a>
-          <a href="tel:+4733378901">
+          <a data-aos="flip-up" data-aos-duration="500" href="tel:+4733378901">
             <ContactItem>
               <Phone style={{ marginRight: "10px" }} /> +91 9876543210
             </ContactItem>
           </a>
-          <a href="mailto:nitesh@gmail.com">
+          <a
+            data-aos="flip-up"
+            data-aos-duration="500"
+            href="mailto:nitesh@gmail.com"
+          >
             <ContactItem>
               <MailOutline style={{ marginRight: "10px" }} /> contact@Art.dev
             </ContactItem>
           </a>
         </Nonlink>
-        <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
+        <Payment
+          src="https://i.ibb.co/Qfvn4z6/payment.png"
+        />
       </Right>
     </Container>
   );

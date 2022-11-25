@@ -30,7 +30,13 @@ const Contact = () => {
         }
       );
   };
-
+  function scroll() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }  scroll();
   return (
     <>
       <Navbar />
@@ -66,7 +72,7 @@ const Contact = () => {
           </form>
         </StyledContactForm>
         <div className="container">
-          <a href="https://wa.me/8619224578" target="_blank">
+          <a href="https://wa.me/8619224578" target="_blank"  rel="noreferrer">
           <div className="card">
             <div className="content">
               <div className="imgBx">
@@ -84,7 +90,7 @@ const Contact = () => {
             </ul>
           </div>
           </a>
-          <a href="mailto:nitesh@gmail.com" target="_blank">
+          <a href="mailto:nitesh@gmail.com" target="_blank"  rel="noreferrer">
 
           <div className="card">
             <div className="content">
@@ -103,12 +109,12 @@ const Contact = () => {
             </ul>
           </div>
           </a>
-          <a href="https://goo.gl/maps/R9EUD6NkHnoAZNPP8" target="_blank" alt="maps">
+          <a href="https://goo.gl/maps/R9EUD6NkHnoAZNPP8" target="_blank"  rel="noreferrer" alt="maps">
 
           <div className="card">
             <div className="content">
               <div className="imgBx">
-                <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" />
+                <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" alt="icon"/>
               </div>
               <div className="contentBx"></div>
             </div>

@@ -5,6 +5,14 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 const Terms = () => {
+  function scroll() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+  scroll();
   return (
     <>
       <Navbar />

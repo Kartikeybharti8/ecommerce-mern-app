@@ -44,13 +44,20 @@ const Button = styled.button`
 `;
 
 const CategoryItem = ({ item }) => {
+  function scroll() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }  scroll();
   return (
     <Container>
       <Link to={`/products/${item.cat}`}>
       <Image src={item.img} />
       <Info>
-        <Title>{item.title}</Title>
-        <Button>SHOP NOW</Button>
+        <Title className="tracking-in-contract" data-aos="zoom-in">{item.title}</Title>
+        <Button data-aos="flip-down" className="hvr-sweep-to-right">SHOP NOW</Button>
       </Info>
       </Link>
     </Container>

@@ -36,7 +36,7 @@ const Newsletter = () => {
         onExit={() => setCounterOn(false)}
       >
         <center>
-          <Title>Love from all over India</Title>
+          <Title >Love from all over India</Title>
           <Desc>Delivered Happiness and art </Desc>
           <h2>
             {counterOn && (

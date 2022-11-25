@@ -4,7 +4,7 @@ import {
   ShoppingCartOutlined,
   VisibilityIcon,
 } from "@material-ui/icons";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -120,14 +120,14 @@ const Product = ({ item }) => {
     <div>
       <Container1>
         <Circle />
-        <Image src={item.img} />
-        <Info>
+        <Image data-aos="fade-up" data-aos-duration="1500" src={item.img} />
+        <Info >
           {/* <Icon>
             <ShoppingCartOutlined />
           </Icon> */}
           <Icon>
             <Link to={`/product/${item.id}`}>
-              <SearchOutlined />
+              <SearchOutlined  className="hvr-icon-bounce "/>
             </Link>
           </Icon>
           {/* <Icon>
@@ -137,10 +137,10 @@ const Product = ({ item }) => {
           </Icon> */}
         </Info>
       </Container1>
-      <Container2>
+      <Container2 data-aos="flip-up">
         <Title>{item.title}</Title>
-        <Span className="price">₹{item.price}</Span>
-        <Span className="stock">{fans}</Span>
+        <Span className="price" data-aos="flip-up">₹{item.price}</Span>
+        <Span className="stock" data-aos="flip-up">{fans}</Span>
       </Container2>
     </div>
   );

@@ -4,14 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../redux/apiCalls';
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-// import { useRouter } from 'next/router';
 import swal from "sweetalert";
-// import PasswordAndConfirmPasswordValidation from "./PasswordAndConfirmPasswordValidation";
-
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 import "./reg.css";
 
 import { mobile } from "../responsive";
-import { CircularProgress } from "@material-ui/core";
 
 const Container = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -157,6 +155,8 @@ const Register = () => {
 
   return (
     <div className="">
+            <Navbar/>
+
       <Container>
         <Wrapper>
           <Title>CREATE AN ACCOUNT</Title>
@@ -224,6 +224,7 @@ const Register = () => {
         )}
         </Wrapper>
       </Container>
+
     </div>
   );
 };

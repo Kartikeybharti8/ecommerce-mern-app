@@ -1,48 +1,49 @@
-.nav-items:hover 
-{
-  border-radius: 49px;
-  color: black;
+.nav-items:hover {
   padding: 5px;
-  background-color: #fcadad;
   opacity: 0.6;
-  transition: background-color 0.5s;  
-} 
-.nav-items
-{
-  text-decoration: none;
-  border: 1.5px solid #D26C6C ;
-  border-radius: 49px;
+  transition: background-color 0.5s;
+}
+.transparent {
+  background-color: transparent !important;
   color: black;
+  border: none;
+}
+
+.cartIcon {
+  color: black;
+  z-index: 1;
+}
+.cartCount > span > span {
+  color: black;
+  background-color: #d26c6c;
+}
+.nav-items {
+  text-decoration: none;
+  background-color: none;
+  border: none;
+  color: black !important;
   padding: 5px;
 }
-.parent
-{
+.parent {
   display: flex;
   flex-direction: row;
 }
-.logout
-{
-
-    padding-left:10px;
-    padding-right:10px;
+.logout {
+  padding-left: 10px;
+  padding-right: 10px;
   background: transparent;
   cursor: pointer;
   text-decoration: none;
-  border: 1.5px solid #D26C6C;
-  border-radius: 49px;
+  border: 1.5px solid #d26c6c;
   color: black;
   padding: 5px;
 }
-.logout:hover 
-{
-  color: black;
+.logout:hover {
   font-weight: 700;
   padding: 5px;
-  background-color: #fcadad;
   opacity: 0.6;
-  transition: background-color 0.5s;  
-} 
-.logoutParent
-{
+  transition: background-color 0.5s;
+}
+.logoutParent {
   padding-left: 25px;
 }

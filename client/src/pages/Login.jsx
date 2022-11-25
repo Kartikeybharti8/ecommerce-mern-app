@@ -140,7 +140,8 @@ const Login = () => {
          }
           <Linked><Link to="/register">CREATE A NEW ACCOUNT</Link></Linked>
         </Form>
-      </Wrapper>
+      </Wrapper> 
+
     </Container>
   );
 };

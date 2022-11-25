@@ -1,5 +1,5 @@
 
-section::before {
+.section::before {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -10,7 +10,7 @@ section::before {
 	clip-path: circle(30% at right 70%);
 }
 
-section::after {
+.section::after {
 	content: '';
 	position: absolute;
 	top: 0;
