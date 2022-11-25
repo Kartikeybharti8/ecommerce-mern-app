@@ -5,11 +5,13 @@ const wishlistSlice = createSlice({
   initialState: {
     products: [],
     quantity: 0,
+    isFilled: false,
   },
   reducers: {
     wishProduct: (state, action) => {
       state.quantity += 1;
       state.products.push(action.payload);
+      state.isFilled = true;
     },
 
     removeFromWishlist: (state, action) => {

@@ -122,7 +122,7 @@ const Product = ({ item }) =>
   const [product, setProduct] = useState({});
   const dispatch = useDispatch();
   const [isFilled, setIsFilled] = useState(false);
-  const toggleFilledIcon = () => setIsFilled(!isFilled)
+  const toggleFilledIcon = () => setIsFilled(!isFilled);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -150,17 +150,17 @@ const Product = ({ item }) =>
       dispatch(removeFromWishlist(product));
     }
     else{
-      dispatch(wishProduct({ ...product, quantity }));}
+      dispatch(wishProduct({ ...product, quantity }));
+      setIsFilled(!isFilled);
+    }
   };
+  
   return (
     <div>
       <Container1>
         <Circle />
         <Image src={item.img} />
         <Info>
-          {/* <Icon>
-            <ShoppingCartOutlined />
-          </Icon> */}
           <Icon>
             <Link to={`/product/${item.id}`}>
               <SearchOutlined />  

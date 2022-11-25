@@ -84,6 +84,7 @@ const Info = styled.div`
 
 const P = styled.div`
   margin: 100px 520px 110px 520px;
+  ${mobile({ margin: "50px 30px 50px 30px" })}
 `;
 
 const Product = styled.div`
@@ -273,7 +274,7 @@ const Wishlist = ({item}) => {
                   isStopped={false}
                   isPaused={false}
                 />
-                <h2>Your wishlist is empty🙃</h2>
+                <h2>Your wishlist is empty</h2>
               </P>
               ) :
               (wishlist.products.map((product) => (
