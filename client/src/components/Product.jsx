@@ -2,7 +2,10 @@ import {
   Favorite,
   SearchOutlined,
   FavoriteBorderOutlined,
+  ShoppingCartOutlined,
+  VisibilityIcon,
 } from "@material-ui/icons";
+import swal from 'sweetalert';
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
@@ -40,10 +43,10 @@ const Container1 = styled.div`
   background-color: blue;
   background-color: #f5fbfd;
   justify-content: center;
-  
+
   position: relative;
 
-  &:hover ${Info}{
+  &:hover ${Info} {
     opacity: 1;
   }
 `;
@@ -57,7 +60,7 @@ const Container2 = styled.div`
   position: relative;
   justify-content: center;
   flex-direction: column;
-`
+`;
 
 const Circle = styled.div`
   width: 200px;
@@ -94,7 +97,7 @@ const SubIcon = styled.div``;
 const Title = styled.div`
   height: 75%;
   font-weight: bold;
-  color:black;
+  color: black;
   align-items: left;
   width: 280px;
 `;

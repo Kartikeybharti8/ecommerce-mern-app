@@ -1,11 +1,13 @@
 import { Badge } from "@material-ui/core";
-import { Search, ShoppingCartOutlined, FavoriteBorderOutlined } from "@material-ui/icons";
-import React, { useEffect, useState } from "react";
+import { Search,OutdoorGrill,FavoriteBorderOutlined, ShoppingCartOutlined} from "@material-ui/icons";
+import React, { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { mobile } from "../responsive";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from '../redux/userRedux';
 import "./Navbar.css";
+
 const Container = styled.div`
   background-color: #fff4ef;
   height: 60px;
@@ -19,41 +21,37 @@ const Wrapper = styled.div`
   justify-content: space-between;
   ${mobile({ padding: "10px 0px" })}
 `;
-
 const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
 `;
-
 const Language = styled.span`
   font-size: 14px;
   cursor: pointer;
   ${mobile({ display: "none" })}
 `;
-
 const SearchContainer = styled.div`
   border: 0.5px solid lightgray;
   border-radius: 5px;
+  display: none !important;
   display: flex;
+  display:none;
   align-items: center;
   margin-left: 25px;
   padding: 5px;
 `;
-
 const Input = styled.input`
   outline: none;
   background-color: transparent;
   border: none;
   ${mobile({ width: "50px" })}
 `;
-
 const Center = styled.div`
   flex: 1;
   text-align: center;
   text-decoration: none
 `;
-
 const Logo = styled.h1`
   font-weight: bold;
   ${mobile({ fontSize: "24px" })}
@@ -71,7 +69,6 @@ const Nonlink = styled.div`
     background-color: transparent;
     text-decoration: none;
   }
-
   a:visited {
     color: black;
     background-color: transparent;
@@ -107,24 +104,15 @@ const WishlistIcon = styled.div`
 
 const Navbar = () => {
   
-  const [user, setUser] = useState(false);
-  useEffect(() => {
-    if (localStorage.getItem("isLoggedIn")) {
-      setUser(true);
-    } else {
-      setUser(false);
-    }
-    //  eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  //
-  const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    window.location.reload();
-  };
-
+  const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
+  const [showPopup, setShowPopup] = useState(false);
   // window.localStorage.clear();
   const quantity = useSelector((state) => state.cart.quantity);
   let wishlistQuantity = useSelector((state) => state.wishlist.quantity);
+
+  const handleLogout = useCallback(() => dispatch(logout()), [dispatch]);
+  // console.log(quantity)
   return (
     <Container>
       <Wrapper>
@@ -149,13 +137,25 @@ const Navbar = () => {
             </>
           )}
 
-          <Link to="/" style={{ textDecoration: "none" }}>
-            {user && (
-              <MenuItem className="nav-items" onClick={handleLogout}>
-                LOGOUT
-              </MenuItem>
-            )}
-          </Link>
+          {user && (
+            <>
+            <div
+                onClick={() => setShowPopup((prev) => !prev)}
+                className="relative cursor-pointer ml-[10px] border  space-x-3 rounded p-2 flex justify-between items-center parent "
+              >
+                <div className="text-[12px] sm:text-[14px] tracking-wide   ">
+                  Hii {user?.name.toUpperCase()}
+                </div>
+                <div
+                  onClick={handleLogout}
+                  className="logoutParent ">
+                  <button className="logout ">
+                    <OutdoorGrill />
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
 
           <Link to="/wishlist">
             <MenuItem>

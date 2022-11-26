@@ -1,0 +1,40 @@
+.Demo {
+    background: #fff;
+    padding: 0px;
+    margin: 8px;
+    border-radius: 15px;
+    border: 0.5px solid IndianRed;
+  }
+  .prodImg {
+    margin: 8px;
+    border-radius: 15px;
+  }
+  .transparent
+  {
+    display: none;
+  }
+  .fa-trash-o
+  {
+    left: 40px;
+    top: 2px;
+    z-index: 14;
+    position: relative;
+    font-size: x-large !important;
+    color: black;
+  }
+  p{
+    padding: 25px;
+    font-style: revert;
+    font-size: large;
+  }
+  
+.backIcon
+{
+  position: relative;
+  font-size: larger;
+  left: 27px;
+  top: 25px;
+  color: indianred;
+  background-color: #FFF4EF;
+  border-radius: 14px;
+}

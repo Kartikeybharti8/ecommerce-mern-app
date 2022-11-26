@@ -6,15 +6,43 @@
   background-color: #fcadad;
   opacity: 0.6;
   transition: background-color 0.5s;  
-}
+} 
 .nav-items
 {
   text-decoration: none;
-  border: 1.5px solid #D26C6C
-  ;
-  border-radius: 28px;
+  border: 1.5px solid #D26C6C ;
   border-radius: 49px;
   color: black;
   padding: 5px;
 }
-
+.parent
+{
+  display: flex;
+  flex-direction: row;
+}
+.logout
+{
+  /* border-radius: 50%; */
+  background: transparent;
+  /* font-size: larger; */
+  cursor: pointer;
+  text-decoration: none;
+  border: 1.5px solid #D26C6C;
+  /* border-radius: 28px; */
+  border-radius: 50%;
+  color: black;
+  padding: 5px;
+}
+.logout:hover 
+{
+  border-radius: 49px;
+  color: black;
+  padding: 5px;
+  background-color: #fcadad;
+  opacity: 0.6;
+  transition: background-color 0.5s;  
+} 
+.logoutParent
+{
+  padding-left: 25px;
+}

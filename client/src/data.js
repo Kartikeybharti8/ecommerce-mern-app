@@ -6,7 +6,7 @@ export const sliderItems = [
     title: "SUMMER SALE",
     //sales
     desc: "Some of the best selling products are on sale",
-    bg: "FCF1ED",
+    bg: "FFFFF",
 
   },
   {
@@ -14,23 +14,21 @@ export const sliderItems = [
     img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/115001145D.jpg?v=1658403378",
     title: "BAGS",
     desc: "DON'T COMPROMISE READYMADE,GO FOR CUSTOM MADE",
-    bg: "fcf1ed",
+    bg: "FFFFF",
   },
   {
     id: 3,
-    img: "https://cdn.shopify.com/s/files/1/0617/1928/1844/products/61001064-5.jpg?v=1659355305",
+    img: "https://www.auffbeat.com/wp-content/uploads/2021/03/Handmade-Meena-Art-Copper-Bottle-in-Funky-Design-1.jpg.webp",
     title: "HOME DECOR",
     desc: "GET FLAT 30% OFF FOR NEW ARRIVALS",
-    bg: "fbf0f4",
-
-
+    bg: "FFFFF",
   },
   {
     id: 4,
     img: "https://images.pexels.com/photos/6447952/pexels-photo-6447952.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     title: "AUTHENTIC WEAR",
-    desc: "WEAR YOUR OWN CHOICE",
-    bg: "fbf0f4",
+    desc: "GET FLAT 30% OFF FOR NEW ARRIVALS",
+    bg: "FFFFF",
 
 
   },
