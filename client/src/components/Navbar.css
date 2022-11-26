@@ -8,6 +8,10 @@
   color: black;
   border: none;
 }
+menuitem
+{
+  color:deepskyblue !important;
+}
 
 .cartIcon {
   color: black;

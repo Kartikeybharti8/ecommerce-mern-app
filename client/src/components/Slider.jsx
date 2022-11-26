@@ -126,7 +126,7 @@ const Slider = () => {
                   data-aos="flip-left"
                   data-aos-duration="1000"
                 >
-                  SHOW NOW
+                  SHOP NOW
                 </Button>
               </Link>
             </InfoContainer>

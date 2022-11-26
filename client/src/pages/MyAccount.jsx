@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import "./account.css";
 const Account = () => {
   function scroll() {
@@ -52,17 +54,17 @@ const Account = () => {
                   <ul className=" ">
                     <li>
                       <a href="#">
-                        <i className="fa fa-shopping-cart" />
+                        <ShoppingBagIcon/>
                         Your orders
                         <span className="label label-warning pull-right r-activity"></span>
                       </a>
                     </li>
                     <br />
                     <li>
-                      <a href="#">
-                        <i class=" fa fa-shopping-cart" />
+                      <Link to="/cart">
+                        <ShoppingCartIcon/>
                         Cart
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
