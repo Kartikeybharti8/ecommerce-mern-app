@@ -1,12 +1,14 @@
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import styled from "styled-components";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import "./account.css";
 const Account = () => {
   function scroll() {
@@ -17,6 +19,31 @@ const Account = () => {
     });
   }
   scroll();
+  const Nonlink = styled.div`
+    a:link {
+      color: black;
+      background-color: transparent;
+      text-decoration: none;
+    }
+
+    a:visited {
+      color: black;
+      background-color: transparent;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #ee6c4d;
+      background-color: fff4efv;
+      text-decoration: none;
+    }
+
+    a:active {
+      color: black;
+      background-color: transparent;
+      text-decoration: none;
+    }
+  `;
   const user = useSelector((state) => state.user.currentUser);
   console.log(user);
   return (
@@ -53,8 +80,8 @@ const Account = () => {
                   </div>
                   <ul className=" ">
                     <li>
-                      <a href="#">
-                        <ShoppingBagIcon/>
+                      <a href="/orders">
+                        <ShoppingBagIcon />
                         Your orders
                         <span className="label label-warning pull-right r-activity"></span>
                       </a>
@@ -62,7 +89,7 @@ const Account = () => {
                     <br />
                     <li>
                       <Link to="/cart">
-                        <ShoppingCartIcon/>
+                        <ShoppingCartIcon />
                         Cart
                       </Link>
                     </li>
@@ -77,7 +104,11 @@ const Account = () => {
                       Edit
                     </button>
                     <button className="btn btn-outline-primary md-5 ms-2 ">
-                      <Link to="/track">Track your orders</Link>
+                      <Nonlink>
+                        <Link className="black" to="/track">
+                          Track your orders
+                        </Link>
+                      </Nonlink>{" "}
                     </button>
                     <div className="col userDetails">
                       <div className="bio-row">
@@ -120,7 +151,7 @@ const Account = () => {
                     </div>
                   </div>
                 </div>
-                <div>
+                {/* <div>
                   <h1 className="user-heading suggestionHeading">
                     You can also buy
                   </h1>
@@ -334,7 +365,7 @@ const Account = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

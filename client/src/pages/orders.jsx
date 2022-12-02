@@ -5,6 +5,7 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
+import artistSvg from "../assets/artist.svg";
 import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
@@ -15,10 +16,6 @@ import { publicRequest } from "../requestMethods";
 
 import { order } from "../redux/apiCalls";
 import { clearingorders } from "../redux/cartRedux";
-
-
-
-
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -41,7 +38,7 @@ const Top = styled.div`
 const TopButton = styled.button`
   padding: 10px;
   font-weight: 600;
-  background-color: #fff4ef;
+  background-color: #f5fbfd;
   border: 0;
   color: black;
   cursor: pointer;
@@ -51,7 +48,8 @@ const TopTexts = styled.div`
   ${mobile({ display: "none" })}
 `;
 const TopText = styled.span`
-  background: #fff4ef;
+  color: black;
+  background: #f5fbfd;
   cursor: pointer;
   margin: 0px 10px;
   padding: 5px;
@@ -137,14 +135,17 @@ const Hr = styled.hr`
 
 const Summary = styled.div`
   flex: 1;
-  border: 0.5px solid IndianRed;
   border-radius: 10px;
+  background-color: #f5fbfd;
+
   padding: 20px;
-  height: 50vh;
+  height: 44vh;
 `;
 
 const SummaryTitle = styled.h1`
   font-weight: 200;
+  border-bottom: 2px solid #ee6c4d;
+  width: fit-content;
 `;
 
 const SummaryItem = styled.div`
@@ -155,14 +156,45 @@ const SummaryItem = styled.div`
   font-size: ${(props) => props.type === "total" && "24px"};
 `;
 
-const SummaryItemText = styled.span``;
+const SummaryItemText = styled.span`
+  background: white;
+  cursor: pointer;
+  margin: 0px 10px;
+  padding: 5px;
+  border-radius: 30px;
+  color: black;
+  font-weight: 500;
+  a:link {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #ee6c4d;
+    background-color: fff4efv;
+    text-decoration: none;
+  }
+
+  a:active {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+`;
 
 const SummaryItemPrice = styled.span``;
 
 const Button = styled.button`
   width: 100%;
   padding: 10px;
-  background-color: #fff4ef;
+  background-color: #f5fbfd;
   border: 0;
   color: black;
   font-weight: 600;
@@ -172,9 +204,7 @@ const Orders = () => {
   const orders = useSelector((state) => state.orders);
   const user = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
-  console.log(orders)
-
-
+  console.log(orders);
 
   return (
     <Container>
@@ -183,60 +213,58 @@ const Orders = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <Link to={`/`}><TopButton>CONTINUE SHOPPING</TopButton></Link>
+          <Link to={`/`}>
+            <TopButton>CONTINUE SHOPPING</TopButton>
+          </Link>
           <TopTexts>
             <TopText>Orders({orders.products.length})</TopText>
             <TopText>Your Wishlist (0)</TopText>
-
           </TopTexts>
         </Top>
         <Bottom>
           <Info>
-            {
-              orders.products[0].map((product) => (
-                <Product className="Demo">
-                  <ProductDetail>
-                    <Image className="prodImg" src={product.img} />
-                    <Details>
-                      <ProductName>
-                        <b>Product:</b> {product.title}
-                      </ProductName>
-                      <ProductId>
-                        <b>ID:</b> {product._id}
-                      </ProductId>
+            {orders.products[0].map((product) => (
+              <Product className="Demo">
+                <ProductDetail>
+                  <Image className="prodImg" src={product.img} />
+                  <Details>
+                    <ProductName>
+                      <b>Product:</b> {product.title}
+                    </ProductName>
+                    <ProductId>
+                      <b>ID:</b> {product._id}
+                    </ProductId>
 
-                      <ProductId>
-                        <b>Status: </b>{orders.status}
-                      </ProductId>
-
-                    </Details>
-                  </ProductDetail>
-                  <PriceDetail>
-                    <ProductAmountContainer>
-                      <b>Qty:</b> <ProductAmount>{product.quantity}</ProductAmount>
-                    </ProductAmountContainer>
-                    <ProductPrice>
-                      ₹ {product.price}
-                    </ProductPrice>
-                  </PriceDetail>
-
-                </Product>
-              ))}
+                    <ProductId>
+                      <b>Status: </b>
+                      {orders.status}
+                    </ProductId>
+                  </Details>
+                </ProductDetail>
+                <PriceDetail>
+                  <ProductAmountContainer>
+                    <b>Qty:</b>{" "}
+                    <ProductAmount>{product.quantity}</ProductAmount>
+                  </ProductAmountContainer>
+                  <ProductPrice>₹ {product.price}</ProductPrice>
+                </PriceDetail>
+              </Product>
+            ))}
             <Hr />
           </Info>
           <Summary>
-          <SummaryTitle>Need help ?</SummaryTitle>
-          <SummaryItem>
-            <SummaryItemText className="hvr-grow">
-              <Link to="/Contact">Contact Us</Link>
-            </SummaryItemText>
-          </SummaryItem>
-          <SummaryItem>
-            <SummaryItemText className="hvr-grow">
-              <Link to="/about"> About Us</Link>
-            </SummaryItemText>
-          </SummaryItem>
-        
+            <SummaryTitle>Need help ?</SummaryTitle>
+            <SummaryItem>
+              <SummaryItemText className="hvr-grow">
+                <Link to="/Contact">Contact Us</Link>
+              </SummaryItemText>
+            </SummaryItem>
+            <SummaryItem>
+              <SummaryItemText className="hvr-grow">
+                <Link to="/about"> About Us</Link>
+              </SummaryItemText>
+            </SummaryItem>
+            <img class="HistSvg" src={artistSvg} alt="back" />
           </Summary>
         </Bottom>
       </Wrapper>
