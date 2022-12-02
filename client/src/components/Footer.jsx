@@ -34,7 +34,7 @@ const Nonlink = styled.div`
   }
 
   a:hover {
-    color: indianRed;
+    color: #ee6c4d;
     background-color: fff4efv;
     text-decoration: none;
   }

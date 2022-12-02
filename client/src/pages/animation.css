@@ -100,7 +100,7 @@
 .hvr-grow:focus,
 .hvr-grow:active {
   -webkit-transform: scale(1.1);
-  color: indianred;
+  color: #ee6c4d;
   transform: scale(1.1);
 }
 
@@ -119,7 +119,7 @@
 .hvr-shrink:active {
   -webkit-transform: scale(0.9);
   transform: scale(0.9);
-  color: indianred;
+  color: #ee6c4d;
 }
 .hvr-shrink:hover,
 .hvr-shrink:focus {
@@ -159,7 +159,7 @@
 .hvr-pulse:focus,
 .hvr-pulse:active {
   font-weight: 500;
-  color: indianred;
+  color: #ee6c4d;
   -webkit-animation-name: hvr-pulse;
   animation-name: hvr-pulse;
   -webkit-animation-duration: 1s;
@@ -323,7 +323,7 @@
   box-shadow: 0 0 1px rgba(0, 0, 0, 0);
   -webkit-transition-duration: 0.5s;
   transition-duration: 0.5s;
-  color: indianred;
+  color: #ee6c4d;
 }
 .hvr-bounce-in:hover,
 .hvr-bounce-in:focus,
@@ -1592,7 +1592,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: indianred;
+  background: #ee6c4d;
   border: none;
   -webkit-transform: scaleX(0);
   transform: scaleX(0);
@@ -2388,7 +2388,7 @@
   left: 0;
   right: 100%;
   bottom: 0;
-  background: indianred;
+  background: #ee6c4d;
   height: 4px;
   -webkit-transition-property: right;
   transition-property: right;
@@ -3821,8 +3821,8 @@
 .hvr-icon-bounce:active .hvr-icon {
   -webkit-transform: scale(1.5);
   transform: scale(1.5);
-  background-color: indianred !important;
-  color: indianred !important;
+  background-color: #ee6c4d !important;
+  color: #ee6c4d !important;
   -webkit-transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
   transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
 }

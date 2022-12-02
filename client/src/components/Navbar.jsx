@@ -11,7 +11,7 @@ import { logout } from "../redux/userRedux";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "./Navbar.css";
 const Container = styled.div`
-  background-color: #fff4ef;
+  background-color: #F5FBFD;
   height: 60px;
   ${mobile({ height: "50px" })}
 `;
@@ -55,11 +55,11 @@ const Center = styled.div`
 `;
 const Logo = styled.h1`
   font-family: "rovo", cursive !important;
-  color: indianRed;
+  color: #ee6c4d;
   font-weight: bold;
   ${mobile({ fontSize: "24px" })}
   h1:hover {
-    color: indianred !important;
+    color: #ee6c4d !important;
     background-color: transparent;
     text-decoration: none;
   }

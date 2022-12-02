@@ -7,7 +7,7 @@ import { useState } from "react";
 import "./news.css";
 const Container = styled.div`
   height: 60vh;
-  background-color: #fcf5f5;
+  background-color: #F5FBFD;
   display: flex;
   align-items: center;
   justify-content: center;

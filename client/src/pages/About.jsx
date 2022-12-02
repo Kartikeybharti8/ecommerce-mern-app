@@ -22,7 +22,7 @@ const Content = styled.div`
 
 const P = styled.div`
   padding: 15px;
-  border: 2px double indianred;
+  border: 2px double #ee6c4d;
   border-radius: 40px;
 `;
 

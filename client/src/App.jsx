@@ -4,6 +4,7 @@ import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
+import History from "./pages/orderHistory";
 import Contact from "./pages/contact";
 import Account from "./pages/MyAccount";
 import Track from "./pages/TrackOrder";
@@ -51,6 +52,9 @@ const App = () => {
         </Route>
         <Route path="/cart">
           <Cart />
+        </Route>
+        <Route path="/History">
+          <History/>
         </Route>
         <Route path="/contact">
           <Contact />

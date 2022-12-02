@@ -6,10 +6,8 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import "./contact.css";
 
-
 const Contact = () => {
   const form = useRef();
-
   const sendEmail = (e) => {
     e.preventDefault();
 
@@ -34,9 +32,10 @@ const Contact = () => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
-  }  scroll();
+  }
+  scroll();
   return (
     <>
       <Navbar />
@@ -72,60 +71,72 @@ const Contact = () => {
           </form>
         </StyledContactForm>
         <div className="container">
-          <a href="https://wa.me/8619224578" target="_blank"  rel="noreferrer">
-          <div className="card">
-            <div className="content">
-              <div className="imgBx">
-                <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png"  alt="whatsapp"/>
+          <a href="https://wa.me/8619224578" target="_blank" rel="noreferrer">
+            <div className="card">
+              <div className="content">
+                <div className="imgBx">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/220/220236.png"
+                    alt="whatsapp"
+                  />
+                </div>
+                <div className="contentBx">
+                  <h3>
+                    <br />
+                    <span> </span>
+                  </h3>
+                </div>
               </div>
-              <div className="contentBx">
-                <h3>
-                  <br />
-                  <span> </span>
-                </h3>
-              </div>
+              <ul className="sci">
+                <li>WhatsApp Us</li>
+              </ul>
             </div>
-            <ul className="sci">
-              <li>WhatsApp Us</li>
-            </ul>
-          </div>
           </a>
-          <a href="mailto:nitesh@gmail.com" target="_blank"  rel="noreferrer">
-
-          <div className="card">
-            <div className="content">
-              <div className="imgBx">
-                <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png"  alt="mail"/>
-              </div>
-              <div className="contentBx">
-                {/* <h3>
+          <a href="mailto:nitesh@gmail.com" target="_blank" rel="noreferrer">
+            <div className="card">
+              <div className="content">
+                <div className="imgBx">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/732/732200.png"
+                    alt="mail"
+                  />
+                </div>
+                <div className="contentBx">
+                  {/* <h3>
                   <br />
                   <span>CC to Art</span>
                 </h3> */}
+                </div>
               </div>
+              <ul className="sci">
+                <li>Email us</li>
+              </ul>
             </div>
-            <ul className="sci">
-              <li>Email us</li>
-            </ul>
-          </div>
           </a>
-          <a href="https://goo.gl/maps/R9EUD6NkHnoAZNPP8" target="_blank"  rel="noreferrer" alt="maps">
-
-          <div className="card">
-            <div className="content">
-              <div className="imgBx">
-                <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" alt="icon"/>
+          <a
+            href="https://goo.gl/maps/R9EUD6NkHnoAZNPP8"
+            target="_blank"
+            rel="noreferrer"
+            alt="maps"
+          >
+            <div className="card">
+              <div className="content">
+                <div className="imgBx">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/854/854878.png"
+                    alt="icon"
+                  />
+                </div>
+                <div className="contentBx"></div>
               </div>
-              <div className="contentBx"></div>
+              <ul className="sci">
+                <li>Feel free to come at our office</li>
+              </ul>
             </div>
-            <ul className="sci">
-              <li>Feel free to come at our office</li>
-            </ul>
-          </div>
           </a>
         </div>
       </div>
-     
+
       <Footer />
     </>
   );

@@ -3,7 +3,7 @@
   padding: 0px;
   margin: 8px;
   border-radius: 15px;
-  border: 0.5px solid IndianRed;
+  border: 0.5px solid #ee6c4d;
 }
 .prodImg {
   margin: 8px;
@@ -23,7 +23,20 @@
   font-size: larger;
   left: 27px;
   top: 25px;
-  color: indianred;
-  background-color: #fff4ef;
+  color: #ee6c4d;
+  background-color: #F5FBFD;
   border-radius: 14px;
+}
+.HistSvg
+{
+  position: relative;
+  left: 63px;
+  top: -206px;
+  width: 300px;
+  height: 400px;
+  z-index: 11;
+}
+SummaryItem>a
+{
+  color:red;
 }

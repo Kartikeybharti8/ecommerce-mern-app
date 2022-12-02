@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router';
-import { useState ,useCallback} from "react";
+import { useRouter } from "next/router";
+import { useState, useCallback } from "react";
 import styled from "styled-components";
 import { login } from "../redux/apiCalls";
 import { mobile } from "../responsive";
@@ -39,14 +39,14 @@ const Title = styled.h1`
   font-size: 24px;
   font-weight: 600;
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
 `;
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
   justify-content: center;
 `;
 
@@ -59,6 +59,31 @@ const Input = styled.input`
   outline: none;
   background-color: #f0f0f0;
   border: none;
+`;
+const Nonlink = styled.div`
+  a:link {
+    color: black;
+    background-color: transparent;
+    text-decoration: none !important;
+  }
+
+  a:visited {
+    color: black;
+    background-color: transparent;
+    text-decoration: none !important;
+  }
+
+  a:hover {
+    color: #ee6c4d;
+    background-color: fff4efv;
+    text-decoration: none !important;
+  }
+
+  a:active {
+    color: black;
+    background-color: transparent;
+    text-decoration: none !important;
+  }
 `;
 
 const Button = styled.button`
@@ -78,9 +103,7 @@ const Button = styled.button`
 const Linked = styled.a`
   margin: 5px 0px;
   font-size: 12px;
-  text-decoration: underline;
   cursor: pointer;
-  
 `;
 
 const Error = styled.span`
@@ -91,30 +114,32 @@ const Login = () => {
   const [email, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { isFetching, isError, currentUser } = useSelector((state) => state.user);
+  const { isFetching, isError, currentUser } = useSelector(
+    (state) => state.user
+  );
   const router = useRouter();
-  const handleLogin =  useCallback(
+  const handleLogin = useCallback(
     (e) => {
       e.preventDefault();
       login(dispatch, { email, password });
     },
     [email, password]
   );
-  
+
   if (currentUser) {
-    router.replace('/');
+    router.replace("/");
     return null;
   }
-  
+
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
-        <Form onSubmit={handleLogin }>
+        <Form onSubmit={handleLogin}>
           <Input
             placeholder="Email"
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-            title='Match The Requested Format (name@example.com) '
+            title="Match The Requested Format (name@example.com) "
             type="email"
             onChange={(e) => setUsername(e.target.value)}
             required
@@ -123,25 +148,24 @@ const Login = () => {
             placeholder="Password"
             type="password"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-            title="Must Contain At Least One Number And One Uppercase And Lowercase Letter, And At Least 8 Or More Characters" 
+            title="Must Contain At Least One Number And One Uppercase And Lowercase Letter, And At Least 8 Or More Characters"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <Button  
-          onClick={handleLogin}
-          disabled={isFetching}
-          >
+          <Button onClick={handleLogin} disabled={isFetching}>
             LOGIN
           </Button>
           {isError && <Error>Something went wrong...</Error>}
           {/*
           <Linked><Link>FORGOT PASSWORD?</Link></Linked>
-          */
-         }
-          <Linked><Link to="/register">CREATE A NEW ACCOUNT</Link></Linked>
+          */}
+          <Linked>
+            <Nonlink>
+              <Link to="/register">CREATE A NEW ACCOUNT</Link>
+            </Nonlink>
+          </Linked>
         </Form>
-      </Wrapper> 
-
+      </Wrapper>
     </Container>
   );
 };

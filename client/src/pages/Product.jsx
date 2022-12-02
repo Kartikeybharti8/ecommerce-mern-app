@@ -172,8 +172,8 @@ const Product = () => {
         <ArrowBackIcon className="backIcon" />
       </Link>
       <Wrapper>
-        <ImgContainer>
-          <Image src={product.img || <Skeleton />} />
+        <ImgContainer >
+          <Image src={product.img} />
         </ImgContainer>
         <InfoContainer>
           <Title>{product.title || <Skeleton/>}</Title>

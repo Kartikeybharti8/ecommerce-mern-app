@@ -1,5 +1,5 @@
 import { Add, Remove } from "@material-ui/icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -7,13 +7,15 @@ import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
-
+import artistSvg from "../assets/artist.svg";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import "./cart.css";
 import { Link } from "react-router-dom";
-
 import swal from "sweetalert";
+import { publicRequest } from "../requestMethods";
+import { order } from "../redux/apiCalls";
+import { clearingorders } from "../redux/cartRedux";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -48,7 +50,7 @@ const TopTexts = styled.div`
   ${mobile({ display: "none" })}
 `;
 const TopText = styled.span`
-color:black;
+  color: black;
   background: #f5fbfd;
   cursor: pointer;
   margin: 0px 10px;
@@ -135,14 +137,17 @@ const Hr = styled.hr`
 
 const Summary = styled.div`
   flex: 1;
-  border: 0.5px solid #ee6c4d;
   border-radius: 10px;
+  background-color: #f5fbfd;
+
   padding: 20px;
-  height: 50vh;
+  height: 44vh;
 `;
 
 const SummaryTitle = styled.h1`
   font-weight: 200;
+  border-bottom: 2px solid #ee6c4d;
+  width: fit-content;
 `;
 
 const SummaryItem = styled.div`
@@ -153,7 +158,38 @@ const SummaryItem = styled.div`
   font-size: ${(props) => props.type === "total" && "24px"};
 `;
 
-const SummaryItemText = styled.span``;
+const SummaryItemText = styled.span`
+  background: white;
+  cursor: pointer;
+  margin: 0px 10px;
+  padding: 5px;
+  border-radius: 30px;
+  color: black;
+  font-weight: 500;
+  a:link {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #ee6c4d;
+    background-color: fff4efv;
+    text-decoration: none;
+  }
+
+  a:active {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+  }
+`;
 
 const SummaryItemPrice = styled.span``;
 
@@ -166,7 +202,7 @@ const Button = styled.button`
   font-weight: 600;
 `;
 
-const Cart = () => {
+const History = () => {
   const cart = useSelector((state) => state.cart);
   function loadScript(src) {
     return new Promise((resolve) => {
@@ -318,9 +354,7 @@ const Cart = () => {
                       <ProductName>
                         <b>Product:</b> {product.title}
                       </ProductName>
-                      <ProductId>
-                        <b>ID:</b> {product._id}
-                      </ProductId>
+
                       <ProductColor color={product.color} />
                       <ProductSize>
                         <b>Size:</b> {product.size}
@@ -328,16 +362,6 @@ const Cart = () => {
                     </Details>
                   </ProductDetail>
                   <PriceDetail>
-                    <ProductAmountContainer>
-                      <Add className="hvr-grow" />
-                      <ProductAmount
-                        data-aos="flip-down"
-                        data-aos-duration="1500"
-                      >
-                        {product.quantity}
-                      </ProductAmount>
-                      <Remove className="hvr-grow" />
-                    </ProductAmountContainer>
                     <ProductPrice data-aos="flip-up" data-aos-duration="1500">
                       ₹ {product.price * product.quantity}
                     </ProductPrice>
@@ -348,42 +372,18 @@ const Cart = () => {
             <Hr />
           </Info>
           <Summary>
-            <SummaryTitle>ORDER SUMMARY</SummaryTitle>
+            <SummaryTitle>Need help ?</SummaryTitle>
             <SummaryItem>
-              <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
+              <SummaryItemText className="hvr-grow">
+                <Link to="/Contact">Contact Us</Link>
+              </SummaryItemText>
             </SummaryItem>
             <SummaryItem>
-              <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>₹ {(5 * cart.total) / 100}</SummaryItemPrice>
+              <SummaryItemText className="hvr-grow">
+                <Link to="/about"> About Us</Link>
+              </SummaryItemText>
             </SummaryItem>
-
-            <SummaryItem type="total">
-              <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>
-                ₹ {cart.total + (5 * cart.total) / 100}
-              </SummaryItemPrice>
-            </SummaryItem>
-            {!user && (
-              <Button
-                onClick={redirect}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hvr-grow "
-              >
-                CHECKOUT NOW
-              </Button>
-            )}
-            {user && (
-              <Button
-                onClick={showRazorpay}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hvr-grow "
-              >
-                CHECKOUT NOW
-              </Button>
-            )}
+            <img class="HistSvg" src={artistSvg} alt="yo" />
           </Summary>
         </Bottom>
       </Wrapper>
@@ -392,4 +392,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default History;
