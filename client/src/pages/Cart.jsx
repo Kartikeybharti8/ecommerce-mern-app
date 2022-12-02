@@ -21,8 +21,6 @@ import { clearingCart } from "../redux/cartRedux";
 
 import "./cart.css";
 // import swal from "sweetalert";
-import { Link } from "react-router-dom";
-import swal from "sweetalert";
 import {
   clearCart,
   removeFromCart,
