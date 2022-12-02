@@ -1,4 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+// import { publicRequest } from "../requestMethods";
+// import { register } from "./apiCalls";
+
+// export const registerUser = createAsyncThunk('register', async (user) => {
+//   const res = await publicRequest.post('/auth/register', user);
+//   return res
+// })
 
 const userSlice = createSlice({
   name: "user",
@@ -30,7 +37,7 @@ const userSlice = createSlice({
     },
     registerSuccess: (state) => {
       state.isFetching = false;
-      state.isError = false;
+      state.isError = null;
       
     },
     registerFailure: (state) => {
@@ -40,7 +47,22 @@ const userSlice = createSlice({
     logout: (state) => {
       state.currentUser = null;
     },
-  },
+  }
+  // extraReducers: builder => {
+  //   builder.addCase(registerUser.pending, (state, action) => {
+  //     state.isFetching = true
+  //     state.isError = false
+  //   }).addCase(registerUser.fulfilled, (state, action) => {
+  //     state.isFetching = false
+  //     state.currentUser = {}
+  //     console.log(action)
+  //   })
+  //   .addCase(registerUser.rejected, (state, action) => {
+  //     state.isFetching = false
+  //     state.isError = true
+  //     console.log(action)
+  //   })
+  // }
 });
 
 export const { 

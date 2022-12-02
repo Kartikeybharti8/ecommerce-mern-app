@@ -3,7 +3,7 @@ import React, { useState,useCallback } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../redux/apiCalls';
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 // import { useRouter } from 'next/router';
 import swal from "sweetalert";
 // import PasswordAndConfirmPasswordValidation from "./PasswordAndConfirmPasswordValidation";
@@ -91,6 +91,10 @@ const Label = styled.label`
   font-size: 1vw;
 `;
 
+const Error = styled.span`
+  color: red;
+`;
+
 const Register = () => {
   const history = useHistory();
 
@@ -140,20 +144,33 @@ const Register = () => {
   // };
 
   const dispatch = useDispatch();
-  const { isFetching, error } = useSelector((state) => state.user);
+  const { isFetching, isError } = useSelector((state) => state.user);
   // const router = useRouter();
 
   const postData = useCallback(
     (e) => {
       e.preventDefault();
       // const { name, email, phone, password } = user;
+      console.log(isFetching,isError)
+      
+
       register(dispatch, {name, email, phone, password });
-      swal("Account Created Successfull");
-      // router.push('/login');
-       history.push("/login");
+       
+      console.log(isFetching,isError)
+      // if(isFetching === false && isError === true){
+      //   swal("There Is Some Error While Registering")
+      // }
+      // else if( isFetching === false && isError === null){
+      //   swal("Account Created Successfull");
+      //   history.push("/login");
+      // }
     },
     [name, email, phone, password]
   );
+
+ if(isError==null){
+  swal("success")
+ }
 
   return (
     <div className="">
@@ -217,11 +234,11 @@ const Register = () => {
             disabled={isFetching}>
             CREATE
             </Button>
+          {isError && <Error>Please Fill The Details Correctly...</Error>}
+          {isError == null &&  <Redirect to="/login" /> }
           </Form>
           
-        {error && (
-          <span className="text-red-500 block ">Something Went Wrong...</span>
-        )}
+       
         </Wrapper>
       </Container>
     </div>

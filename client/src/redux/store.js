@@ -1,7 +1,9 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { configureStore, combineReducers ,applyMiddleware } from "@reduxjs/toolkit";
 import cartReducer from "./cartRedux";
 import wishlistReducer from "./wishlistRedux";
+import orderReducer from "./orderRedux";
 import userReducer from "./userRedux";
+import thunk from "redux-thunk";
 import {
   persistStore,
   persistReducer,
@@ -20,7 +22,7 @@ const persistConfig = {
   storage,
 };
 
-const rootReducer = combineReducers({ user: userReducer, cart: cartReducer , wishlist: wishlistReducer});
+const rootReducer = combineReducers({ user: userReducer, cart: cartReducer, orders:orderReducer,wishlist: wishlistReducer });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
@@ -32,6 +34,8 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-});
+  applyMiddleware:applyMiddleware(thunk)
+  }
+);
 
 export let persistor = persistStore(store);

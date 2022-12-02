@@ -9,6 +9,7 @@ import Account from "./pages/MyAccount";
 import Track from "./pages/TrackOrder";
 import Terms from "./pages/terms";
 import About from "./pages/About";
+import Orders from "./pages/orders";
 import swal from 'sweetalert';
 import Wishlist from "./pages/Wishlist";
 
@@ -22,14 +23,14 @@ import Success from "./pages/Success";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  
-  if(localStorage.getItem("isLoggedIn")){
+
+  if (localStorage.getItem("isLoggedIn")) {
     swal("Login Successful");
   }
 
   const user = useSelector((state) => state.user.currentUser);
   return (
-    
+
     <Router>
       <Switch>
         <Route exact path="/">
@@ -40,6 +41,9 @@ const App = () => {
         </Route>
         <Route path="/product/:id">
           <Product />
+        </Route>
+        <Route path="/orders">
+          <Orders />
         </Route>
         <Route path="/cart">
           <Cart />

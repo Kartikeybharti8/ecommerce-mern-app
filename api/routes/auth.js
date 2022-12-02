@@ -33,6 +33,7 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     console.log("hi kartikey",user)
     !user && res.status(401).json("Wrong credentials!");
+    console.log("hasasgsgha")
     
     const hashedPassword = CryptoJS.AES.decrypt(
       user.password,
