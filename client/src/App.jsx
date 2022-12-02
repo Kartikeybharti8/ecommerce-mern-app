@@ -4,6 +4,7 @@ import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Cart from "./pages/Cart";
+import Orders from "./pages/orders";
 import swal from 'sweetalert';
 
 import {
@@ -16,24 +17,27 @@ import Success from "./pages/Success";
 import { useSelector } from "react-redux";
 
 const App = () => {
-  
-  if(localStorage.getItem("isLoggedIn")){
+
+  if (localStorage.getItem("isLoggedIn")) {
     swal("Login Successful");
   }
 
   const user = useSelector((state) => state.user.currentUser);
   return (
-    
+
     <Router>
       <Switch>
         <Route exact path="/">
           <Home />
         </Route>
-        <Route  path="/products/:category">
+        <Route path="/products/:category">
           <ProductList />
         </Route>
         <Route path="/product/:id">
           <Product />
+        </Route>
+        <Route path="/orders">
+          <Orders />
         </Route>
         <Route path="/cart">
           <Cart />

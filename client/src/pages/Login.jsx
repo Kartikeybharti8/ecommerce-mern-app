@@ -5,6 +5,7 @@ import { login } from "../redux/apiCalls";
 import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import swal from 'sweetalert';
 
 const Container = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -101,6 +102,7 @@ const Login = () => {
   );
   
   if (currentUser) {
+    swal("login")
     router.replace('/');
     return null;
   }
@@ -132,7 +134,7 @@ const Login = () => {
           >
             LOGIN
           </Button>
-          {isError && <Error>Something went wrong...</Error>}
+          {isError && <Error>Something Went Wrong...</Error>}
           {/*
           <Linked><Link>FORGOT PASSWORD?</Link></Linked>
           */

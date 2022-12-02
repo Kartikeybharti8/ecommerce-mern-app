@@ -1,5 +1,5 @@
-import { Add, Remove } from "@material-ui/icons";
-import { useSelector } from "react-redux";
+import { Add, LocalDrinkSharp, Remove } from "@material-ui/icons";
+import { useSelector,useDispatch} from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -10,7 +10,14 @@ import { useEffect, useState } from "react";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
 import "./cart.css"
+import { publicRequest } from "../requestMethods";
+
+import { order } from "../redux/apiCalls";
+import { clearingCart } from "../redux/cartRedux";
+
+
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -165,28 +172,12 @@ const Button = styled.button`
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  // const [stripeToken, setStripeToken] = useState(null);
-  // const history = useHistory();
+  const orders = useSelector((state) => state.orders);
 
-  // const onToken = (token) => {
-  //   setStripeToken(token);
-  // };
-//  console.log(stripeToken)
-  // useEffect(() => {
-  //   const makeRequest = async () => {
-  //     try {
-  //       const res = await userRequest.post("/checkout/payment", {
-  //         tokenId: stripeToken.id,
-  //         amount: 500,
-  //       });
-  //       history.push("/success", {
-  //         stripeData: res.data,
-  //         products: cart,
-  //       });
-  //     } catch {}
-  //   };
-  //   stripeToken && makeRequest();
-  // }, [stripeToken, cart.total, history]);
+  const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
+  // console.log(cart.products)
+ 
   function loadScript(src) {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -202,57 +193,83 @@ const Cart = () => {
   }
  
   async function showRazorpay(total) {
-    console.log(total)
-    const res = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
-    );
-
-    if (!res) {
-      alert("Razorpay SDK failed to load. Are you online?");
-      return;
-    }
-
-    const data = await fetch("http://localhost:5000/api/checkout/payment", {
-      method: "POST",
-      headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              currency:"INR",
-              payment_capture:cart.products.length,
-              amount:cart.total*100
-            }),
-    }).then((t) => t.json());
-
-    console.log(data);
-
-    const options = {
-      //publc key
-      key: "rzp_test_Hhk1Sht36toHVl",
-      currency: data.currency,
-      amount: data.amount,
-      order_id: data.id,
-      name: "Artisan Shopping",
-      description: "You can make your payments here",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSemqiIPiJGwCjVqLTbkUODcDHt8As8aALN0eo48P434qjeKqSXS8eRfKSc1kPnyRv0jSI&usqp=CAU",
-      handler: function (response) {
-        // alert(response.razorpay_payment_id);
-        // alert(response.razorpay_order_id);
-        // alert(response.razorpay_signature);
-
-        alert("Transaction successful");
-      },
-      prefill: {
-        name: "kartikey",
-        email: "kartikey@gamil.com",
-        phone_number: "9999999999",
-      },
-      theme:{
-        color: "#99cc33"
+    if(user === null){
+      swal({
+        title: 'Login To Checkout!',
+        text: 'Redirecting you to login...',
+        buttons:false
+      })
+      setTimeout(locate, 2000);
+      function locate(){
+        window.location = "http://localhost:3000/login"
       }
-    };
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
+    }
+    else { 
+        
+        // console.log(total)
+        const res = await loadScript(
+          "https://checkout.razorpay.com/v1/checkout.js"
+        );
+
+        if (!res) {
+          swal("Razorpay SDK failed to load. Are you online?");
+          return;
+        }
+
+        const data = await fetch("http://localhost:5000/api/checkout/payment", {
+          method: "POST",
+          headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  currency:"INR",
+                  payment_capture:cart.products.length,
+                  amount:cart.total*100
+                }),
+        }).then((t) => t.json());
+
+        // console.log(data);
+
+        const options = {
+          //publc key
+          key: "rzp_test_Hhk1Sht36toHVl",
+          currency: data.currency,
+          amount: data.amount,
+          order_id: data.id,
+          name: "Artisan Shopping",
+          description: "You can make your payments here",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSemqiIPiJGwCjVqLTbkUODcDHt8As8aALN0eo48P434qjeKqSXS8eRfKSc1kPnyRv0jSI&usqp=CAU",
+          handler: async function (response) {
+            
+            // alert(response.razorpay_payment_id);
+            // alert(response.razorpay_order_id);
+            // alert(response.razorpay_signature);
+              if(response)
+              {
+                
+                // console.log(res);
+
+                var res = order(dispatch, user,cart);
+                console.log(res)
+                if(res === 0){
+                  swal("Transaction could not be completed.")
+                }else{
+                  dispatch(clearingCart());
+                  swal("Transaction successful!!");
+                }
+              }
+          },
+          prefill: {
+            name: "yourname",
+            email: "yourname@gmail.com",
+            phone_number: "9999999999",
+          },
+          theme:{
+            color: "#99cc33"
+          }
+        };
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();}
   }
   
   return (
@@ -265,6 +282,8 @@ const Cart = () => {
           <Link to={`/`}><TopButton>CONTINUE SHOPPING</TopButton></Link>
           <TopTexts>
             <TopText>Shopping Bag({cart.products.length})</TopText>
+           <Link to={'/orders'}>  <TopText>Orders({orders.products.length})</TopText> </Link>
+
             <TopText>Your Wishlist (0)</TopText>
           </TopTexts>
           <TopButton type="filled">CHECKOUT NOW</TopButton>
@@ -317,18 +336,6 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-             {/* <StripeCheckout
-              name="Artisan Shop"
-              image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSemqiIPiJGwCjVqLTbkUODcDHt8As8aALN0eo48P434qjeKqSXS8eRfKSc1kPnyRv0jSI&usqp=CAU"
-              billingAddress
-              shippingAddress
-              description={`Your total is Rs ${cart.total}`}
-              amount={cart.total * 100}
-              token={onToken}
-              stripeKey={KEY}
-            >
-             </StripeCheckout>*/}
-            
               <Button
               onClick={()=>{showRazorpay(cart.total)}}
               target="_blank"
