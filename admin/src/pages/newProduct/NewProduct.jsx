@@ -107,10 +107,12 @@ export default function NewProduct() {
             onChange={handleChange}
           />
         </div>
-        <div className="addProductItem">
-          <label>Categories</label>
-          <input type="text" placeholder="jeans,skirts" onChange={handleCat} />
-        </div>
+        {/*
+          <div className="addProductItem">
+            <label>Categories</label>
+            <input type="text" placeholder="jeans,skirts" onChange={handleCat} />
+          </div>
+  */}
         <div className="addProductItem">
           <label>Stock</label>
           <select name="inStock" onChange={handleChange}>
