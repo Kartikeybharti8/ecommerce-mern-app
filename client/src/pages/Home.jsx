@@ -3,24 +3,26 @@ import Announcement from "../components/Announcement";
 import Categories from "../components/Categories";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import Newsletter from "../components/Newsletter";
+import Counter from "../components/Counter";
 import Products from "../components/Products";
 import Slider from "../components/Slider";
-import Testimonial from "../components/Testimonial";
+import spinner from "../components/spinner";
+
 
 const Home = () => {
   return (
+
     <div>
-      <Announcement id="Announcement" />
+      <Announcement />
       <Navbar />
       <Slider />
       <Categories />
-      <Products/>
-      <Newsletter/>
-      <Testimonial/>
-      <Footer/>
+      <Products />
+      <Counter />
+      <Footer />
     </div>
   );
 };
+
 
 export default Home;

@@ -1,6 +1,54 @@
-.nav-items:hover 
+.nav-items:hover {
+  padding: 5px;
+  opacity: 0.6;
+  transition: background-color 0.5s;
+}
+.transparent {
+  background-color: transparent !important;
+  color: black;
+  border: none;
+}
+menuitem
 {
-  border-radius: 49px;
-  color: white;
-  background-color: #fcadad;
+  color:deepskyblue !important;
+}
+
+.cartIcon {
+  color: black;
+  z-index: 1;
+}
+.cartCount > span > span {
+  color: black;
+  background-color: #ee6c4d;
+}
+.nav-items {
+  text-decoration: none;
+  background-color: none;
+  border: none;
+  color: black !important;
+  padding: 5px;
+}
+.parent {
+  display: flex;
+  flex-direction: row;
+}
+.logout {
+  padding-left: 10px;
+  padding-right: 10px;
+  background: transparent;
+  /* font-size: larger; */
+  cursor: pointer;
+  text-decoration: none;
+  border: 1.5px solid #ee6c4d;
+  color: black;
+  padding: 5px;
+}
+.logout:hover {
+  font-weight: 700;
+  padding: 5px;
+  opacity: 0.6;
+  transition: background-color 0.5s;
+}
+.logoutParent {
+  padding-left: 25px;
 }
