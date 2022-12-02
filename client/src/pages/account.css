@@ -24,7 +24,7 @@
    
     color: black;
     border-radius: 4px 4px 0 0;
-    border: 1px solid indianred;
+    border: 1px solid #ee6c4d;
     -webkit-border-radius: 4px 4px 0 0;
     padding: 30px;
     text-align: center;
@@ -55,7 +55,7 @@
 .md-5
 {
     margin: 16px 0px;
-    border: 1px solid indianred !important;
+    border: 1px solid #ee6c4d !important;
     color:black !important;
 
 }
@@ -114,7 +114,7 @@
 
 .profile-nav ul > li > a:hover, .profile-nav ul > li > a:focus, .profile-nav ul li.active  a {
     background: #f8f7f5 !important;
-    border-left: 5px solid indianred;
+    border-left: 5px solid #ee6c4d;
     color: #89817f !important;
 }
 
@@ -155,7 +155,7 @@
 .bio-graph-heading {
     color: black;
     text-align: center;
-    border: 1px solid indianred;
+    border: 1px solid #ee6c4d;
     padding: 40px 110px;
     border-radius: 4px ;
     -webkit-border-radius: 4px 4px 0 0;

@@ -1,40 +1,42 @@
 .Demo {
-    background: #fff;
-    padding: 0px;
-    margin: 8px;
-    border-radius: 15px;
-    border: 0.5px solid IndianRed;
-  }
-  .prodImg {
-    margin: 8px;
-    border-radius: 15px;
-  }
-  .transparent
-  {
-    display: none;
-  }
-  .fa-trash-o
-  {
-    left: 40px;
-    top: 2px;
-    z-index: 14;
-    position: relative;
-    font-size: x-large !important;
-    color: black;
-  }
-  p{
-    padding: 25px;
-    font-style: revert;
-    font-size: large;
-  }
-  
-.backIcon
-{
+  background: #fff;
+  padding: 0px;
+  margin: 8px;
+  border-radius: 15px;
+  border: 0.5px solid #ee6c4d;
+}
+.prodImg {
+  margin: 8px;
+  border-radius: 15px;
+}
+.btm-data > .emptyCart {
+  left: 437px !important;
+  top: 159px !important;
+  width: 300px !important;
+}
+.transparent {
+  display: none;
+}
+
+.backIcon {
   position: relative;
   font-size: larger;
   left: 27px;
   top: 25px;
-  color: indianred;
-  background-color: #FFF4EF;
+  color: #ee6c4d;
+  background-color: #F5FBFD;
   border-radius: 14px;
+}
+.HistSvg
+{
+  position: relative;
+  left: 63px;
+  top: -206px;
+  width: 300px;
+  height: 400px;
+  z-index: 11;
+}
+SummaryItem>a
+{
+  color:red;
 }

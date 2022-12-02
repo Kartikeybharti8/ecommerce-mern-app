@@ -7,7 +7,7 @@ import { useState } from "react";
 import "./news.css";
 const Container = styled.div`
   height: 60vh;
-  background-color: #fcf5f5;
+  background-color: #F5FBFD;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,14 +30,14 @@ const Counter = () => {
   const [counterOn, setCounterOn] = useState(0);
  
   return (
-    <Container>
+    <Container data-aos="zoom-in">
       {/* <ScrollTrigger
         onEnter={() => setCounterOn(true)}
         onExit={() => setCounterOn(false)}
       > */}
         <center>
           <Title>Love from all over India</Title>
-          <Desc>Ready to deliver Happiness and art </Desc>
+          <Desc data-aos="flip-down">Ready to deliver Happiness and art </Desc>
           <h1>
             {/* {counterOn && (
               <CountUp

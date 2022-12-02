@@ -6,10 +6,12 @@ import Navbar from "../components/Navbar";
 import Counter from "../components/Counter";
 import Products from "../components/Products";
 import Slider from "../components/Slider";
+import spinner from "../components/spinner";
 
 
 const Home = () => {
   return (
+
     <div>
       <Announcement />
       <Navbar />
@@ -21,5 +23,6 @@ const Home = () => {
     </div>
   );
 };
+
 
 export default Home;

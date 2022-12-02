@@ -9,7 +9,7 @@ const productRoute = require("./routes/product");
 const cartRoute = require("./routes/cart");
 const orderRoute = require("./routes/order");
 const razorpayRoute = require("./routes/razorpay");
-const cors = require("cors");
+const cors = require("cors"); 
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => console.log("DB Connection Successfull!"))

@@ -1,48 +1,54 @@
-.nav-items:hover 
-{
-  border-radius: 49px;
-  color: black;
+.nav-items:hover {
   padding: 5px;
-  background-color: #fcadad;
   opacity: 0.6;
-  transition: background-color 0.5s;  
-} 
-.nav-items
-{
-  text-decoration: none;
-  border: 1.5px solid #D26C6C ;
-  border-radius: 49px;
+  transition: background-color 0.5s;
+}
+.transparent {
+  background-color: transparent !important;
   color: black;
+  border: none;
+}
+menuitem
+{
+  color:deepskyblue !important;
+}
+
+.cartIcon {
+  color: black;
+  z-index: 1;
+}
+.cartCount > span > span {
+  color: black;
+  background-color: #ee6c4d;
+}
+.nav-items {
+  text-decoration: none;
+  background-color: none;
+  border: none;
+  color: black !important;
   padding: 5px;
 }
-.parent
-{
+.parent {
   display: flex;
   flex-direction: row;
 }
-.logout
-{
-  /* border-radius: 50%; */
+.logout {
+  padding-left: 10px;
+  padding-right: 10px;
   background: transparent;
   /* font-size: larger; */
   cursor: pointer;
   text-decoration: none;
-  border: 1.5px solid #D26C6C;
-  /* border-radius: 28px; */
-  border-radius: 50%;
+  border: 1.5px solid #ee6c4d;
   color: black;
   padding: 5px;
 }
-.logout:hover 
-{
-  border-radius: 49px;
-  color: black;
+.logout:hover {
+  font-weight: 700;
   padding: 5px;
-  background-color: #fcadad;
   opacity: 0.6;
-  transition: background-color 0.5s;  
-} 
-.logoutParent
-{
+  transition: background-color 0.5s;
+}
+.logoutParent {
   padding-left: 25px;
 }

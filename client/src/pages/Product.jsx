@@ -13,7 +13,10 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import "./cart.css"
+
+import Skeleton from 'react-loading-skeleton'
+
+import "./cart.css";
 const Container = styled.div``;
 
 const Wrapper = styled.div`
@@ -167,17 +170,17 @@ const Product = () => {
       <Navbar />
       <Announcement />
       <Link to="/">
-        <ArrowBackIcon className="backIcon"/>
+        <ArrowBackIcon className="backIcon" />
       </Link>
       <Wrapper>
-        <ImgContainer>
+        <ImgContainer >
           <Image src={product.img} />
         </ImgContainer>
         <InfoContainer>
-          <Title>{product.title}</Title>
-          <Desc>{product.desc}</Desc>
+          <Title>{product.title || <Skeleton/>}</Title>
+          <Desc>{product.desc || <Skeleton count={4}/>}</Desc>
 
-          <Price>₹ {product.price}</Price>
+          <Price>₹ {product.price || <Skeleton/>}</Price>
           <FilterContainer>
             {/* <Filter>
               <FilterTitle>Color</FilterTitle>
@@ -200,7 +203,7 @@ const Product = () => {
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity("inc")} />
             </AmountContainer>
-            <Button onClick={handleClick}>ADD TO CART</Button>
+            <Button onClick={handleClick} >ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
