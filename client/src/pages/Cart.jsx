@@ -1,17 +1,31 @@
-import { Add, Remove } from "@material-ui/icons";
-import { useSelector } from "react-redux";
+import { Add, LocalDrinkSharp, Remove } from "@material-ui/icons";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
-import StripeCheckout from "react-stripe-checkout";
+
 import { useEffect, useState } from "react";
+
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
+import "./cart.css";
+import { publicRequest } from "../requestMethods";
 
-const KEY = process.env.REACT_APP_STRIPE;
+import { order } from "../redux/apiCalls";
+import { clearingCart } from "../redux/cartRedux";
+
+import "./cart.css";
+// import swal from "sweetalert";
+import {
+  clearCart,
+  removeFromCart,
+  getTotals,
+  updateamount,
+} from "../redux/cartRedux";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -34,20 +48,22 @@ const Top = styled.div`
 const TopButton = styled.button`
   padding: 10px;
   font-weight: 600;
+  background-color: #f5fbfd;
+  border: 0;
+  color: black;
   cursor: pointer;
-  border: ${(props) => props.type === "filled" && "none"};
-  background-color: ${(props) =>
-    props.type === "filled" ? "black" : "transparent"};
-  color: ${(props) => props.type === "filled" && "white"};
 `;
 
 const TopTexts = styled.div`
   ${mobile({ display: "none" })}
 `;
 const TopText = styled.span`
-  text-decoration: underline;
+  color: black;
+  background: #f5fbfd;
   cursor: pointer;
   margin: 0px 10px;
+  padding: 5px;
+  border-radius: 30px;
 `;
 
 const Bottom = styled.div`
@@ -93,7 +109,7 @@ const ProductColor = styled.div`
   background-color: ${(props) => props.color};
 `;
 
-const ProductSize = styled.span``;
+// const ProductSize = styled.span``;
 
 const PriceDetail = styled.div`
   flex: 1;
@@ -129,7 +145,7 @@ const Hr = styled.hr`
 
 const Summary = styled.div`
   flex: 1;
-  border: 0.5px solid lightgray;
+  border: 0.5px solid #ee6c4d;
   border-radius: 10px;
   padding: 20px;
   height: 50vh;
@@ -154,83 +170,224 @@ const SummaryItemPrice = styled.span``;
 const Button = styled.button`
   width: 100%;
   padding: 10px;
-  background-color: black;
-  color: white;
+  background-color: #f5fbfd;
+  border: 0;
+  color: black;
   font-weight: 600;
 `;
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  const [stripeToken, setStripeToken] = useState(null);
-  const history = useHistory();
+  const orders = useSelector((state) => state.orders);
+  const user = useSelector((state) => state.user.currentUser);
 
-  const onToken = (token) => {
-    setStripeToken(token);
-  };
-//  console.log(stripeToken)
+  const dispatch = useDispatch();
+  const quantity = 0;
+
   useEffect(() => {
-    const makeRequest = async () => {
-      try {
-        const res = await userRequest.post("/checkout/payment", {
-          tokenId: stripeToken.id,
-          amount: 500,
-        });
-        history.push("/success", {
-          stripeData: res.data,
-          products: cart,
-        });
-      } catch {}
-    };
-    stripeToken && makeRequest();
-  }, [stripeToken, cart.total, history]);
-  
+    dispatch(getTotals());
+  }, [cart, dispatch]);
+
+  const updateonclick = (id, type) => {
+    dispatch(updateamount({ id, type }));
+  };
+  const handleRemoveFromCart = (product) => {
+    // console.log(product)
+
+    dispatch(removeFromCart(product));
+  };
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
+
+  function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+
+  async function showRazorpay(total) {
+    if (user === null) {
+      swal({
+        title: "Login To Checkout!",
+        text: "Redirecting you to login...",
+        buttons: false,
+      });
+      setTimeout(locate, 2000);
+      function locate() {
+        window.location = "http://localhost:3000/login";
+      }
+    } else {
+      // console.log(total)
+      const res = await loadScript(
+        "https://checkout.razorpay.com/v1/checkout.js"
+      );
+
+      if (!res) {
+        swal("Razorpay SDK failed to load. Are you online?");
+        return;
+      }
+
+      const data = await fetch("http://localhost:5000/api/checkout/payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          currency: "INR",
+          payment_capture: cart.products.length,
+          amount: cart.total * 100,
+        }),
+      }).then((t) => t.json());
+
+      // console.log(data);
+
+      const options = {
+        //publc key
+        key: "rzp_test_Hhk1Sht36toHVl",
+        currency: data.currency,
+        amount: data.amount,
+        order_id: data.id,
+        name: "Artisan Shopping",
+        description: "You can make your payments here",
+        image:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSemqiIPiJGwCjVqLTbkUODcDHt8As8aALN0eo48P434qjeKqSXS8eRfKSc1kPnyRv0jSI&usqp=CAU",
+        handler: async function (response) {
+          // alert(response.razorpay_payment_id);
+          // alert(response.razorpay_order_id);
+          // alert(response.razorpay_signature);
+          if (response) {
+            // console.log(res);
+
+            var res = order(dispatch, user, cart);
+            console.log(res);
+            if (res === 0) {
+              swal("Transaction could not be completed.");
+            } else {
+              dispatch(clearingCart());
+              swal("Transaction successful!!");
+            }
+          }
+        },
+        prefill: {
+          name: "yourname",
+          email: "yourname@gmail.com",
+          phone_number: "9999999999",
+        },
+        theme: {
+          color: "#99cc33",
+        },
+      };
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+    }
+  }
+  //print product quantity
+  function scroll() {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
+  scroll();
   return (
     <Container>
+      <link
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+        rel="stylesheet"
+      />
       <Navbar />
+
       <Announcement />
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <Link to={`/`}><TopButton>CONTINUE SHOPPING</TopButton></Link>
+          <Link to={`/`}>
+            <TopButton className="hvr-grow">CONTINUE SHOPPING</TopButton>
+          </Link>
           <TopTexts>
-            <TopText>Shopping Bag(0)</TopText>
-            <TopText>Your Wishlist (0)</TopText>
+            <Link to="/wishlist" style={{ color: "black" }}>
+              <TopText className="hvr-grow">Your Wishlist({quantity})</TopText>
+            </Link>
+            <TopText className="hvr-grow">
+              Shopping Bag({cart.products.length})
+            </TopText>
+            <Link to={"/orders"}>
+              {" "}
+              <TopText className="hvr-grow">
+                Orders({orders.products.length})
+              </TopText>{" "}
+            </Link>
           </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+          <TopButton onClick={() => handleClearCart()} className="hvr-grow">
+            EMPTY CART
+          </TopButton>
         </Top>
-        <Bottom>
+        <Bottom className="btm-data">
           <Info>
-            {cart.products.map((product) => (
-              <Product>
-                <ProductDetail>
-                  <Image src={product.img} />
-                  <Details>
-                    <ProductName>
-                      <b>Product:</b> {product.title}
-                    </ProductName>
-                    <ProductId>
-                      <b>ID:</b> {product._id}
-                    </ProductId>
-                    <ProductColor color={product.color} />
-                    <ProductSize>
-                      <b>Size:</b> {product.size}
-                    </ProductSize>
-                  </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmountContainer>
-                    <Add />
-                    <ProductAmount>{product.quantity}</ProductAmount>
-                    <Remove />
-                  </ProductAmountContainer>
-                  <ProductPrice>
-                    ₹ {product.price * product.quantity}
-                  </ProductPrice>
-                </PriceDetail>
-              </Product>
-            ))}
+            {cart.products.length === 0 ? (
+              <p className="">
+                Your Cart is empty.<br></br> <Link to="/">Go for Shopping</Link>
+              </p>
+            ) : (
+              cart.products.map((product) => (
+                <Product className="Demo " data-aos="flip-up">
+                  <ProductDetail>
+                    <Link to={`/product/${product._id}`}>
+                      <Image className="prodImg" src={product.img} />
+                    </Link>
+                    <Details>
+                      <ProductName>
+                        <b>Product:</b> {product.title}
+                      </ProductName>
+                      <ProductId>
+                        <b>ID:</b> {product._id}
+                      </ProductId>
+                      <ProductColor color={product.color} />
+                    </Details>
+                  </ProductDetail>
+                  <PriceDetail>
+                    <ProductAmountContainer>
+                      <Remove
+                        className="hvr-grow"
+                        onClick={() => updateonclick(product._id, false)}
+                      />
+
+                      <ProductAmount
+                        data-aos="flip-down"
+                        data-aos-duration="1500"
+                      >
+                        {product.quantity}
+                      </ProductAmount>
+                      <Add
+                        className="hvr-grow"
+                        onClick={() => updateonclick(product._id, true)}
+                      />
+
+                      <i
+                        className="fa fa-trash-o"
+                        onClick={() => handleRemoveFromCart(product)}
+                      />
+                    </ProductAmountContainer>
+                    <ProductPrice data-aos="flip-up" data-aos-duration="1500">
+                      ₹ {product.price * product.quantity}
+                    </ProductPrice>
+                  </PriceDetail>
+                </Product>
+              ))
+            )}
             <Hr />
           </Info>
+
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
@@ -239,25 +396,22 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>₹ {(5 * cart.total) / 100}</SummaryItemPrice>
+              <SummaryItemPrice>₹ {0}</SummaryItemPrice>
             </SummaryItem>
-
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-              <StripeCheckout
-              name="Artisan Shop"
-              image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSemqiIPiJGwCjVqLTbkUODcDHt8As8aALN0eo48P434qjeKqSXS8eRfKSc1kPnyRv0jSI&usqp=CAU"
-              billingAddress
-              shippingAddress
-              description={`Your total is Rs ${cart.total}`}
-              amount={cart.total * 100}
-              token={onToken}
-              stripeKey={KEY}
+            <Button
+              onClick={() => {
+                showRazorpay(cart.total);
+              }}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hvr-grow "
             >
-              <Button>CHECKOUT NOW</Button>
-            </StripeCheckout>
+              CHECKOUT NOW
+            </Button>
           </Summary>
         </Bottom>
       </Wrapper>

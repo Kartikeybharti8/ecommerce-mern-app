@@ -11,15 +11,14 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
 import "./footer.css";
-
-import React from 'react'
-import ReactDOM from 'react-dom'
-
+import React from "react";
+import ReactDOM from "react-dom";
 
 const Container = styled.div`
+  border-top: 1px solid #e6e6e6;
+  background-color: white;
   display: flex;
   ${mobile({ flexDirection: "column" })}
-
 `;
 const Nonlink = styled.div`
   a:link {
@@ -35,8 +34,8 @@ const Nonlink = styled.div`
   }
 
   a:hover {
-    color: black;
-    background-color: transparent;
+    color: #ee6c4d;
+    background-color: fff4efv;
     text-decoration: none;
   }
 
@@ -114,18 +113,19 @@ const ContactItem = styled.div`
 const Payment = styled.img`
   width: 50%;
 `;
-const responsive = styled.div`
-  
-`;
-
+function scrollup() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 const Footer = () => {
   return (
     <Container>
       <Left>
-        <Logo>Artisans</Logo>
-        <Desc>
-          We provide the finest traditional and modern art pieces for your
-          home and make them more beautiful.
+        <Logo data-aos="flip-up" data-aos-duration="500">
+          Artisans
+        </Logo>
+        <Desc data-aos="flip-up" data-aos-duration="500">
+          We provide the finest traditional and modern art pieces for your home
+          and make them more beautiful.
         </Desc>
         <SocialContainer>
           <a href="http://www.facebook.com" target="_blank" rel="noreferrer">
@@ -151,38 +151,65 @@ const Footer = () => {
         </SocialContainer>
       </Left>
       <Center>
-        <Title>Useful Links</Title>
-        <List>
-          <ListItem><Link to="/home">Home</Link></ListItem>
-          <ListItem><Link to="/cart">Cart</Link></ListItem>
-          <ListItem><Link to="/register">My Account</Link></ListItem>
-          <ListItem>Track Order</ListItem>
-          <ListItem>Terms</ListItem>
-        </List>
+        <Title data-aos="flip-up" data-aos-duration="500">
+          Useful Links
+        </Title>
+        <Nonlink>
+          <List>
+            <ListItem data-aos="flip-up" data-aos-duration="500">
+              <Link onClick={scrollup}>Home</Link>
+            </ListItem>
+            <ListItem data-aos="flip-up" data-aos-duration="500">
+              <Link to="/cart">Cart</Link>
+            </ListItem>
+            <ListItem data-aos="flip-up" data-aos-duration="500">
+              <Link to="/myAccount">My Account</Link>
+            </ListItem>
+            <ListItem data-aos="flip-up" data-aos-duration="500">
+              <Link to="/terms">Terms</Link>
+            </ListItem>
+            <ListItem>
+              <Link data-aos="flip-up" data-aos-duration="500" to="/contact">
+                Contact
+              </Link>
+            </ListItem>
+          </List>
+        </Nonlink>
       </Center>
       <Right>
         <Nonlink>
-          <Title>Contact</Title>
+          <Title data-aos="flip-up" data-aos-duration="1000">
+            Contact
+          </Title>
           <a href="https://goo.gl/maps/R9EUD6NkHnoAZNPP8" target="_blank">
             <ContactItem>
-              <Room style={{ marginRight: "10px" }} /> 1330, 13th Main, 4th
-              Block, Jayanagar, Bangalore-560011
+              <Room
+                data-aos="flip-up"
+                data-aos-duration="500"
+                style={{ marginRight: "10px" }}
+              />{" "}
+              1330, 13th Main, 4th Block, Jayanagar, Bangalore-560011
             </ContactItem>
           </a>
-          <a href="tel:+4733378901" >
+          <a data-aos="flip-up" data-aos-duration="500" href="tel:+4733378901">
             <ContactItem>
               <Phone style={{ marginRight: "10px" }} /> +91 9876543210
             </ContactItem>
           </a>
-          <a href="mailto:nitesh@gmail.com">
+          <a
+            data-aos="flip-up"
+            data-aos-duration="500"
+            href="mailto:nitesh@gmail.com"
+          >
             <ContactItem>
               <MailOutline style={{ marginRight: "10px" }} /> contact@Art.dev
             </ContactItem>
           </a>
         </Nonlink>
-        <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
+        <Payment
+          src="https://i.ibb.co/Qfvn4z6/payment.png"
+        />
       </Right>
-      
     </Container>
   );
 };

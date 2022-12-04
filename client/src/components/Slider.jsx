@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { sliderItems } from "../data";
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
+import Skeleton from 'react-loading-skeleton'
 
 const Container = styled.div`
   width: 100%;
@@ -28,7 +29,7 @@ if (`@media (width: 1024px)`) {
 const Arrow = styled.div`
   width: 50px;
   height: 50px;
-  background-color: #fff7f7;
+  background-color: #6c6b6bc9;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -103,26 +104,40 @@ const Slider = () => {
 
   return (
     <Container>
-      <Arrow direction="left" onClick={() => handleClick("left")}>
+      <Arrow
+        direction="left"
+        data-aos="flip-left"
+        onClick={() => handleClick("left")}
+      >
         <ArrowLeftOutlined />
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
         {sliderItems.map((item) => (
           <Slide bg={item.bg} key={item.id}>
             <ImgContainer>
-              <Image src={item.img} />
+              <Image src={item.img  || <Skeleton />} />
             </ImgContainer>
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
               <Link to="/products/women" style={{ textDecoration: "none" }}>
-                <Button>SHOW NOW</Button>
+                <Button
+                  className="hvr-bounce-to-right "
+                  data-aos="flip-left"
+                  data-aos-duration="1000"
+                >
+                  SHOP NOW
+                </Button>
               </Link>
             </InfoContainer>
           </Slide>
         ))}
       </Wrapper>
-      <Arrow direction="right" onClick={() => handleClick("right")}>
+      <Arrow
+        direction="right"
+        data-aos="flip-right"
+        onClick={() => handleClick("right")}
+      >
         <ArrowRightOutlined />
       </Arrow>
     </Container>

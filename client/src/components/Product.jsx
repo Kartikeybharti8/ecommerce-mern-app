@@ -1,17 +1,21 @@
 import {
-  FavoriteBorderOutlined,
+  Favorite,
   SearchOutlined,
+  FavoriteBorderOutlined,
   ShoppingCartOutlined,
+  VisibilityIcon,
 } from "@material-ui/icons";
+import swal from "sweetalert";
 import { Link } from "react-router-dom";
-import { useEffect,useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { popularProducts } from "../data";
 import "./product.css";
-
-
-
-
+import { publicRequest } from "../requestMethods";
+import { useLocation } from "react-router-dom";
+import { wishProduct, removeFromWishlist } from "../redux/wishlistRedux";
+import { useDispatch } from "react-redux";
+import {RiHeart3Fill} from 'react-icons/ri';
 
 const Info = styled.div`
   opacity: 0;
@@ -28,6 +32,7 @@ const Info = styled.div`
   transition: all 0.5s ease;
   cursor: pointer;
 `;
+
 const Container1 = styled.div`
   flex: 1;
   margin: 5px;
@@ -35,16 +40,16 @@ const Container1 = styled.div`
   height: 350px;
   display: flex;
   align-items: center;
-  // background-color: blue;
+  background-color: blue;
   background-color: #f5fbfd;
   justify-content: center;
-  
+
   position: relative;
 
   &:hover ${Info} {
     opacity: 1;
   }
-  `;
+`;
 
 const Container2 = styled.div`
   flex: 1;
@@ -55,7 +60,7 @@ const Container2 = styled.div`
   position: relative;
   justify-content: center;
   flex-direction: column;
-`
+`;
 
 const Circle = styled.div`
   width: 200px;
@@ -87,10 +92,12 @@ const Icon = styled.div`
   }
 `;
 
+const SubIcon = styled.div``;
+
 const Title = styled.div`
   height: 75%;
   font-weight: bold;
-  color:black;
+  color: black;
   align-items: left;
   width: 280px;
 `;
@@ -108,42 +115,77 @@ const Stock = styled.div`
   align-items: right;
 `;
 
-const Product = ({ item }) => {
-  let ans1 = "In Stock";
-  let ans2 = "Out of Stock";
-  let fans;
+const Product = ({ item }) =>
+{
+  const location = useLocation();
+  // const id = location.pathname.split("/")[2];
+  const [quantity, setQuantity] = useState(1);
+  // const [color, setColor] = useState("");
+  // const [size, setSize] = useState("");
+  const [product, setProduct] = useState({});
+  const dispatch = useDispatch();
+  const [isFilled, setIsFilled] = useState(false);
+  const toggleFilledIcon = () => setIsFilled(!isFilled);
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await publicRequest.get("/products/find/" + item.id);
+        setProduct(res.data);
+      } catch {}
+    };
+    getProduct();
+  }, [item.id]);
+
+  let inStock = "In Stock";
+  let outofStock = "Out of Stock";
+  let stockDetail;
   if (item.inStock) {
-    fans = ans1;
+    stockDetail = inStock;
   }
   else {
-    fans = ans2;
+    stockDetail = outofStock;
   }
 
+  const handleClick = () => {
+    //console.log(product, item.id)
+    if(isFilled){
+      dispatch(removeFromWishlist(product));
+    }
+    else{
+      dispatch(wishProduct({ ...product, quantity }));
+      setIsFilled(!isFilled);
+    }
+  };
+  
   return (
     <div>
       <Container1>
         <Circle />
-        <Image src={item.img} />
-        <Info>
+        <Image data-aos="fade-up" data-aos-duration="1500" src={item.img} />
+        <Info >
           {/* <Icon>
             <ShoppingCartOutlined />
           </Icon> */}
           <Icon>
             <Link to={`/product/${item.id}`}>
-              <SearchOutlined />
+              <SearchOutlined  className="hvr-icon-bounce "/>
             </Link>
           </Icon>
-          <Icon>
-            <Link to={`/product/${item.id}`}>
-              <FavoriteBorderOutlined />
-            </Link>
+          <Icon onClick={(event)=>{
+              event.preventDefault();
+              event.stopPropagation();
+              toggleFilledIcon();
+              handleClick();
+            }}>
+            { isFilled ? <Favorite style={{ color: 'crimson' }} /> : <FavoriteBorderOutlined /> }
           </Icon>
         </Info>
       </Container1>
-      <Container2>
+      <Container2 data-aos="flip-up">
         <Title>{item.title}</Title>
-        <Span className="price">₹{item.price}</Span>
-        <Span className="stock">{fans}</Span>
+        <Span className="price" data-aos="flip-up">₹{item.price}</Span>
+        <Span className="stock" data-aos="flip-up">{stockDetail}</Span>
       </Container2>
     </div>
   );

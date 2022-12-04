@@ -2,11 +2,12 @@ import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
 import Products from "../components/Products";
-import Newsletter from "../components/Newsletter";
+import Counter from "../components/Counter";
 import Footer from "../components/Footer";
 import { mobile } from "../responsive";
 import { useLocation } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { popularProducts } from "../data";
 
 const Container = styled.div``;
 
@@ -38,7 +39,7 @@ const Select = styled.select`
 `;
 const Option = styled.option``;
 
-const ProductList = () => {
+const ProductList = ({item}) => {
   const location = useLocation();
   const cat = location.pathname.split("/")[2];
   const [filters, setFilters] = useState({});
@@ -51,14 +52,14 @@ const ProductList = () => {
       [e.target.name]: value,
     });
   };
-  console.log(filters);
+  console.log(filters,sort);
   return (
     <Container>
       <Navbar />
       <Announcement />
       <Title>{cat}</Title>
       <FilterContainer>
-        <Filter>
+        {/* <Filter>
           <FilterText>Filter Products:</FilterText>
           <Select name="color" onChange={handleFilters}>
             <Option disabled>Color</Option>
@@ -77,18 +78,18 @@ const ProductList = () => {
             <Option>L</Option>
             <Option>XL</Option>
           </Select>
-        </Filter>
+        </Filter> */}
         <Filter>
           <FilterText>Sort Products:</FilterText>
           <Select onChange={(e) => setSort(e.target.value)}>
-            <Option value="newest">Newest</Option>
+            {/* <Option value="newest">Newest</Option> */}
             <Option value="asc">Price (asc)</Option>
             <Option value="desc">Price (desc)</Option>
           </Select>
         </Filter>
       </FilterContainer>
       <Products cat={cat} filters={filters} sort={sort} />
-      <Newsletter />
+      <Counter />
       <Footer />
     </Container>
   );
