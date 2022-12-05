@@ -173,6 +173,11 @@ const Footer = () => {
                 Contact
               </Link>
             </ListItem>
+            <ListItem>
+              <Link data-aos="flip-up" data-aos-duration="500" to="/about">
+                About
+              </Link>
+            </ListItem>
           </List>
         </Nonlink>
       </Center>

@@ -19,7 +19,7 @@ menuitem
 }
 .cartCount > span > span {
   color: black;
-  background-color: #ee6c4d;
+  background-color: #ef886f96;
 }
 .nav-items {
   text-decoration: none;
@@ -27,6 +27,8 @@ menuitem
   border: none;
   color: black !important;
   padding: 5px;
+}
+.arrow{
 }
 .parent {
   display: flex;

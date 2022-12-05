@@ -12,7 +12,7 @@ import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeFromWishlist } from "../redux/wishlistRedux";
-import Lottie from 'react-lottie';
+import Lottie from "react-lottie";
 import HeartLottie from "./heart.json";
 
 const KEY = process.env.REACT_APP_STRIPE;
@@ -95,7 +95,7 @@ const Product = styled.div`
   align-items: center;
   position: relative;
 
-  &:hover ${Info}{
+  &:hover ${Info} {
     opacity: 1;
   }
 `;
@@ -103,7 +103,7 @@ const Product = styled.div`
 const ProductDetail = styled.div`
   flex: 2;
   display: column;
-  padding: 10px 10px 10px 10px
+  padding: 10px 10px 10px 10px;
 `;
 
 const Image = styled.img`
@@ -113,6 +113,7 @@ const Image = styled.img`
 `;
 
 const DeleteButton = styled.div`
+  color: white;
   position: relative;
   top: -195px;
   left: 169px;
@@ -133,7 +134,7 @@ const ProductName = styled.span`
   text-align: center;
   width: 200px;
   font-weight: bold;
-  color:black;
+  color: black;
 `;
 
 const ProductStock = styled.div`
@@ -214,7 +215,7 @@ const Hr = styled.hr`
 //   font-weight: 600;
 // `;
 
-const Wishlist = ({item}) => {
+const Wishlist = ({ item }) => {
   const wishlist = useSelector((state) => state.wishlist);
   const [stripeToken, setStripeToken] = useState(null);
   const history = useHistory();
@@ -228,32 +229,32 @@ const Wishlist = ({item}) => {
   let heartObj = {
     loop: true,
     autoplay: true,
-    animationData : HeartLottie,
+    animationData: HeartLottie,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice'
-    }
-}
-  
-//   const onToken = (token) => {
-//     setStripeToken(token);
-//   };
-// //  console.log(stripeToken)
-//   useEffect(() => {
-//     const makeRequest = async () => {
-//       try {
-//         const res = await userRequest.post("/checkout/payment", {
-//           tokenId: stripeToken.id,
-//           amount: 500,
-//         });
-//         history.push("./success", {
-//           stripeData: res.data,
-//           products: wishlist,
-//         });
-//       } catch {}
-//     };
-//     stripeToken && makeRequest();
-//   }, [stripeToken, wishlist.total, history]);
-  
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+  //   const onToken = (token) => {
+  //     setStripeToken(token);
+  //   };
+  // //  console.log(stripeToken)
+  //   useEffect(() => {
+  //     const makeRequest = async () => {
+  //       try {
+  //         const res = await userRequest.post("/checkout/payment", {
+  //           tokenId: stripeToken.id,
+  //           amount: 500,
+  //         });
+  //         history.push("./success", {
+  //           stripeData: res.data,
+  //           products: wishlist,
+  //         });
+  //       } catch {}
+  //     };
+  //     stripeToken && makeRequest();
+  //   }, [stripeToken, wishlist.total, history]);
+
   return (
     <Container>
       <Announcement />
@@ -261,14 +262,17 @@ const Wishlist = ({item}) => {
       <Wrapper>
         <Title>YOUR WISHLIST</Title>
         <Top>
-          <Link to={`/`}><TopButton>CONTINUE SHOPPING</TopButton></Link>
+          <Link to={`/`}>
+            <TopButton>CONTINUE SHOPPING</TopButton>
+          </Link>
           {/* <TopButton type="outlined">ADD TO CART</TopButton> */}
         </Top>
         <Bottom>
           <Info>
             {wishlist.products.length === 0 ? (
               <P>
-                <Lottie options={heartObj}
+                <Lottie
+                  options={heartObj}
                   height={150}
                   width={150}
                   isStopped={false}
@@ -276,73 +280,33 @@ const Wishlist = ({item}) => {
                 />
                 <h2>Your wishlist is empty</h2>
               </P>
-              ) :
-              (wishlist.products.map((product) => (
-              <Product>
-                <ProductDetail>
-                  <Link to ={`/product/${product._id}`}>
-                    <Image src={product.img} />
-                  </Link>
-                  <DeleteButton onClick={() => handleDeleteWislist(product)}>
-                    <DeleteOutlineOutlined />
-                  </DeleteButton>
-                  {/* <Icon>
+            ) : (
+              wishlist.products.map((product) => (
+                <Product>
+                  <ProductDetail>
+                    <Link to={`/product/${product._id}`}>
+                      <Image src={product.img} />
+                    </Link>
+                    <DeleteButton onClick={() => handleDeleteWislist(product)}>
+                      <DeleteOutlineOutlined />
+                    </DeleteButton>
+                    {/* <Icon>
                     <FavoriteBorderOutlined />
                   </Icon> */}
-                  <Details>
-                    <ProductName>
-                      {product.title}
-                    </ProductName>
-                    <ProductStock>
-                      {product.stockDetail}
-                    </ProductStock>
-                    {/*<ProductColor color={item.color} />
+                    <Details>
+                      <ProductName>{product.title}</ProductName>
+                      <ProductStock>{product.stockDetail}</ProductStock>
+                      {/*<ProductColor color={item.color} />
                     <ProductSize>
                       <b>Size:</b> {item.size}
                     </ProductSize>*/}
-                  </Details>
-                </ProductDetail>
-                {/*<PriceDetail>
-                  <ProductAmountContainer>
-                    <Add />
-                    <ProductAmount>{product.quantity}</ProductAmount>
-                    <Remove />
-                  </ProductAmountContainer>
-                  <ProductPrice>
-                    ₹ {product.price * product.quantity}
-                  </ProductPrice>
-                </PriceDetail>*/}
-              </Product>
-            )))}
+                    </Details>
+                  </ProductDetail>
+                </Product>
+              ))
+            )}
             <Hr />
           </Info>
-          {/*<Summary>
-            <SummaryTitle>ORDER SUMMARY</SummaryTitle>
-            <SummaryItem>
-              <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>₹ {(5 * cart.total) / 100}</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem type="total">
-              <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
-            </SummaryItem>
-            <StripeCheckout
-              name="Art Store"
-              image="https://avatars.githubusercontent.com/u/1486366?v=4"
-              billingAddress
-              shippingAddress
-              description={`Your total is Rs ${cart.total}`}
-              amount={cart.total * 100}
-              token={onToken}
-              stripeKey={KEY}
-            >
-              <Button>CHECKOUT NOW</Button>
-            </StripeCheckout>
-            </Summary>*/}
         </Bottom>
       </Wrapper>
       <Footer />

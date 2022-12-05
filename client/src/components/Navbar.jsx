@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import Wishlist from "../pages/Wishlist";
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 // import LogoutIcon from '@mui/icons-material/Logout';
 import { logout } from "../redux/userRedux";
@@ -126,6 +127,7 @@ const Navbar = () => {
   //   localStorage.removeItem("isLoggedIn");
   //   window.location.reload();
   // };
+  const wishlist = useSelector((state) => state.wishlist);
   const user = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState(false);
@@ -182,16 +184,16 @@ const Navbar = () => {
                 </Link>
 
                 <div onClick={handleLogout} className="logoutParent  ">
-                  <LogoutIcon className="hvr-underline-from-left hvr-shrink" />
+                  <LogoutIcon className="hvr-underline-from-left hvr-grow" />
                 </div>
               </div>
             </>
           )}
 
           <Link to="/wishlist">
-            <MenuItem>
-              <Badge className="nav-items" badgeContent={wishlistQuantity}>
-                <FavoriteBorderOutlined />
+            <MenuItem className="cartCount">
+              <Badge className="nav-items" badgeContent={wishlist.products.length}>
+                <FavoriteBorderOutlined  className="cartIcon hvr-grow"/>
               </Badge>
             </MenuItem>
           </Link>
@@ -199,7 +201,7 @@ const Navbar = () => {
           <Link to="/cart">
             <MenuItem className="cartCount">
               <Badge className=" hvr-shrink " badgeContent={quantity}>
-                <ShoppingCartOutlined className="hvr-shrink cartIcon" />
+                <ShoppingCartOutlined className="hvr-shrink cartIcon hvr-grow" />
               </Badge>
             </MenuItem>
           </Link>

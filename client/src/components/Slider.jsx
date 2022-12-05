@@ -5,7 +5,7 @@ import { sliderItems } from "../data";
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
 import Skeleton from 'react-loading-skeleton'
-
+import "./Navbar.css"
 const Container = styled.div`
   width: 100%;
   height: 81vh;
@@ -27,9 +27,10 @@ if (`@media (width: 1024px)`) {
 }
 
 const Arrow = styled.div`
+color: white;
+    background: black;
   width: 50px;
   height: 50px;
-  background-color: #6c6b6bc9;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -105,6 +106,7 @@ const Slider = () => {
   return (
     <Container>
       <Arrow
+        className="arrow"
         direction="left"
         data-aos="flip-left"
         onClick={() => handleClick("left")}
@@ -120,7 +122,7 @@ const Slider = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Link to="/products/women" style={{ textDecoration: "none" }}>
+              <Link to="/products/POTTERY" style={{ textDecoration: "none" }}>
                 <Button
                   className="hvr-bounce-to-right "
                   data-aos="flip-left"

@@ -102,6 +102,7 @@
   -webkit-transform: scale(1.1);
   color: #ee6c4d;
   transform: scale(1.1);
+  cursor: pointer;
 }
 
 /* Shrink */

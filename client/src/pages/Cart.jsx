@@ -5,20 +5,17 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
-
 import { useEffect, useState } from "react";
-
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import "./cart.css";
 import { publicRequest } from "../requestMethods";
-
 import { order } from "../redux/apiCalls";
 import { clearingCart } from "../redux/cartRedux";
-
 import "./cart.css";
+import Wishlist from "./Wishlist";
 // import swal from "sweetalert";
 import {
   clearCart,
@@ -177,6 +174,7 @@ const Button = styled.button`
 `;
 
 const Cart = () => {
+  const wishlist = useSelector((state) => state.wishlist);
   const cart = useSelector((state) => state.cart);
   const orders = useSelector((state) => state.orders);
   const user = useSelector((state) => state.user.currentUser);
@@ -316,13 +314,12 @@ const Cart = () => {
           </Link>
           <TopTexts>
             <Link to="/wishlist" style={{ color: "black" }}>
-              <TopText className="hvr-grow">Your Wishlist({quantity})</TopText>
+              <TopText className="hvr-grow">Your Wishlist({wishlist.products.length})</TopText>
             </Link>
             <TopText className="hvr-grow">
-              Shopping Bag({cart.products.length})
+              Total products ({cart.products.length})
             </TopText>
             <Link to={"/orders"}>
-              {" "}
               <TopText className="hvr-grow">
                 Orders({orders.products.length})
               </TopText>{" "}
@@ -374,7 +371,7 @@ const Cart = () => {
                       />
 
                       <i
-                        className="fa fa-trash-o"
+                        className="fa fa-trash-o hvr-grow"
                         onClick={() => handleRemoveFromCart(product)}
                       />
                     </ProductAmountContainer>

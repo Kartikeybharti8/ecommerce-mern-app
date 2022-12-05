@@ -69,7 +69,7 @@ export const popularProducts = [
   },
   {
     id: "634798a0df4c8b863b4bd6f9",
-    title: "PRESTIGE TATTVA COPPER WATER BOTTLE",
+    title: "COPPER WATER BOTTLE",
     desc: "POTTERY",
     img: "https://www.auffbeat.com/wp-content/uploads/2021/03/Handmade-Meena-Art-Copper-Bottle-in-Funky-Design-1.jpg.webp",
     cat: ["POTTERY"],

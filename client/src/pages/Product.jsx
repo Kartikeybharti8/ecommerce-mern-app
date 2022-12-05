@@ -107,7 +107,7 @@ const Amount = styled.span`
   width: 30px;
   height: 30px;
   border-radius: 10px;
-  border: 1px solid teal;
+  border: 1px solid #ee6c4d;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,7 +116,7 @@ const Amount = styled.span`
 
 const Button = styled.button`
   padding: 15px;
-  border: 2px solid teal;
+  border: 2px solid #ee6c4d;
   background-color: white;
   cursor: pointer;
   font-weight: 500;
@@ -199,9 +199,11 @@ const Product = () => {
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove onClick={() => handleQuantity("dec")} />
+              <Remove                         className="hvr-grow"
+ onClick={() => handleQuantity("dec")} />
               <Amount>{quantity}</Amount>
-              <Add onClick={() => handleQuantity("inc")} />
+              <Add                          className="hvr-grow"
+onClick={() => handleQuantity("inc")} />
             </AmountContainer>
             <Button onClick={handleClick} >ADD TO CART</Button>
           </AddContainer>
