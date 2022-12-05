@@ -1,2 +1,4 @@
 api/api.rar
 client/client.rar
+.env
+/node_modules
