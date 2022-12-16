@@ -1,4 +1,4 @@
-import { Add, Remove } from "@material-ui/icons";
+import { Add, Remove, FavoriteBorderOutlined, Favorite } from "@material-ui/icons";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
 import { addtoProduct } from "../redux/cartRedux";
+import { wishProduct, removeFromWishlist } from "../redux/wishlistRedux";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
@@ -27,6 +28,7 @@ const Wrapper = styled.div`
 
 const ImgContainer = styled.div`
   flex: 1;
+  display: flex;
 `;
 
 const Image = styled.img`
@@ -34,6 +36,24 @@ const Image = styled.img`
   height: 70vh;
   object-fit: cover;
   ${mobile({ height: "40vh" })}
+`;
+
+const Icon = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  position: absolute;
+  right: 53%;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  &:hover {
+    background-color: #e9f5f5;
+    transform: scale(1.1);
+  }
 `;
 
 const InfoContainer = styled.div`
@@ -134,6 +154,9 @@ const Product = () => {
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
   const dispatch = useDispatch();
+  const [isFilled, setIsFilled] = useState(false);
+  const toggleFilledIcon = () => setIsFilled(!isFilled);
+
 
   useEffect(() => {
     const getProduct = async () => {
@@ -165,6 +188,30 @@ const Product = () => {
     });
     dispatch(addtoProduct({ ...product, quantity, color, size }));
   };
+
+  const handleClickIcon = () => {
+    //console.log(product, item.id)
+    if(isFilled){
+      swal("Removed from Wishlist", {
+        buttons: false,
+        timer: 1500,
+        closeOnEsc: true,
+        closeOnClickOutside: true,
+      });
+      dispatch(removeFromWishlist(product));
+    }
+    else{
+      swal("Added to Wishlist", {
+        buttons: false,
+        timer: 1500,
+        closeOnEsc: true,
+        closeOnClickOutside: true,
+      });
+      dispatch(wishProduct({ ...product, quantity }));
+      setIsFilled(!isFilled);
+    }
+  };
+
   return (
     <Container>
       <Navbar />
@@ -175,6 +222,14 @@ const Product = () => {
       <Wrapper>
         <ImgContainer >
           <Image src={product.img} />
+          <Icon onClick={(event)=>{
+                event.preventDefault();
+                event.stopPropagation();
+                toggleFilledIcon();
+                handleClickIcon();
+              }}>
+              { isFilled ? <Favorite style={{ color: 'crimson' }} /> : <FavoriteBorderOutlined /> }
+          </Icon>
         </ImgContainer>
         <InfoContainer>
           <Title>{product.title || <Skeleton/>}</Title>

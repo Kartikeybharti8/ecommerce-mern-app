@@ -7,7 +7,7 @@ import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 
 import { useEffect, useState } from "react";
-
+import Wishlist from "./Wishlist";
 import { userRequest } from "../requestMethods";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
@@ -180,7 +180,7 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const orders = useSelector((state) => state.orders);
   const user = useSelector((state) => state.user.currentUser);
-
+  const wishlist = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
   const quantity = 0;
 
@@ -316,7 +316,7 @@ const Cart = () => {
           </Link>
           <TopTexts>
             <Link to="/wishlist" style={{ color: "black" }}>
-              <TopText className="hvr-grow">Your Wishlist({quantity})</TopText>
+              <TopText className="hvr-grow">Your Wishlist({wishlist.products.length})</TopText>
             </Link>
             <TopText className="hvr-grow">
               Shopping Bag({cart.products.length})

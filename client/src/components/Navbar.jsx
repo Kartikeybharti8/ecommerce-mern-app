@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 // import LogoutIcon from '@mui/icons-material/Logout';
 import { logout } from "../redux/userRedux";
+import Wishlist from "../pages/Wishlist";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "./Navbar.css";
 
@@ -129,6 +130,7 @@ const Navbar = () => {
   const user = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
   const [showPopup, setShowPopup] = useState(false);
+  const wishlist = useSelector((state) => state.wishlist);
   // window.localStorage.clear();
   const quantity = useSelector((state) => state.cart.quantity);
   let wishlistQuantity = useSelector((state) => state.wishlist.quantity);
@@ -190,7 +192,7 @@ const Navbar = () => {
 
           <Link to="/wishlist">
             <MenuItem>
-              <Badge className="nav-items" badgeContent={wishlistQuantity}>
+              <Badge className="nav-items" badgeContent={wishlist.products.length}>
                 <FavoriteBorderOutlined />
               </Badge>
             </MenuItem>

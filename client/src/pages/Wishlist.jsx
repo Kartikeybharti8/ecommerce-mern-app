@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { removeFromWishlist } from "../redux/wishlistRedux";
 import Lottie from 'react-lottie';
 import HeartLottie from "./heart.json";
+import swal from "sweetalert";
 
 const KEY = process.env.REACT_APP_STRIPE;
 
@@ -114,10 +115,16 @@ const Image = styled.img`
 
 const DeleteButton = styled.div`
   position: relative;
-  top: -195px;
+  top: -193px;
   left: 169px;
+  border-radius: 50%;
   cursor: pointer;
-  width: 25px;
+  width: 24px;
+  height: 27px;
+  &:hover {
+    background-color: #e9f5f5;
+    transform: scale(1.1);
+  }
 `;
 
 const Icon = styled.div``;
@@ -141,78 +148,11 @@ const ProductStock = styled.div`
   padding-top: 5px;
 `;
 
-// const ProductColor = styled.div`
-//   width: 20px;
-//   height: 20px;
-//   border-radius: 50%;
-//   background-color: ${(props) => props.color};
-// `;
-
-// const ProductSize = styled.span``;
-
-// const PriceDetail = styled.div`
-//   flex: 1;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-// `;
-
-// const ProductAmountContainer = styled.div`
-//   display: flex;
-//   align-items: center;
-//   margin-bottom: 20px;
-// `;
-
-// const ProductAmount = styled.div`
-//   font-size: 24px;
-//   margin: 5px;
-//   ${mobile({ margin: "5px 15px" })}
-// `;
-
-// const ProductPrice = styled.div`
-//   font-size: 30px;
-//   font-weight: 200;
-//   ${mobile({ marginBottom: "20px" })}
-// `;
-
 const Hr = styled.hr`
   background-color: #eee;
   border: none;
   height: 1px;
 `;
-
-// const Summary = styled.div`
-//   flex: 1;
-//   border: 0.5px solid lightgray;
-//   border-radius: 10px;
-//   padding: 20px;
-//   height: 50vh;
-// `;
-
-// const SummaryTitle = styled.h1`
-//   font-weight: 200;
-// `;
-
-// const SummaryItem = styled.div`
-//   margin: 30px 0px;
-//   display: flex;
-//   justify-content: space-between;
-//   font-weight: ${(props) => props.type === "total" && "500"};
-//   font-size: ${(props) => props.type === "total" && "24px"};
-// `;
-
-// const SummaryItemText = styled.span``;
-
-// const SummaryItemPrice = styled.span``;
-
-// const Button = styled.button`
-//   width: 100%;
-//   padding: 10px;
-//   background-color: black;
-//   color: white;
-//   font-weight: 600;
-// `;
 
 const Wishlist = ({item}) => {
   const wishlist = useSelector((state) => state.wishlist);
@@ -222,6 +162,12 @@ const Wishlist = ({item}) => {
 
   const handleDeleteWislist = (product) => {
     // console.log(product)
+    swal("Item removed from wishlist", {
+      buttons: false,
+      timer: 1500,
+      closeOnEsc: true,
+      closeOnClickOutside: true,
+    });
     dispatch(removeFromWishlist(product));
   };
 
@@ -233,26 +179,6 @@ const Wishlist = ({item}) => {
       preserveAspectRatio: 'xMidYMid slice'
     }
 }
-  
-//   const onToken = (token) => {
-//     setStripeToken(token);
-//   };
-// //  console.log(stripeToken)
-//   useEffect(() => {
-//     const makeRequest = async () => {
-//       try {
-//         const res = await userRequest.post("/checkout/payment", {
-//           tokenId: stripeToken.id,
-//           amount: 500,
-//         });
-//         history.push("./success", {
-//           stripeData: res.data,
-//           products: wishlist,
-//         });
-//       } catch {}
-//     };
-//     stripeToken && makeRequest();
-//   }, [stripeToken, wishlist.total, history]);
   
   return (
     <Container>
@@ -286,9 +212,6 @@ const Wishlist = ({item}) => {
                   <DeleteButton onClick={() => handleDeleteWislist(product)}>
                     <DeleteOutlineOutlined />
                   </DeleteButton>
-                  {/* <Icon>
-                    <FavoriteBorderOutlined />
-                  </Icon> */}
                   <Details>
                     <ProductName>
                       {product.title}
@@ -296,53 +219,12 @@ const Wishlist = ({item}) => {
                     <ProductStock>
                       {product.stockDetail}
                     </ProductStock>
-                    {/*<ProductColor color={item.color} />
-                    <ProductSize>
-                      <b>Size:</b> {item.size}
-                    </ProductSize>*/}
                   </Details>
                 </ProductDetail>
-                {/*<PriceDetail>
-                  <ProductAmountContainer>
-                    <Add />
-                    <ProductAmount>{product.quantity}</ProductAmount>
-                    <Remove />
-                  </ProductAmountContainer>
-                  <ProductPrice>
-                    ₹ {product.price * product.quantity}
-                  </ProductPrice>
-                </PriceDetail>*/}
               </Product>
             )))}
             <Hr />
           </Info>
-          {/*<Summary>
-            <SummaryTitle>ORDER SUMMARY</SummaryTitle>
-            <SummaryItem>
-              <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem>
-              <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>₹ {(5 * cart.total) / 100}</SummaryItemPrice>
-            </SummaryItem>
-            <SummaryItem type="total">
-              <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>₹ {cart.total}</SummaryItemPrice>
-            </SummaryItem>
-            <StripeCheckout
-              name="Art Store"
-              image="https://avatars.githubusercontent.com/u/1486366?v=4"
-              billingAddress
-              shippingAddress
-              description={`Your total is Rs ${cart.total}`}
-              amount={cart.total * 100}
-              token={onToken}
-              stripeKey={KEY}
-            >
-              <Button>CHECKOUT NOW</Button>
-            </StripeCheckout>
-            </Summary>*/}
         </Bottom>
       </Wrapper>
       <Footer />

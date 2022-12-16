@@ -43,9 +43,7 @@ const Container1 = styled.div`
   background-color: blue;
   background-color: #f5fbfd;
   justify-content: center;
-
   position: relative;
-
   &:hover ${Info} {
     opacity: 1;
   }
@@ -100,6 +98,7 @@ const Title = styled.div`
   color: black;
   align-items: left;
   width: 280px;
+  display: flex;
 `;
 
 const Span = styled.div`
@@ -124,8 +123,8 @@ const Product = ({ item }) =>
   // const [size, setSize] = useState("");
   const [product, setProduct] = useState({});
   const dispatch = useDispatch();
-  const [isFilled, setIsFilled] = useState(false);
-  const toggleFilledIcon = () => setIsFilled(!isFilled);
+  // const [isFilled, setIsFilled] = useState(false);
+  // const toggleFilledIcon = () => setIsFilled(!isFilled);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -147,44 +146,50 @@ const Product = ({ item }) =>
     stockDetail = outofStock;
   }
 
-  const handleClick = () => {
-    //console.log(product, item.id)
-    if(isFilled){
-      dispatch(removeFromWishlist(product));
-    }
-    else{
-      dispatch(wishProduct({ ...product, quantity }));
-      setIsFilled(!isFilled);
-    }
-  };
+  // const handleClick = () => {
+  //   //console.log(product, item.id)
+  //   if(isFilled){
+  //     dispatch(removeFromWishlist(product));
+  //   }
+  //   else{
+  //     dispatch(wishProduct({ ...product, quantity }));
+  //     setIsFilled(!isFilled);
+  //   }
+  // };
   
   return (
     <div>
-      <Container1>
-        <Circle />
-        <Image data-aos="fade-up" data-aos-duration="1500" src={item.img} />
-        <Info >
-          {/* <Icon>
-            <ShoppingCartOutlined />
-          </Icon> */}
-          <Icon>
-            <Link to={`/product/${item.id}`}>
-              <SearchOutlined  className="hvr-icon-bounce "/>
-            </Link>
-          </Icon>
-          <Icon onClick={(event)=>{
-              event.preventDefault();
-              event.stopPropagation();
-              toggleFilledIcon();
-              handleClick();
-            }}>
-            { isFilled ? <Favorite style={{ color: 'crimson' }} /> : <FavoriteBorderOutlined /> }
-          </Icon>
-        </Info>
-      </Container1>
+      <Link to={`/product/${item.id}`}>
+        <Container1>
+          <Circle />
+          <Image data-aos="fade-up" data-aos-duration="1500" src={item.img} />
+          <Info >
+            {/* <Icon>
+              <ShoppingCartOutlined />
+            </Icon> */}
+            {/* <Icon>
+              <Link to={`/product/${item.id}`}>
+                <SearchOutlined  className="hvr-icon-bounce "/>
+              </Link>
+            </Icon>
+            <Icon onClick={(event)=>{
+                event.preventDefault();
+                event.stopPropagation();
+                toggleFilledIcon();
+                handleClick();
+              }}>
+              { isFilled ? <Favorite style={{ color: 'crimson' }} /> : <FavoriteBorderOutlined /> }
+            </Icon> */}
+          </Info>
+        </Container1>
+      </Link>
       <Container2 data-aos="flip-up">
-        <Title>{item.title}</Title>
-        <Span className="price" data-aos="flip-up">₹{item.price}</Span>
+        <Title>{item.title.length < 19
+                ? `${item.title}`
+                : `${item.title.substring(0, 18)}...`}
+                
+          <Span className="price" data-aos="flip-up">₹{item.price}</Span>
+        </Title>
         <Span className="stock" data-aos="flip-up">{stockDetail}</Span>
       </Container2>
     </div>
